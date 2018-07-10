@@ -13,12 +13,13 @@ import SwiftyJSON
 class NetworkAPI {
 	
 	//The URL where all the backend code is stored
+	static var view: UIView!
 	static var baseURL = "https://epidemik.us/api"
 	static var versionExtension = "?version=" + (Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
 	
 	//Says if this username and password combo exist
 	public static func loginIsValid(username: String, password: String, result: @escaping (_ response: JSON?) -> Void) {
-        let queryParams = "&username=" + username + "&password=" + password
+		let queryParams = "&username=" + username + "&password=" + password
 		sendPOSTWithCallback(method: "POST", urlExtensiuon: "/login", queryParams: queryParams, body: Data(), callback: result)
 	}
 	
@@ -43,7 +44,7 @@ class NetworkAPI {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/diseases", queryParams: queryParams, body: Data(), callback: result)
-
+		
 	}
 	
 	//Returns all the trend data for the given users location
@@ -84,7 +85,7 @@ class NetworkAPI {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let dateString = dateFormatter.string(from:date as Date)
-
+		
 		let diseaseName2 = diseaseName.replacingOccurrences(of: " ", with: "-")
 		let body = JSON([
 			"disease_name": diseaseName2,
@@ -121,7 +122,7 @@ class NetworkAPI {
 		sendPOSTWithCallback(method: "PATCH", urlExtensiuon: "/users/" + username, queryParams: queryParams, body: Data(), callback: ({(response: JSON?) -> Void
 			in
 			
-			}))
+		}))
 		
 	}
 	
@@ -160,14 +161,15 @@ class NetworkAPI {
 	}
 	
 	static func showBadVersion() {
-		var view = UIApplication().windows[0]
-		let frame = CGRect(x: 0, y: -view.frame.height, width: view.frame.width, height: view.frame.height)
-		let badScreen = BadVersionScreen(frame: frame)
-		badScreen.accessibilityIdentifier = "BadScreen"
-		view.addSubview(badScreen)
-		UIView.animate(withDuration: 0.5, animations: {
-			badScreen.frame.origin.y += frame.height
-		})
+		DispatchQueue.main.sync {
+			let frame = CGRect(x: 0, y: -view.frame.height, width: view.frame.width, height: view.frame.height)
+			let badScreen = BadVersionScreen(frame: frame)
+			badScreen.accessibilityIdentifier = "BadScreen"
+			view.addSubview(badScreen)
+			UIView.animate(withDuration: 0.5, animations: {
+				badScreen.frame.origin.y += frame.height
+			})
+		}
 	}
 	
 	static func getAuthToken() -> String {

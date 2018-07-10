@@ -89,7 +89,9 @@ public class PersonalTrendDataCenter {
 	}
 	
 	func getDatapoints() -> Array<Disease> {
-		return self.datapoints
+		return self.datapoints.sorted(by: {
+			$0.date < $1.date
+		})
 	}
 	
 }

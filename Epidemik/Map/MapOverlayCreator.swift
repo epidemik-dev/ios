@@ -58,8 +58,6 @@ public class MapOverlayCreator {
 	func loadData() {
 		self.manager = DiseaseManager()
 		for dataPoint in data {
-			print(dataPoint.lat)
-			print(dataPoint.long)
 			manager.addDisease(lat: dataPoint.lat, long: dataPoint.long)
 		}
 	}

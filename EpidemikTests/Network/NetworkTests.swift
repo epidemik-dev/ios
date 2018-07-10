@@ -38,7 +38,6 @@ class NetworkTests: XCTestCase {
     }
     
 	func testCreateAcc() {
-		print("starting")
 		NetworkAPI.createAccount(username: String(username), password: "password1", latitude: 0, longitude: 0, deviceID: "", dob: Date(), gender: "Male", result: accountCreated)
 		wait(for: [expectation1], timeout: 10)
 	}
@@ -65,7 +64,6 @@ class NetworkTests: XCTestCase {
 	}
 	
 	func diseaseData(result: JSON?) {
-		print(result)
 		XCTAssert(result?.array != nil);
 		expectation1.fulfill()
 	}

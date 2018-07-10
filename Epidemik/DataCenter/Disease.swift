@@ -16,7 +16,7 @@ public class Disease {
 	var date: Date
 	var date_healthy: Date?
 	
-	var nullData: Date
+	var nullData: Date? = nil
 	
 	//Initalizes this disease with this data exactly
 	init(lat: Double, long: Double, diseaseName: String, date: Date, date_healthy: Date) {
@@ -43,10 +43,7 @@ public class Disease {
 		self.diseaseName = diseaseName
 		
 		
-		print(date);
 		self.date = dateFormatter.date(from: date)!
-		
-		self.nullData = dateFormatter.date(from: "4099-11-30T00:00:00.000Z")!
 	}
 	
 }

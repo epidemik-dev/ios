@@ -13,6 +13,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
+	var mainVC: ViewController?
 	var accCreation: LoginScreen?
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -28,12 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			FileRW.writeFile(fileName: "password.epi", contents: "pass")
 		}
 		
-		if CommandLine.arguments.contains("--bad-version") {
-			NetworkAPI.versionExtension = "?version=0.01"
-		}
-		
-		
-		let mainVC = ViewController()
+		mainVC = ViewController()
+		NetworkAPI.view = mainVC?.view
 		
 		let window = UIWindow(frame: UIScreen.main.bounds)
 		window.rootViewController = mainVC

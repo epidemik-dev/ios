@@ -53,7 +53,6 @@ class DiseaseGraph: UIView {
 	//EFFECT: draws the graph when done
 	func processResponser(resp: JSON?) {
 		for disease in resp!.arrayValue {
-			print(disease)
 			let dateFormatter = DateFormatter()
 			dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
 			let dateString = disease["date"].string!
