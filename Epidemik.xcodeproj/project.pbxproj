@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		0007B17E2051D7A800355DD9 /* PersonalTrendDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007B17D2051D7A800355DD9 /* PersonalTrendDataCenter.swift */; };
 		0007C2F5203CDCE8009EA7A8 /* PTrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007C2F4203CDCE8009EA7A8 /* PTrendsView.swift */; };
-		0008CE2E1FE6D158006FD767 /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008CE2D1FE6D158006FD767 /* ReportingService.swift */; };
 		0008CE361FE6FB09006FD767 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0008CE351FE6FB09006FD767 /* NotificationCenter.framework */; };
 		0008CE391FE6FB09006FD767 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008CE381FE6FB09006FD767 /* TodayViewController.swift */; };
 		0008CE3C1FE6FB09006FD767 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0008CE3A1FE6FB09006FD767 /* MainInterface.storyboard */; };
 		0008CE401FE6FB09006FD767 /* EpidemikWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0008CE331FE6FB09006FD767 /* EpidemikWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0008CE461FE6FCD6006FD767 /* TrendsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008CE451FE6FCD6006FD767 /* TrendsWidgetView.swift */; };
 		0008CE4D1FE706CC006FD767 /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 0011DBBE1F6C0EBA004212E1 /* Assets.xcassets */; };
-		000F3D062066DCAF00A191A6 /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3D052066DCAF00A191A6 /* DiseaseQuestionair.swift */; };
 		000F3D082066E30C00A191A6 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3D072066E30C00A191A6 /* CheckBox.swift */; };
 		000F3D0A2066ED0300A191A6 /* DiseaseQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3D092066ED0300A191A6 /* DiseaseQuestions.swift */; };
 		0010A42F1F800DD000D12495 /* ScrollSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0010A42E1F800DD000D12495 /* ScrollSelector.swift */; };
@@ -51,9 +49,7 @@
 		007011682087A58C008DFF49 /* DiseaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007011672087A58C008DFF49 /* DiseaseManager.swift */; };
 		007011692087AD14008DFF49 /* DiseaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007011672087A58C008DFF49 /* DiseaseManager.swift */; };
 		0079189B1FF56C4900DB03D3 /* TransitionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079189A1FF56C4900DB03D3 /* TransitionControls.swift */; };
-		0079189D1FF58D8700DB03D3 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079189C1FF58D8700DB03D3 /* Diseases.swift */; };
 		0083AD251F795BD8007AEF87 /* SicknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD241F795BD8007AEF87 /* SicknessView.swift */; };
-		0083AD271F795C50007AEF87 /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD261F795C50007AEF87 /* DiseaseNameScreen.swift */; };
 		0087EADE2041091B00BDEEC8 /* Asker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0087EADD2041091B00BDEEC8 /* Asker.swift */; };
 		008F79782059F9AE00B794A1 /* AccCreationTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */; };
 		009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CE9E11F8FFFFD00D224F0 /* MainHolder.swift */; };
@@ -81,10 +77,6 @@
 		009E240520A7B2A2000A144F /* PTrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0007C2F4203CDCE8009EA7A8 /* PTrendsView.swift */; };
 		009E240620A7B2A2000A144F /* SicknessGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00315DDF205846770060D56E /* SicknessGraph.swift */; };
 		009E240720A7B2A2000A144F /* SicknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD241F795BD8007AEF87 /* SicknessView.swift */; };
-		009E240820A7B2A2000A144F /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD261F795C50007AEF87 /* DiseaseNameScreen.swift */; };
-		009E240920A7B2A2000A144F /* ReportingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0008CE2D1FE6D158006FD767 /* ReportingService.swift */; };
-		009E240A20A7B2A2000A144F /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079189C1FF58D8700DB03D3 /* Diseases.swift */; };
-		009E240B20A7B2A2000A144F /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3D052066DCAF00A191A6 /* DiseaseQuestionair.swift */; };
 		009E240C20A7B2A2000A144F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0018BCD71FE0BDB7008DCDE5 /* SettingsView.swift */; };
 		009E240D20A7B2A2000A144F /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD462E1FE19C620009A4B5 /* DetailSelector.swift */; };
 		009E240E20A7B2A2000A144F /* BarSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD462C1FE19AF50009A4B5 /* BarSelector.swift */; };
@@ -107,6 +99,18 @@
 		00AFBE5B209CE4B20098F95A /* LogInProcessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00347985209BAA480012B1A5 /* LogInProcessTests.swift */; };
 		00AFBE5E209CEFCB0098F95A /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */; };
 		00AFBE60209D09660098F95A /* CreateAccExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5F209D09660098F95A /* CreateAccExtension.swift */; };
+		00B5D85520FE61B300583214 /* DiagnosisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85420FE61B300583214 /* DiagnosisManager.swift */; };
+		00B5D85B20FE64DD00583214 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85820FE64DD00583214 /* Diseases.swift */; };
+		00B5D85C20FE64DD00583214 /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */; };
+		00B5D85D20FE64DD00583214 /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */; };
+		00B5D85E20FE686D00583214 /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */; };
+		00B5D85F20FE687200583214 /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */; };
+		00B5D86020FE687600583214 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85820FE64DD00583214 /* Diseases.swift */; };
+		00B5D86120FE687B00583214 /* DataTermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */; };
+		00B5D86220FE687B00583214 /* PersonSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */; };
+		00B5D86320FE687B00583214 /* BodyPartSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */; };
+		00B5D86420FE687B00583214 /* ResultReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41F020F8DD090025BDC2 /* ResultReporter.swift */; };
+		00B5D86520FE687B00583214 /* DiagnosisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85420FE61B300583214 /* DiagnosisManager.swift */; };
 		00BC4F701F81746C0018D5D8 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC4F6F1F81746C0018D5D8 /* Map.swift */; };
 		00BD462D1FE19AF50009A4B5 /* BarSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD462C1FE19AF50009A4B5 /* BarSelector.swift */; };
 		00BD462F1FE19C620009A4B5 /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD462E1FE19C620009A4B5 /* DetailSelector.swift */; };
@@ -115,6 +119,10 @@
 		00C56883204B110100BC5762 /* AccountCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C56882204B110100BC5762 /* AccountCreation.swift */; };
 		00CD77FD1F7844C1002B5C78 /* FileRW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD77FC1F7844C1002B5C78 /* FileRW.swift */; };
 		00D665511FB5348F00C3C680 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D665501FB5348F00C3C680 /* Trend.swift */; };
+		00DC41EB20F8DCA00025BDC2 /* DataTermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */; };
+		00DC41ED20F8DCB90025BDC2 /* PersonSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */; };
+		00DC41EF20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */; };
+		00DC41F120F8DD090025BDC2 /* ResultReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41F020F8DD090025BDC2 /* ResultReporter.swift */; };
 		00E9A4C71F8EFA6C008C95BD /* Disease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9A4C61F8EFA6C008C95BD /* Disease.swift */; };
 		00E9D5282038A9A900C353AF /* DiseaseDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E9D5272038A9A900C353AF /* DiseaseDataCenter.swift */; };
 		00EBE4B11F9D2EC1005A8E6B /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EBE4B01F9D2EC1005A8E6B /* Presets.swift */; };
@@ -173,7 +181,6 @@
 /* Begin PBXFileReference section */
 		0007B17D2051D7A800355DD9 /* PersonalTrendDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTrendDataCenter.swift; sourceTree = "<group>"; };
 		0007C2F4203CDCE8009EA7A8 /* PTrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTrendsView.swift; sourceTree = "<group>"; };
-		0008CE2D1FE6D158006FD767 /* ReportingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportingService.swift; sourceTree = "<group>"; };
 		0008CE331FE6FB09006FD767 /* EpidemikWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = EpidemikWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0008CE351FE6FB09006FD767 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		0008CE381FE6FB09006FD767 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -182,7 +189,6 @@
 		0008CE451FE6FCD6006FD767 /* TrendsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsWidgetView.swift; sourceTree = "<group>"; };
 		0008CE471FE6FD06006FD767 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
 		0008CE4B1FE702A7006FD767 /* EpidemikWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EpidemikWidget.entitlements; sourceTree = "<group>"; };
-		000F3D052066DCAF00A191A6 /* DiseaseQuestionair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseQuestionair.swift; sourceTree = "<group>"; };
 		000F3D072066E30C00A191A6 /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		000F3D092066ED0300A191A6 /* DiseaseQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseQuestions.swift; sourceTree = "<group>"; };
 		0010A42E1F800DD000D12495 /* ScrollSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSelector.swift; sourceTree = "<group>"; };
@@ -220,9 +226,7 @@
 		0056504820E133CB003BCB4F /* SicknessSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessSubmission.swift; sourceTree = "<group>"; };
 		007011672087A58C008DFF49 /* DiseaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseManager.swift; sourceTree = "<group>"; };
 		0079189A1FF56C4900DB03D3 /* TransitionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionControls.swift; sourceTree = "<group>"; };
-		0079189C1FF58D8700DB03D3 /* Diseases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diseases.swift; sourceTree = "<group>"; };
 		0083AD241F795BD8007AEF87 /* SicknessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessView.swift; sourceTree = "<group>"; };
-		0083AD261F795C50007AEF87 /* DiseaseNameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseNameScreen.swift; sourceTree = "<group>"; };
 		0087EADD2041091B00BDEEC8 /* Asker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asker.swift; sourceTree = "<group>"; };
 		008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccCreationTextBox.swift; sourceTree = "<group>"; };
 		009CE9E11F8FFFFD00D224F0 /* MainHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHolder.swift; sourceTree = "<group>"; };
@@ -232,6 +236,10 @@
 		00AA1809203BB8440071CA6A /* GlobalTrendDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTrendDataCenter.swift; sourceTree = "<group>"; };
 		00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
 		00AFBE5F209D09660098F95A /* CreateAccExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccExtension.swift; sourceTree = "<group>"; };
+		00B5D85420FE61B300583214 /* DiagnosisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisManager.swift; sourceTree = "<group>"; };
+		00B5D85820FE64DD00583214 /* Diseases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diseases.swift; sourceTree = "<group>"; };
+		00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseQuestionair.swift; sourceTree = "<group>"; };
+		00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseNameScreen.swift; sourceTree = "<group>"; };
 		00BC4F6F1F81746C0018D5D8 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		00BD462C1FE19AF50009A4B5 /* BarSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSelector.swift; sourceTree = "<group>"; };
 		00BD462E1FE19C620009A4B5 /* DetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelector.swift; sourceTree = "<group>"; };
@@ -239,6 +247,10 @@
 		00C56882204B110100BC5762 /* AccountCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreation.swift; sourceTree = "<group>"; };
 		00CD77FC1F7844C1002B5C78 /* FileRW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRW.swift; sourceTree = "<group>"; };
 		00D665501FB5348F00C3C680 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
+		00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTermsOfService.swift; sourceTree = "<group>"; };
+		00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSymptomSelector.swift; sourceTree = "<group>"; };
+		00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartSymptomSelector.swift; sourceTree = "<group>"; };
+		00DC41F020F8DD090025BDC2 /* ResultReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultReporter.swift; sourceTree = "<group>"; };
 		00E9A4C61F8EFA6C008C95BD /* Disease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disease.swift; sourceTree = "<group>"; };
 		00E9D5272038A9A900C353AF /* DiseaseDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseDataCenter.swift; sourceTree = "<group>"; };
 		00EBE4B01F9D2EC1005A8E6B /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
@@ -534,11 +546,9 @@
 		00173B9820882E5B0047916F /* Sickness Registration */ = {
 			isa = PBXGroup;
 			children = (
+				00B5D85720FE64B000583214 /* Sickness */,
+				00B5D85620FE64A300583214 /* Diagnosis */,
 				0083AD241F795BD8007AEF87 /* SicknessView.swift */,
-				0083AD261F795C50007AEF87 /* DiseaseNameScreen.swift */,
-				0008CE2D1FE6D158006FD767 /* ReportingService.swift */,
-				0079189C1FF58D8700DB03D3 /* Diseases.swift */,
-				000F3D052066DCAF00A191A6 /* DiseaseQuestionair.swift */,
 			);
 			path = "Sickness Registration";
 			sourceTree = "<group>";
@@ -625,6 +635,28 @@
 				0013D22F209D41BB00314360 /* Extensions */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		00B5D85620FE64A300583214 /* Diagnosis */ = {
+			isa = PBXGroup;
+			children = (
+				00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */,
+				00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */,
+				00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */,
+				00DC41F020F8DD090025BDC2 /* ResultReporter.swift */,
+				00B5D85420FE61B300583214 /* DiagnosisManager.swift */,
+			);
+			path = Diagnosis;
+			sourceTree = "<group>";
+		};
+		00B5D85720FE64B000583214 /* Sickness */ = {
+			isa = PBXGroup;
+			children = (
+				00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */,
+				00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */,
+				00B5D85820FE64DD00583214 /* Diseases.swift */,
+			);
+			path = Sickness;
 			sourceTree = "<group>";
 		};
 		00F28348208A588C00AA34E8 /* Network */ = {
@@ -755,8 +787,9 @@
 					};
 					0011DBB31F6C0EBA004212E1 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 637YQRHJ3C;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -953,7 +986,6 @@
 			files = (
 				00E9A4C71F8EFA6C008C95BD /* Disease.swift in Sources */,
 				0014D41D204C4687007D9E31 /* MapExtension.swift in Sources */,
-				0079189D1FF58D8700DB03D3 /* Diseases.swift in Sources */,
 				00BD462F1FE19C620009A4B5 /* DetailSelector.swift in Sources */,
 				00315DE0205846770060D56E /* SicknessGraph.swift in Sources */,
 				0031F036208963F500B55DD6 /* GenderSelector.swift in Sources */,
@@ -961,25 +993,31 @@
 				00F45FFD205F167100BF880F /* LoadingGraphic.swift in Sources */,
 				00FC19101FB3DEB700D8FD97 /* GTrendsView.swift in Sources */,
 				0083AD251F795BD8007AEF87 /* SicknessView.swift in Sources */,
+				00B5D85C20FE64DD00583214 /* DiseaseQuestionair.swift in Sources */,
 				00BC4F701F81746C0018D5D8 /* Map.swift in Sources */,
 				004E1452205C7D490055ADA3 /* DiseaseGraph.swift in Sources */,
 				0007B17E2051D7A800355DD9 /* PersonalTrendDataCenter.swift in Sources */,
-				000F3D062066DCAF00A191A6 /* DiseaseQuestionair.swift in Sources */,
 				00EBE4B11F9D2EC1005A8E6B /* Presets.swift in Sources */,
 				009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */,
 				00E9D5282038A9A900C353AF /* DiseaseDataCenter.swift in Sources */,
+				00DC41EB20F8DCA00025BDC2 /* DataTermsOfService.swift in Sources */,
 				00BD46311FE1C6F20009A4B5 /* AddressChanger.swift in Sources */,
+				00B5D85520FE61B300583214 /* DiagnosisManager.swift in Sources */,
+				00B5D85D20FE64DD00583214 /* DiseaseNameScreen.swift in Sources */,
+				00DC41EF20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift in Sources */,
 				0087EADE2041091B00BDEEC8 /* Asker.swift in Sources */,
 				00315DE320584F440060D56E /* StatusDataCenter.swift in Sources */,
 				00D665511FB5348F00C3C680 /* Trend.swift in Sources */,
 				0079189B1FF56C4900DB03D3 /* TransitionControls.swift in Sources */,
+				00DC41ED20F8DCB90025BDC2 /* PersonSymptomSelector.swift in Sources */,
 				00112527203889EF00C3D16A /* DataCenter.swift in Sources */,
 				0031F034208936F800B55DD6 /* BadVersionScreen.swift in Sources */,
 				00C56883204B110100BC5762 /* AccountCreation.swift in Sources */,
+				00B5D85B20FE64DD00583214 /* Diseases.swift in Sources */,
 				00CD77FD1F7844C1002B5C78 /* FileRW.swift in Sources */,
 				0011DBBA1F6C0EBA004212E1 /* ViewController.swift in Sources */,
-				0083AD271F795C50007AEF87 /* DiseaseNameScreen.swift in Sources */,
 				00AA180A203BB8440071CA6A /* GlobalTrendDataCenter.swift in Sources */,
+				00DC41F120F8DD090025BDC2 /* ResultReporter.swift in Sources */,
 				000F3D082066E30C00A191A6 /* CheckBox.swift in Sources */,
 				007011682087A58C008DFF49 /* DiseaseManager.swift in Sources */,
 				0032F3421F808295001A9633 /* MapOverlayCreator.swift in Sources */,
@@ -989,7 +1027,6 @@
 				00F28347208A507F00AA34E8 /* AddressCreator.swift in Sources */,
 				0007C2F5203CDCE8009EA7A8 /* PTrendsView.swift in Sources */,
 				00F2834A208A58B800AA34E8 /* NetworkAPI.swift in Sources */,
-				0008CE2E1FE6D158006FD767 /* ReportingService.swift in Sources */,
 				000F3D0A2066ED0300A191A6 /* DiseaseQuestions.swift in Sources */,
 				0014D41B204C4550007D9E31 /* UIViewExtension.swift in Sources */,
 				0011DBB81F6C0EBA004212E1 /* AppDelegate.swift in Sources */,
@@ -1001,6 +1038,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B5D86120FE687B00583214 /* DataTermsOfService.swift in Sources */,
+				00B5D86220FE687B00583214 /* PersonSymptomSelector.swift in Sources */,
+				00B5D86320FE687B00583214 /* BodyPartSymptomSelector.swift in Sources */,
+				00B5D86420FE687B00583214 /* ResultReporter.swift in Sources */,
+				00B5D86520FE687B00583214 /* DiagnosisManager.swift in Sources */,
+				00B5D86020FE687600583214 /* Diseases.swift in Sources */,
+				00B5D85F20FE687200583214 /* DiseaseNameScreen.swift in Sources */,
+				00B5D85E20FE686D00583214 /* DiseaseQuestionair.swift in Sources */,
 				009E23F620A7B2A2000A144F /* DataCenter.swift in Sources */,
 				009E23F720A7B2A2000A144F /* Disease.swift in Sources */,
 				009E23F820A7B2A2000A144F /* Trend.swift in Sources */,
@@ -1020,10 +1065,6 @@
 				009E240620A7B2A2000A144F /* SicknessGraph.swift in Sources */,
 				009E240720A7B2A2000A144F /* SicknessView.swift in Sources */,
 				009E242220A7B886000A144F /* AddOverlaysTest.swift in Sources */,
-				009E240820A7B2A2000A144F /* DiseaseNameScreen.swift in Sources */,
-				009E240920A7B2A2000A144F /* ReportingService.swift in Sources */,
-				009E240A20A7B2A2000A144F /* Diseases.swift in Sources */,
-				009E240B20A7B2A2000A144F /* DiseaseQuestionair.swift in Sources */,
 				009E240C20A7B2A2000A144F /* SettingsView.swift in Sources */,
 				009E240D20A7B2A2000A144F /* DetailSelector.swift in Sources */,
 				009E240E20A7B2A2000A144F /* BarSelector.swift in Sources */,
@@ -1291,13 +1332,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Epidemik/Epidemik.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 637YQRHJ3C;
 				INFOPLIST_FILE = Epidemik/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.rbradford.thaumavor.Epidemik;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1312,8 +1354,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Epidemik/Epidemik.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 637YQRHJ3C;
 				INFOPLIST_FILE = Epidemik/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -115,7 +115,7 @@ public class DiseaseQuestionair: UIView {
 		if(self.superScreen?.title != nil) {
 			self.superScreen!.title.text = "You Are Currently Sick"
 		}
-		Reporting.amSick(diseaseName: self.disease_name, symptoms: symptomsToReport)
+		NetworkAPI.setSick(username: FileRW.readFile(fileName: "username.epi")!, diseaseName: self.disease_name, symptoms: symptomsToReport)
 		submit()
 	}
 	

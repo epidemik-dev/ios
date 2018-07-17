@@ -18,6 +18,9 @@ public class SicknessView: UIView {
 	var healthyButton: UIButton!
 	//The button to report sickness
 	public var sicknessButton: UIButton!
+	// The button to diagnose the user
+	public var diagnoseButton: UIButton!
+
 	
 	var buttonWidth: CGFloat!
 	var buttonHeight: CGFloat!
@@ -32,6 +35,7 @@ public class SicknessView: UIView {
 	
 	var sickYCord: CGFloat!
 	var doneYCord: CGFloat!
+	var diagnoseYCord: CGFloat!
 	
 	//The title that says the users current status
 	var title: UILabel!
@@ -54,7 +58,8 @@ public class SicknessView: UIView {
 		buttonHeight = self.frame.height/6
 		buttonWidth = 7*CGFloat(insetX)
 		sickYCord = self.frame.height/2 - 3*self.buttonHeight/2
-		doneYCord = self.frame.height/2 + self.buttonHeight/2
+		doneYCord = self.frame.height/2 + 3*self.buttonHeight/2
+		diagnoseYCord = self.frame.height/2
 	}
 	
 	// Inits the button that the user can press
@@ -64,15 +69,16 @@ public class SicknessView: UIView {
 		if (isSick) {
 			initHealthyButton()
 		} else {
-			initSickButton(x: self.frame.width/2 - buttonWidth/2)
+			initSickButton()
+			initDiagnoseButton()
 		}
 		initTitle(isSick: isSick)
-		initDoneButton(x: self.frame.width/2 - buttonWidth/2)
+		initDoneButton()
 	}
 	
 	// Creates the button that the user can press to say they are sick
-	func initSickButton(x: CGFloat) {
-		sicknessButton = UIButton(frame: CGRect(x: self.frame.width + x, y: sickYCord, width: buttonWidth, height: buttonHeight))
+	func initSickButton() {
+		sicknessButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: sickYCord, width: buttonWidth, height: buttonHeight))
 		sicknessButton.accessibilityIdentifier = "SickButton"
 		sicknessButton.layer.cornerRadius = buttonChampher
 		sicknessButton.setTitle("REPORT SICK", for: UIControlState.normal)
@@ -83,6 +89,21 @@ public class SicknessView: UIView {
 		
 		UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
 			self.sicknessButton.frame.origin.x -= self.frame.width
+		})
+	}
+	
+	func initDiagnoseButton() {
+		diagnoseButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: diagnoseYCord, width: buttonWidth, height: buttonHeight))
+		diagnoseButton.accessibilityIdentifier = "DiagButton"
+		diagnoseButton.layer.cornerRadius = buttonChampher
+		diagnoseButton.setTitle("DIAGNOSE ME", for: UIControlState.normal)
+		diagnoseButton.titleLabel?.font = buttonFont
+		diagnoseButton.backgroundColor = PRESETS.GRAY
+		diagnoseButton.addTarget(self, action: #selector(SicknessView.diagnoseMe(_:)), for: .touchUpInside)
+		self.addSubview(diagnoseButton)
+		
+		UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
+			self.diagnoseButton.frame.origin.x -= self.frame.width
 		})
 	}
 	
@@ -105,8 +126,8 @@ public class SicknessView: UIView {
 	
 	//Creates the done button
 	//EFFECT: adds the button to the screen and adds the target to the button
-	func initDoneButton(x: CGFloat) {
-		doneButton = UIButton(frame: CGRect(x: self.frame.width + x, y: doneYCord, width: buttonWidth, height: buttonHeight))
+	func initDoneButton() {
+		doneButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: doneYCord, width: buttonWidth, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
 		doneButton.layer.cornerRadius = buttonChampher
 		doneButton.setTitle("Done", for: UIControlState.normal)
@@ -152,9 +173,28 @@ public class SicknessView: UIView {
 		self.addSubview(diseaseSelector)
 		UIView.animate(withDuration: 0.5, animations: {
 			self.sicknessButton.frame.origin.x -= self.frame.width
+			self.diagnoseButton.frame.origin.x -= self.frame.width
 			diseaseSelector.frame = self.frame
 		}, completion: {
 			(value: Bool) in
+			self.diagnoseButton.removeFromSuperview()
+			self.sicknessButton.removeFromSuperview()
+		})
+	}
+	
+	// Handles Diagnose button presses
+	// - Adds the diagnosis manager
+	// UIButton -> Nothing
+	@objc func diagnoseMe(_ sender: UIButton?) {
+		let diseaseWalkThrough = DiagnosisManager(frame: CGRect(x: self.frame.width, y: 0, width: self.frame.width, height: self.frame.height), superScreen: self)
+		self.addSubview(diseaseWalkThrough)
+		UIView.animate(withDuration: 0.5, animations: {
+			self.sicknessButton.frame.origin.x -= self.frame.width
+			self.diagnoseButton.frame.origin.x -= self.frame.width
+			diseaseWalkThrough.frame = self.frame
+		}, completion: {
+			(value: Bool) in
+			self.diagnoseButton.removeFromSuperview()
 			self.sicknessButton.removeFromSuperview()
 		})
 	}
@@ -168,7 +208,7 @@ public class SicknessView: UIView {
 	// Wipes the current sickness report from the server
 	// Puts the sickness button on the screen
 	@objc func amHealthy(_ sender: UIButton?) {
-		Reporting.amHealthy()
+		NetworkAPI.setHealthy(username: FileRW.readFile(fileName: "username.epi")!)
 		replaceHealthyButton()
 		self.title.text = "You Are Currently Healthy"
 	}
@@ -177,8 +217,9 @@ public class SicknessView: UIView {
 	func replaceHealthyButton() {
 		if(sicknessButton != nil) {
 			sicknessButton.removeFromSuperview()
+			diagnoseButton.removeFromSuperview()
 		}
-		initSickButton(x: self.frame.width/2 - buttonWidth/2 + 2*self.frame.width)
+		initSickButton()
 		let smileyView = UIImageView(image: FileRW.readImage(imageName: "smiley"))
 		smileyView.frame = CGRect(x: 1*self.frame.width+(self.frame.width-self.frame.height/4)/2, y: sickYCord, width: self.frame.height/4, height: self.frame.height/4)
 		self.addSubview(smileyView)
@@ -186,6 +227,7 @@ public class SicknessView: UIView {
 			smileyView.frame.origin.x -= 2*self.frame.width
 			self.healthyButton.frame.origin.x -= 2*self.frame.width
 			self.sicknessButton.frame.origin.x -= 2*self.frame.width
+			self.diagnoseButton.frame.origin.x -= 2*self.frame.width
 		}, completion: {
 			(value: Bool) in
 			self.healthyButton.removeFromSuperview()

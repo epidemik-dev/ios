@@ -158,10 +158,12 @@ public class DiseaseNameScreen: UIView {
 	
 	// Recieves the press from the back button and slides the disease selection screen to the right
 	@objc func back(_ sender: UIButton?) {
+		superScreen.addSubview(superScreen.diagnoseButton)
 		superScreen.addSubview(superScreen.sicknessButton)
 		UIView.animate(withDuration: 0.5, animations: {
 			self.frame.origin.x += self.frame.width
 			self.superScreen.sicknessButton.frame.origin.x += self.frame.width
+			self.superScreen.diagnoseButton.frame.origin.x += self.frame.width
 		}, completion: {
 			(value: Bool) in
 			self.removeFromSuperview()
