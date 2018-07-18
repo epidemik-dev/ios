@@ -74,4 +74,12 @@ public class DISEASE_QUESTIONS {
 			return COMMON_COLD_QUESTIONS
 		}
 	}
+	
+	public static func getBodyPartQuestions(bodyPart: String) -> Array<Int> {
+		if(bodyPart == "head") {
+			return [5, 1, 2, 3]
+		} else {
+			return [7, 8, 9]
+		}
+	}
 }

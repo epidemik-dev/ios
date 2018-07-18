@@ -28,7 +28,7 @@ class ADDRESS {
 		if (address != "") {
 			FileRW.writeFile(fileName: ADDRESS.FILE_NAME, contents: address)
 			let geocoder = CLGeocoder()
-			geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
+			geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> () in
 				if let buffer = placemarks?[0] {
 					let location = buffer.location;
 					self.sendToServer(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)

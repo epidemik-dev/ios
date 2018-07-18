@@ -18,13 +18,13 @@ class NetworkAPI {
 	static var versionExtension = "?version=" + (Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
 	
 	//Says if this username and password combo exist
-	public static func loginIsValid(username: String, password: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func loginIsValid(username: String, password: String, result: @escaping (JSON?) -> ()) {
 		let queryParams = "&username=" + username + "&password=" + password
 		sendPOSTWithCallback(method: "POST", urlExtensiuon: "/login", queryParams: queryParams, body: Data(), callback: result)
 	}
 	
 	// Creates an account on the database with all this information
-	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, result: @escaping (JSON?) -> ()) {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let body = JSON([
@@ -40,7 +40,7 @@ class NetworkAPI {
 	
 	// Pulls all the current disease infromation from the server where
 	// the disease point is still sick and not healthy
-	public static func loadAllDiseaseData(result: @escaping (_ response: JSON?) -> Void) {
+	public static func loadAllDiseaseData(result: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/diseases", queryParams: queryParams, body: Data(), callback: result)
@@ -48,14 +48,14 @@ class NetworkAPI {
 	}
 	
 	//Returns all the trend data for the given users location
-	public static func getAllTrendData(username: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func getAllTrendData(username: String, result: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/trends/" + username, queryParams: queryParams, body: Data(), callback: result)
 	}
 	
 	//Returns all points for this disease in this users location
-	public static func getTrendsForDisease(latitude: Double, longitude: Double, diseaseName: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func getTrendsForDisease(latitude: Double, longitude: Double, diseaseName: String, result: @escaping (_ response: JSON?) -> ()) {
 		let diseaseName2 = diseaseName.replacingOccurrences(of: " ", with: "-")
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken + "&latitude=" + String(latitude) + "&longitude=" + String(longitude) + "&disease_name=" + diseaseName2
@@ -63,21 +63,33 @@ class NetworkAPI {
 	}
 	
 	//Returns every disease point that this user has registered
-	public static func getAllPersonalData(username: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func getAllPersonalData(username: String, result: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: Data(), callback: result)
 	}
 	
 	//Says if this user is sick or not
-	public static func amISickHuh(username: String, result: @escaping (_ response: JSON?) -> Void) {
+	public static func amISickHuh(username: String, result: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/users/" + username + "/sickness", queryParams: queryParams, body: Data(), callback: result)
 	}
 	
 	//Updates the database so that this user is sick
+	public static func setSick(username: String, symptoms: Array<Int>, callback: @escaping (JSON?) -> ()) {
+		NetworkAPI.setSick(username: username, diseaseName: nil, symptoms: symptoms, callback: callback)
+	}
+	
 	public static func setSick(username: String, diseaseName: String, symptoms: Array<Int>) {
+		NetworkAPI.setSick(username: username, diseaseName: diseaseName, symptoms: symptoms, callback: ({(response: JSON?) -> ()
+			in
+			
+		}))
+	}
+	
+	//Updates the database so that this user is sick
+	public static func setSick(username: String, diseaseName: String?, symptoms: Array<Int>, callback: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		
@@ -86,17 +98,21 @@ class NetworkAPI {
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let dateString = dateFormatter.string(from:date as Date)
 		
-		let diseaseName2 = diseaseName.replacingOccurrences(of: " ", with: "-")
-		let body = JSON([
-			"disease_name": diseaseName2,
+		var body = JSON([
 			"date_sick": dateString,
 			"date_healthy": nil,
 			"symptoms": symptoms
 			])
-		try? sendPOSTWithCallback(method: "POST", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: body.rawData(), callback: ({(response: JSON?) -> Void
-			in
-			
-		}))
+		if(diseaseName != nil) {
+			let diseaseName2 = diseaseName!.replacingOccurrences(of: " ", with: "-")
+			body = JSON([
+				"disease_name": diseaseName2,
+				"date_sick": dateString,
+				"date_healthy": nil,
+				"symptoms": symptoms
+				])
+		}
+		try? sendPOSTWithCallback(method: "POST", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: body.rawData(), callback: callback)
 	}
 	
 	//Updates the database so that this user is healthy
@@ -109,7 +125,7 @@ class NetworkAPI {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken + "&date_healthy=" + dateString
 		
-		sendPOSTWithCallback(method: "PATCH", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: Data(), callback: ({(response: JSON?) -> Void
+		sendPOSTWithCallback(method: "PATCH", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: Data(), callback: ({(response: JSON?) -> ()
 			in
 			
 		}))
@@ -119,7 +135,7 @@ class NetworkAPI {
 	public static func updateAddress(username: String, latitude: Double, longitude: Double) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken + "&latitude=" + String(latitude) + "&longitude=" + String(longitude)
-		sendPOSTWithCallback(method: "PATCH", urlExtensiuon: "/users/" + username, queryParams: queryParams, body: Data(), callback: ({(response: JSON?) -> Void
+		sendPOSTWithCallback(method: "PATCH", urlExtensiuon: "/users/" + username, queryParams: queryParams, body: Data(), callback: ({(response: JSON?) -> ()
 			in
 			
 		}))
@@ -128,7 +144,7 @@ class NetworkAPI {
 	
 	//Sends this POST string to the given url and calls the given callback when it returns
 	//If the url errors or the user is offline it calls the callback with the string "error"
-	public static func sendPOSTWithCallback(method: String, urlExtensiuon: String, queryParams: String, body: Data, callback: @escaping (_ response: JSON?) -> Void) {
+	public static func sendPOSTWithCallback(method: String, urlExtensiuon: String, queryParams: String, body: Data, callback: @escaping (JSON?) -> ()) {
 		var request = URLRequest(url: URL(string: baseURL + urlExtensiuon + versionExtension + queryParams)!)
 		request.httpMethod = "POST"
 		request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")  // the request is JSON

@@ -22,9 +22,12 @@ class PersonSymptomSelector: UIView {
 	let buttonInShift = CGFloat(25.0)
 	let buttonUpShift = CGFloat(20.0)
 	
+	var symptomDisplay: SymptomSelector!
+	
 	init(frame: CGRect, manager: DiagnosisManager) {
 		super.init(frame: frame)
 		self.manager = manager
+		self.initSymptomDisplay(symptoms: Array<Int>())
 		self.initPerson()
 		self.initDoneButton()
 		self.initBackButton()
@@ -41,7 +44,7 @@ class PersonSymptomSelector: UIView {
 	}
 	
 	func initHead() {
-		head = UIButton(frame: CGRect(x: 20, y: 0, width: 60, height: 100))
+		head = UIButton(frame: CGRect(x: self.frame.width/2 - 30, y: 0, width: 60, height: 100))
 		head.backgroundColor = UIColor.red
 		head.accessibilityIdentifier = "head"
 		head.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -49,7 +52,7 @@ class PersonSymptomSelector: UIView {
 	}
 	
 	func initChest() {
-		chest = UIButton(frame: CGRect(x: 0, y: 100, width: 100, height: 100))
+		chest = UIButton(frame: CGRect(x: self.frame.width/2-50, y: 100, width: 100, height: 100))
 		chest.backgroundColor = UIColor.blue
 		chest.accessibilityIdentifier = "chest"
 		chest.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -60,7 +63,7 @@ class PersonSymptomSelector: UIView {
 	@objc func bodyPartClicked(_ sender: UIButton?) {
 		var frame = self.frame
 		frame.origin.x = self.frame.width
-		let bodyPartSelector = BodyPartSymptomSelector(frame: frame, partName: sender!.accessibilityIdentifier!)
+		let bodyPartSelector = BodyPartSymptomSelector(frame: frame, partName: sender!.accessibilityIdentifier!, done: finishedAddingSymptomsToPart, currentSymptoms: self.symptomDisplay.getSelectedSymptoms())
 		self.addSubview(bodyPartSelector)
 		UIView.animate(withDuration: 0.5, animations: {
 			bodyPartSelector.frame.origin.x -= self.frame.width
@@ -71,8 +74,8 @@ class PersonSymptomSelector: UIView {
 	// Creates the button that allows the user to send their sickness data to the server
 	func initDoneButton() {
 		doneButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
-		doneButton.accessibilityIdentifier = "AgreeButton"
-		doneButton.setTitle("AGREE", for: .normal)
+		doneButton.accessibilityIdentifier = "SubmitButton"
+		doneButton.setTitle("SUBMIT", for: .normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		doneButton.backgroundColor = PRESETS.RED
 		doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
@@ -99,7 +102,31 @@ class PersonSymptomSelector: UIView {
 	
 	// When the user is finished selecting all their symptoms
 	@objc func done(_ sender: UIButton?) {
+		UIView.animate(withDuration: 0.5, animations: {
+			self.frame.origin.x -= self.frame.width
+		})
+		manager.sendResults(symptoms: self.symptomDisplay.getSelectedSymptoms())
+	}
+	
+	func finishedAddingSymptomsToPart(part: BodyPartSymptomSelector) {
+		let toAdd = part.getSelectedSymptoms()
+		for add in toAdd {
+			symptomDisplay.addSymptom(symID: add)
+		}
 		
+		let toRemove = part.getUnselectedSymptoms()
+		for remove in toRemove {
+			symptomDisplay.removeSymptom(symID: remove)
+		}
+		
+	}
+	
+	func initSymptomDisplay(symptoms: Array<Int>) {
+		if(symptomDisplay != nil) {
+			symptomDisplay.removeFromSuperview()
+		}
+		symptomDisplay = SymptomSelector(frame: CGRect(x: 20, y: self.frame.height/3, width: self.frame.width-20, height: self.frame.height/4), canSelect: symptoms, selectOrView: false)
+		self.addSubview(symptomDisplay)
 	}
 	
 }

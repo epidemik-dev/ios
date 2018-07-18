@@ -80,7 +80,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	//EFFECT: if suceeds, writes the passwors and username to the disk and slides this view away
 	//If fails, dismisses the textbox and warns the user
 	func login(username: String, password: String) {
-		NetworkAPI.loginIsValid(username: username, password: password, result: {(response: JSON?) -> Void in
+		NetworkAPI.loginIsValid(username: username, password: password, result: {(response: JSON?) -> () in
 			if(response != nil) {
 				FileRW.writeFile(fileName: self.FILE_NAME, contents: username)
 				FileRW.writeFile(fileName: "auth_token.epi", contents: response!.string!)
@@ -377,7 +377,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 		}
 		if (address != "") {
 			let geocoder = CLGeocoder()
-			geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
+			geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> () in
 				if let buffer = placemarks?[0] {
 					let location = buffer.location;
 					if(self.dobPicker == nil) {
@@ -423,7 +423,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	//EFFECT: if the account is valid, it removes this view and writes the username + password to the disk
 	//Else, it warns the user and we do the whole thing again
 	func createAccount(deviceID: String) {
-		NetworkAPI.createAccount(username: username!, password: password!, latitude: latitude!, longitude: longitude!, deviceID: deviceID, dob: self.dobPicker!.date, gender: self.genderSelector!.getGender(), result: { (response: JSON?) -> Void in
+		NetworkAPI.createAccount(username: username!, password: password!, latitude: latitude!, longitude: longitude!, deviceID: deviceID, dob: self.dobPicker!.date, gender: self.genderSelector!.getGender(), result: { (response: JSON?) -> () in
 			if(response != nil) {
 				FileRW.writeFile(fileName: self.FILE_NAME, contents: self.username!)
 				FileRW.writeFile(fileName: "password.epi", contents: self.password!)

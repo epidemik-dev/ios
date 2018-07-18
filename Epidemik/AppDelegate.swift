@@ -74,12 +74,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	//What is called when the user recieves a notification
-	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> ()) {
 	}
 
 	//What is called when the user quicktouches something
 	//SHOULD NEVER BE CALLED NOW
-	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> ()) {
 		completionHandler(shouldPerformActionFor(shortcutItem: shortcutItem, application: application))
 	}
 	

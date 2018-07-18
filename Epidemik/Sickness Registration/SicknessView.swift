@@ -220,18 +220,23 @@ public class SicknessView: UIView {
 			diagnoseButton.removeFromSuperview()
 		}
 		initSickButton()
+		initDiagnoseButton()
 		let smileyView = UIImageView(image: FileRW.readImage(imageName: "smiley"))
 		smileyView.frame = CGRect(x: 1*self.frame.width+(self.frame.width-self.frame.height/4)/2, y: sickYCord, width: self.frame.height/4, height: self.frame.height/4)
 		self.addSubview(smileyView)
-		UIView.animate(withDuration: 0.8, animations: {
+		UIView.animate(withDuration: 0.4, animations: {
 			smileyView.frame.origin.x -= 2*self.frame.width
-			self.healthyButton.frame.origin.x -= 2*self.frame.width
-			self.sicknessButton.frame.origin.x -= 2*self.frame.width
-			self.diagnoseButton.frame.origin.x -= 2*self.frame.width
+			self.healthyButton.frame.origin.x -= self.frame.width
 		}, completion: {
 			(value: Bool) in
-			self.healthyButton.removeFromSuperview()
-			smileyView.removeFromSuperview()
+			UIView.animate(withDuration: 0.4, animations: {
+				self.sicknessButton.frame.origin.x -= self.frame.width
+				self.diagnoseButton.frame.origin.x -= self.frame.width
+			}, completion: {
+				(value: Bool) in
+				self.healthyButton.removeFromSuperview()
+				smileyView.removeFromSuperview()
+			})
 		})
 	}
 	

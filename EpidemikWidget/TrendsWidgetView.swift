@@ -33,7 +33,7 @@ public class TrendsWidgetView: UIScrollView {
 	}
 	
 	func getTrends(username: String) {
-		NetworkAPI.getAllTrendData(username: username, result: { (response: JSON?) -> Void in
+		NetworkAPI.getAllTrendData(username: username, result: { (response: JSON?) -> () in
 			DispatchQueue.main.sync {
 				self.processTrends(json_trends: response!)
 			}

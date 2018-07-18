@@ -148,7 +148,7 @@ class ViewController: UIViewController {
 		if(accCreation.shouldAdd == false) {
 			let username = FileRW.readFile(fileName: "username.epi")
 			let password = FileRW.readFile(fileName: "password.epi")
-			NetworkAPI.loginIsValid(username: username!, password: password!, result: {(response: JSON?) -> Void in
+			NetworkAPI.loginIsValid(username: username!, password: password!, result: {(response: JSON?) -> () in
 				if(response == nil) {
 					DispatchQueue.main.sync {
 						self.view.addSubview(self.accCreation)

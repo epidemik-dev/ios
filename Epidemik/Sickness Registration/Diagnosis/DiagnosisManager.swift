@@ -8,12 +8,14 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class DiagnosisManager: UIView {
 	
 	var tosView: DataTermsOfService!
 	var personSelector: PersonSymptomSelector!
 	var superScreen: SicknessView!
+	var reporter: ResultReporter!
 	
 	init(frame: CGRect, superScreen: SicknessView) {
 		super.init(frame: frame)
@@ -54,6 +56,22 @@ class DiagnosisManager: UIView {
 			self.superScreen.sicknessButton.frame.origin.x += self.frame.width
 			self.superScreen.diagnoseButton.frame.origin.x += self.frame.width
 		})
+	}
+	
+	func sendResults(symptoms: Array<Int>) {
+		NetworkAPI.setSick(username: FileRW.readFile(fileName: "username.epi")!, symptoms: symptoms, callback: processResults)
+	}
+	
+	func processResults(response: JSON?) {
+		DispatchQueue.main.sync {
+			var frame = self.frame
+			frame.origin.x = self.frame.width
+			self.reporter = ResultReporter(frame: frame, results: response)
+			self.addSubview(self.reporter)
+			UIView.animate(withDuration: 0.5, animations: {
+				self.reporter.frame.origin.x -= self.reporter.frame.width
+			})
+		}
 	}
 	
 }

@@ -19,15 +19,11 @@ public class DiseaseQuestionair: UIView {
 	var doneButton: UIButton!
 	//The x cordinate that everything is pushed in by
 	var insetX = CGFloat(30.0)
-	//The blur view
-	var blur: UIVisualEffectView!
 
 	//The number values of all questions for this disease questinair
 	var questions = Array<Int>()
 	
-	//The checkboxes that cordinate to every disease question
-	//Have a field ID that says which question it points to
-	var checkBoxes = Array<CheckBox>()
+	var symptomSelector: SymptomSelector!
 	
 	//Initalizes this View with these fields
 	//Creates the blur for the background
@@ -40,12 +36,8 @@ public class DiseaseQuestionair: UIView {
 		self.superScreen = superScreen
 		self.questions = DISEASE_QUESTIONS.getDiseaseQuestions(diseaseName: disease_name)
 		initBlur()
-		myInitBlur()
-		blur.frame = CGRect(x: 30, y: 100, width: self.frame.width-60, height: 4*self.frame.height/8)
-		blur.layer.cornerRadius = 20
-		blur.clipsToBounds = true
 		initDoneButton()
-		initSelectors()
+		initSelector()
 		initTitle()
 	}
 	
@@ -71,19 +63,11 @@ public class DiseaseQuestionair: UIView {
 	
 	//Creates the selectors
 	//EFFECT: resets the selector array and adds the checkboxes and lables to the view
-	func initSelectors() {
-		checkBoxes = Array<CheckBox>()
-		var yPos = 120
-		for question in self.questions {
-			let checkbox = CheckBox(frame: CGRect(x: 40, y: yPos, width: 40, height: 40), id: question)
-			checkBoxes.append(checkbox)
-			let textBox = UILabel(frame: CGRect(x: 100, y: yPos, width: Int(self.frame.width - CGFloat(60)), height: 40))
-			textBox.text = DISEASE_QUESTIONS.QUESTION_DICT[question]
-			textBox.font = PRESETS.FONT_BIG
-			self.addSubview(textBox)
-			self.addSubview(checkbox)
-			yPos += 60
-		}
+	func initSelector() {
+		//var frame = CGRect(x: self.blur.frame.origin.x, y: self.blur.frame.origin.y, width: self.blur.frame.width, height: self.blur.frame.origin.x)
+		//frame.height -= 20
+		symptomSelector = SymptomSelector(frame: CGRect(x: 30, y: 100, width: self.frame.width-60, height: 4*self.frame.height/8), canSelect: self.questions, selectOrView: true)
+		self.addSubview(symptomSelector)
 	}
 	
 	//Creates the done button
@@ -106,12 +90,7 @@ public class DiseaseQuestionair: UIView {
 	//Changes the title of the sickness screen
 	//Makes this screen go away
 	@objc func amDone(_ sender: UIButton?) {
-		var symptomsToReport = Array<Int>()
-		for checkbox in self.checkBoxes {
-			if(checkbox.isChecked) {
-				symptomsToReport.append(checkbox.id)
-			}
-		}
+		let symptomsToReport = self.symptomSelector.getSelectedSymptoms()
 		if(self.superScreen?.title != nil) {
 			self.superScreen!.title.text = "You Are Currently Sick"
 		}
@@ -134,19 +113,6 @@ public class DiseaseQuestionair: UIView {
 			self.removeFromSuperview()
 		})
 	}
-	
-	//Initalizes the blur field of this class
-	//EFFECT: creates the blur field of this class
-	//Also makes it way longer than it needs to be (in the Y direction) for scrolling purposes
-	func myInitBlur() {
-		let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.prominent)
-		blur = UIVisualEffectView(effect: blurEffect)
-		//always fill the view
-		blur.frame = CGRect(x: 0, y: -self.frame.height, width: self.frame.width, height: self.frame.height*5)
-		blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		self.addSubview(blur) //if you have more UIViews, use an insertSubview API to place it where needed
-	}
-	
 	
 	
 }

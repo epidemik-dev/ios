@@ -34,7 +34,7 @@ class GlobalTrendDataCenter {
 	// Calls the network trend loader
 	// EFFECT: calls the trend processer when done and loads the data to this class
 	func getTrends(username: String) {
-		NetworkAPI.getAllTrendData(username: username, result: {(response: JSON?) -> Void in
+		NetworkAPI.getAllTrendData(username: username, result: {(response: JSON?) -> () in
 			DispatchQueue.main.sync {
 				self.processTrends(response: response)
 			}

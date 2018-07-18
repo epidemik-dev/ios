@@ -21,7 +21,7 @@ class StatusDataCenter {
 	//EFFECT: initilizes the sicknessScreen with the proper boolean when done
 	//Also stops any loading animations
 	func getUserStatus() {
-		NetworkAPI.amISickHuh(username: FileRW.readFile(fileName: "username.epi")!, result: {(response: JSON?) -> Void in
+		NetworkAPI.amISickHuh(username: FileRW.readFile(fileName: "username.epi")!, result: {(response: JSON?) -> () in
 			sleep(1)
 			if(response!.string! == "false") {
 				DispatchQueue.main.sync {
