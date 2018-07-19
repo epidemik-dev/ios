@@ -65,7 +65,7 @@ public class MainHolder: UIView {
 	//Creates the data cennter
 	//EFFECT: updates the map, trends, and pTrends data center also reloads their data when done loading
 	func initData() {
-		self.dataCenter = RealDataCenter(sicknessScreen: self.sicknessView, map: self.mapView, trendsView: self.trendsView, pTrendsView: self.personalTrends)
+		self.dataCenter = RealDataCenter(mainScreen: self, map: self.mapView, trendsView: self.trendsView, pTrendsView: self.personalTrends)
 		self.mapView.dataCenter = self.dataCenter
 		self.trendsView.dataCenter = self.dataCenter
 		self.personalTrends.dataCenter = dataCenter
@@ -77,7 +77,7 @@ public class MainHolder: UIView {
 		if(sicknessView != nil) {
 			sicknessView.removeFromSuperview()
 		}
-		sicknessView = SicknessView(frame: self.frame, mainHolder: self)
+		sicknessView = SicknessView(frame: self.frame)
 		self.addSubview(sicknessView)
 	}
 	
@@ -219,14 +219,6 @@ public class MainHolder: UIView {
 	//Creates the transition controls from swipe capibilites
 	func initTransition() {
 		transControls = TransitionControls(mainView: self)
-	}
-	
-	//Removes the sickness view
-	//EFFECT: slides it up
-	func removeSickness() {
-		UIView.animate(withDuration: 0.5, animations: {
-			self.sicknessView.frame.origin.y -= self.frame.height
-		})
 	}
 	
 	//Creates the button that can recal the sickness view after the user has pressed done to dismis it

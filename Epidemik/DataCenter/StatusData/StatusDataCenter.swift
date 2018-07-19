@@ -11,10 +11,10 @@ import SwiftyJSON
 
 class StatusDataCenter {
 	
-	var sicknessScreen: SicknessView!
+	var mainScreen: MainHolder!
 	
-	init(sicknessScreen: SicknessView) {
-		self.sicknessScreen = sicknessScreen
+	init(mainScreen: MainHolder) {
+		self.mainScreen = mainScreen
 	}
 	
 	//Inits the sickness buttons and writes the post string if applicable
@@ -25,13 +25,13 @@ class StatusDataCenter {
 			sleep(1)
 			if(response!.string! == "false") {
 				DispatchQueue.main.sync {
-					self.sicknessScreen.mainHolder.loadingView.stopAnimation()
-					self.sicknessScreen.initButton(isSick: false)
+					self.mainScreen.loadingView.stopAnimation()
+					self.mainScreen.sicknessView.initButton(isSick: false)
 				}
 			} else {
 				DispatchQueue.main.sync {
-					self.sicknessScreen.mainHolder.loadingView.stopAnimation()
-					self.sicknessScreen.initButton(isSick: true)
+					self.mainScreen.loadingView.stopAnimation()
+					self.mainScreen.sicknessView.initButton(isSick: true)
 				}
 			}
 		})

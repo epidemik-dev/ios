@@ -30,8 +30,6 @@ public class SicknessView: UIView {
 	
 	//The button to make it all go away
 	var doneButton: UIButton!
-	//The screen that this view is put on
-	var mainHolder: MainHolder!
 	
 	var sickYCord: CGFloat!
 	var doneYCord: CGFloat!
@@ -40,11 +38,10 @@ public class SicknessView: UIView {
 	//The title that says the users current status
 	var title: UILabel!
 	
-	init (frame: CGRect, mainHolder: MainHolder) {
+	override init (frame: CGRect) {
 		super.init(frame: frame)
 		self.accessibilityIdentifier = "SicknessView"
 		initButtonPerams()
-		self.mainHolder = mainHolder
 		initBlur()
 	}
 	
@@ -201,7 +198,9 @@ public class SicknessView: UIView {
 	
 	//Removes the sickness view from the main view
 	@objc func amDone(_ sender: UIButton?) {
-		self.mainHolder.removeSickness()
+		UIView.animate(withDuration: 0.5, animations: {
+			self.frame.origin.y -= self.frame.height
+		})
 	}
 	
 	// Handles the healthy press
@@ -219,24 +218,23 @@ public class SicknessView: UIView {
 			sicknessButton.removeFromSuperview()
 			diagnoseButton.removeFromSuperview()
 		}
-		initSickButton()
-		initDiagnoseButton()
 		let smileyView = UIImageView(image: FileRW.readImage(imageName: "smiley"))
-		smileyView.frame = CGRect(x: 1*self.frame.width+(self.frame.width-self.frame.height/4)/2, y: sickYCord, width: self.frame.height/4, height: self.frame.height/4)
+		smileyView.frame = CGRect(x: self.frame.width + self.frame.width/2 - self.frame.height/8, y: sickYCord, width: self.frame.height/4, height: self.frame.height/4)
 		self.addSubview(smileyView)
-		UIView.animate(withDuration: 0.4, animations: {
-			smileyView.frame.origin.x -= 2*self.frame.width
+		UIView.animate(withDuration: 0.5, animations: {
+			smileyView.frame.origin.x -= self.frame.width
 			self.healthyButton.frame.origin.x -= self.frame.width
 		}, completion: {
 			(value: Bool) in
-			UIView.animate(withDuration: 0.4, animations: {
-				self.sicknessButton.frame.origin.x -= self.frame.width
-				self.diagnoseButton.frame.origin.x -= self.frame.width
+			UIView.animate(withDuration: 0.5, animations: {
+				smileyView.frame.origin.x -= self.frame.width
 			}, completion: {
 				(value: Bool) in
-				self.healthyButton.removeFromSuperview()
 				smileyView.removeFromSuperview()
 			})
+			self.initSickButton()
+			self.initDiagnoseButton()
+			self.healthyButton.removeFromSuperview()
 		})
 	}
 	

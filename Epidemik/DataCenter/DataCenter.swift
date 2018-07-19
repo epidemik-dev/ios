@@ -49,14 +49,14 @@ public class RealDataCenter: DataCenter {
 	
 	var statusData: StatusDataCenter
 	
-	init(sicknessScreen: SicknessView, map: Map, trendsView: GTrendsView, pTrendsView: PTrendsView) {
+	init(mainScreen: MainHolder, map: Map, trendsView: GTrendsView, pTrendsView: PTrendsView) {
 		self.diseaseData = DiseaseDataCenter(map: map)
 		
 		self.globalTrendData = GlobalTrendDataCenter(trendsView: trendsView)
 		
 		self.personalTrendData = PersonalTrendDataCenter(pTrendsView: pTrendsView)
 		
-		statusData = StatusDataCenter(sicknessScreen: sicknessScreen)
+		statusData = StatusDataCenter(mainScreen: mainScreen)
 		
 		self.loadData()
 	}
