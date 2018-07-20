@@ -136,7 +136,7 @@ private class SymptomSelectorScroller: UIScrollView {
 	
 }
 
-private class IndivSymptomSelector: UIView {
+private class IndivSymptomSelector: UIButton {
 	
 	var removeFunc: ((Int) -> ())!
 	var symID: Int!
@@ -170,6 +170,7 @@ private class IndivSymptomSelector: UIView {
 	func addTitle() {
 		title = UITextView(frame: CGRect(x: self.frame.height, y: 0, width: self.frame.width - self.frame.height, height: self.frame.height))
 		title.isEditable = false
+		title.isSelectable = false
 		title.text = DISEASE_QUESTIONS.QUESTION_DICT[self.symID]
 		title.backgroundColor = UIColor.clear
 		self.addSubview(self.title)
@@ -177,7 +178,7 @@ private class IndivSymptomSelector: UIView {
 	
 	func addDeleteButton() {
 		deleteButton = UIButton(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height))
-		deleteButton.backgroundColor = UIColor.red
+		deleteButton.setImage(FileRW.readImage(imageName: "x.png"), for: .normal)
 		deleteButton.addTarget(self, action: #selector(IndivSymptomSelector.deleteSelf(_:)), for: .touchUpInside)
 		self.addSubview(deleteButton)
 	}

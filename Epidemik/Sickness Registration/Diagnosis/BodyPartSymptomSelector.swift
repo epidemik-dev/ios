@@ -65,7 +65,7 @@ class BodyPartSymptomSelector: UIView {
 		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
 		doneButton.layer.cornerRadius = 40
-		doneButton.setTitle("Done", for: UIControlState.normal)
+		doneButton.setTitle("Continue", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		doneButton.backgroundColor = PRESETS.RED
 		doneButton.addTarget(self, action: #selector(BodyPartSymptomSelector.done(_:)), for: .touchUpInside)

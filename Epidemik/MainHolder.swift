@@ -239,5 +239,11 @@ public class MainHolder: UIView {
 		})
 	}
 	
+	// Writes to DiseaseQuestions all the info that we need
+	// EFFECT: changes DiseaseQuestions info
+	func getSymptomInfo() {
+		
+	}
+	
 }
 

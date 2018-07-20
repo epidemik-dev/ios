@@ -34,6 +34,7 @@ public class PRESETS {
 	public static var FONT_BIG = UIFont(name: FONT_NAME, size: CGFloat(20*SCALE))
 	public static var FONT_SMALL_BOLD = UIFont(name: BOLD_FONT_NAME, size: CGFloat(10*SCALE))
 	public static var FONT_BIG_BOLD = UIFont(name: BOLD_FONT_NAME, size: CGFloat(20*SCALE))
-	
+	public static var FONT_VERY_BIG = UIFont(name: FONT_NAME, size: CGFloat(30*SCALE))
+	public static var FONT_VERY_VERY_BIG = UIFont(name: FONT_NAME, size: CGFloat(40*SCALE))
 	
 }

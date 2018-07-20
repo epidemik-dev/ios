@@ -11,6 +11,7 @@ import UIKit
 
 class DataTermsOfService: UIView {
 
+	var title: UITextView!
 	var tosText: UITextView!
 	var agreeButton: UIButton!
 	var backButton: UIButton!
@@ -22,6 +23,7 @@ class DataTermsOfService: UIView {
 	
 	init(frame: CGRect, manager: DiagnosisManager) {
 		super.init(frame: frame)
+		self.initTitle()
 		self.initTOSText()
 		self.initAgreeButton()
 		self.initBackButton()
@@ -32,11 +34,29 @@ class DataTermsOfService: UIView {
 		super.init(coder: aDecoder)
 	}
 	
+	func initTitle() {
+		self.title = UITextView(frame: CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height/5-10))
+		self.title.text = "Concerned About Your Health?"
+		self.title.textAlignment = .center
+		self.title.font = PRESETS.FONT_VERY_VERY_BIG
+		self.title.isEditable = false
+		self.title.isSelectable = false
+		self.title.backgroundColor = .clear
+		self.addSubview(self.title)
+	}
+	
 	// Adds the text that says the TOS to the view
 	// EFFECT: inits and adds the TOS text to the view
 	func initTOSText() {
-		self.tosText = UITextView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height/5))
-		self.tosText.text = "These are Terms of Service"
+		self.tosText = UITextView(frame: CGRect(x: 40, y: self.frame.height/5, width: self.frame.width-80, height: self.frame.height/2))
+		self.tosText.text = "Our Diagnosis tool is used to give a potential diagnosis of your symptoms. Further consultation with a medical physican is recommended for confirmation. \n\nThis checkup should take around 2 minutes."
+		self.tosText.textAlignment = .center
+		self.tosText.backgroundColor = UIColor.clear
+		self.tosText.isEditable = false
+		self.tosText.isSelectable = false
+		self.tosText.font = PRESETS.FONT_VERY_BIG
+		self.tosText.textColor = PRESETS.GRAY
+		self.tosText.layer.cornerRadius = 10
 		self.addSubview(self.tosText)
 	}
 	

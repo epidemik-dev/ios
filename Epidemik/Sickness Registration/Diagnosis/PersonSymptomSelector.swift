@@ -11,24 +11,39 @@ import UIKit
 
 class PersonSymptomSelector: UIView {
 	
+	var title: UITextView!
+	
 	var manager: DiagnosisManager!
+	
+	var curPersonY: CGFloat!
 	var head: UIButton!
+	var arms: UIButton!
 	var chest: UIButton!
+	var stomach: UIButton!
+	var leg1: UIButton!
+	var leg2: UIButton!
 	
 	var backButton: UIButton!
 	var doneButton: UIButton!
 	
 	//Where the buttons are placed on the screen
 	let buttonInShift = CGFloat(25.0)
-	let buttonUpShift = CGFloat(20.0)
+	let buttonUpShift = CGFloat(40.0)
+	// how far the gap between the side and the sym selector is
+	var symptomSelectorGap = CGFloat(20)
+	// how far the title is pushed down
+	var titlePushDown = CGFloat(10)
 	
 	var symptomDisplay: SymptomSelector!
 	
 	init(frame: CGRect, manager: DiagnosisManager) {
 		super.init(frame: frame)
+		self.curPersonY = 2*self.frame.height/16
 		self.manager = manager
-		self.initSymptomDisplay(symptoms: Array<Int>())
+		self.initTitle()
 		self.initPerson()
+		self.initSymptomDisplay(symptoms: Array<Int>())
+		
 		self.initDoneButton()
 		self.initBackButton()
 	}
@@ -37,26 +52,74 @@ class PersonSymptomSelector: UIView {
 		super.init(coder: aDecoder)
 	}
 	
-	// Adds the content to the screen that allows you to select symptoms
-	func initPerson() {
-		initHead()
-		initChest()
+	func initTitle() {
+		title = UITextView(frame: CGRect(x: 0, y: titlePushDown, width: self.frame.width, height: self.frame.height/8 - titlePushDown))
+		title.backgroundColor = UIColor.clear
+		title.text = "Tap The Person Where It Hurts"
+		title.textAlignment = .center
+		title.font = PRESETS.FONT_VERY_BIG
+		self.addSubview(title)
 	}
 	
-	func initHead() {
-		head = UIButton(frame: CGRect(x: self.frame.width/2 - 30, y: 0, width: 60, height: 100))
+	// Adds the content to the screen that allows you to select symptoms
+	func initPerson() {
+		let personDimensions = PersonDimensions(height: self.frame.height/3)
+		initHead(width: personDimensions.HEAD_WIDTH, height: personDimensions.HEAD_HEIGHT)
+		initArms(width: personDimensions.ARM_WIDTH, height: personDimensions.ARM_HEIGHT)
+		initChest(width: personDimensions.CHEST_WIDTH, height: personDimensions.CHEST_HEIGHT)
+		initStomach(width: personDimensions.CHEST_WIDTH, height: personDimensions.STOMACH_HEIGHT)
+		initLegs(width: personDimensions.LEG_WIDTH, height: personDimensions.LEG_HEIGHT, chestWidth: personDimensions.CHEST_WIDTH)
+	}
+	
+	func initHead(width: CGFloat, height: CGFloat) {
+		head = UIButton(frame: CGRect(x: self.frame.width/2 - width/2, y: curPersonY, width: width, height: height))
+		curPersonY += height
 		head.backgroundColor = UIColor.red
 		head.accessibilityIdentifier = "head"
 		head.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(head)
 	}
 	
-	func initChest() {
-		chest = UIButton(frame: CGRect(x: self.frame.width/2-50, y: 100, width: 100, height: 100))
+	func initArms(width: CGFloat, height: CGFloat) {
+		arms = UIButton(frame: CGRect(x: self.frame.width/2 - width/2, y: curPersonY, width: width, height: height))
+		arms.backgroundColor = UIColor.green
+		arms.accessibilityIdentifier = "arms"
+		arms.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
+		self.addSubview(arms)
+	}
+	
+	func initChest(width: CGFloat, height: CGFloat) {
+		chest = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
+		curPersonY += height;
 		chest.backgroundColor = UIColor.blue
 		chest.accessibilityIdentifier = "chest"
 		chest.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(chest)
+	}
+	
+	func initStomach(width: CGFloat, height: CGFloat) {
+		stomach = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
+		curPersonY += height;
+		stomach.backgroundColor = UIColor.orange
+		stomach.accessibilityIdentifier = "chest"
+		stomach.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
+		self.addSubview(stomach)
+	}
+	
+	func initLegs(width: CGFloat, height: CGFloat, chestWidth: CGFloat) {
+		leg1 = UIButton(frame: CGRect(x: self.frame.width/2-chestWidth/2, y: curPersonY, width: width, height: height))
+		leg1.backgroundColor = UIColor.purple
+		leg1.accessibilityIdentifier = "legs"
+		leg1.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
+		self.addSubview(leg1)
+		
+		leg2 = UIButton(frame: CGRect(x: self.frame.width/2+chestWidth/2-width, y: curPersonY, width: width, height: height))
+		leg2.backgroundColor = UIColor.purple
+		leg2.accessibilityIdentifier = "legs"
+		leg2.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
+		self.addSubview(leg2)
+		curPersonY += height;
+
 	}
 	
 	// The thing that happens when a body part is clicked
@@ -70,10 +133,18 @@ class PersonSymptomSelector: UIView {
 		})
 	}
 	
+	func initSymptomDisplay(symptoms: Array<Int>) {
+		if(symptomDisplay != nil) {
+			symptomDisplay.removeFromSuperview()
+		}
+		symptomDisplay = SymptomSelector(frame: CGRect(x: symptomSelectorGap, y: curPersonY + symptomSelectorGap, width: self.frame.width-symptomSelectorGap, height: self.frame.height/4), canSelect: symptoms, selectOrView: false)
+		self.addSubview(symptomDisplay)
+	}
+	
 	// A SendButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to send their sickness data to the server
 	func initDoneButton() {
-		doneButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
+		doneButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
 		doneButton.accessibilityIdentifier = "SubmitButton"
 		doneButton.setTitle("SUBMIT", for: .normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
@@ -86,7 +157,7 @@ class PersonSymptomSelector: UIView {
 	// A BackButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to go back to the sickness screen
 	func initBackButton() {
-		backButton = UIButton(frame: CGRect(x: buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
+		backButton = UIButton(frame: CGRect(x: buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
 		backButton.setTitle("BACK", for: .normal)
 		backButton.backgroundColor = PRESETS.GRAY
 		backButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
@@ -121,13 +192,36 @@ class PersonSymptomSelector: UIView {
 		
 	}
 	
-	func initSymptomDisplay(symptoms: Array<Int>) {
-		if(symptomDisplay != nil) {
-			symptomDisplay.removeFromSuperview()
-		}
-		symptomDisplay = SymptomSelector(frame: CGRect(x: 20, y: self.frame.height/3, width: self.frame.width-20, height: self.frame.height/4), canSelect: symptoms, selectOrView: false)
-		self.addSubview(symptomDisplay)
+}
+
+
+private class PersonDimensions {
+	
+	var HEAD_WIDTH: CGFloat
+	var HEAD_HEIGHT: CGFloat
+	var ARM_WIDTH: CGFloat
+	var ARM_HEIGHT: CGFloat
+	var CHEST_WIDTH: CGFloat
+	var CHEST_HEIGHT: CGFloat
+	var STOMACH_HEIGHT: CGFloat
+	var LEG_WIDTH: CGFloat
+	var LEG_HEIGHT: CGFloat
+	
+	// The height of the person as a whole
+	init(height: CGFloat) {
+		HEAD_WIDTH = height / 7
+		HEAD_HEIGHT = height / 5
+		ARM_WIDTH = height
+		ARM_HEIGHT = height/12
+		CHEST_WIDTH = height/3
+		CHEST_HEIGHT = height/4
+		STOMACH_HEIGHT = height/4
+		LEG_WIDTH = height/9
+		LEG_HEIGHT = height/3
 	}
+
+	
 	
 }
+
 
