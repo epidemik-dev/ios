@@ -165,8 +165,8 @@ class ViewController: UIViewController {
 			self.view.addSubview(self.accCreation)
 			self.view.sendSubview(toBack: self.accCreation)
 		}
-		
 	}
+	
 	
 	
 	

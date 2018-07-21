@@ -102,12 +102,10 @@
 		00AFBE5E209CEFCB0098F95A /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */; };
 		00AFBE60209D09660098F95A /* CreateAccExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5F209D09660098F95A /* CreateAccExtension.swift */; };
 		00B5D85520FE61B300583214 /* DiagnosisManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85420FE61B300583214 /* DiagnosisManager.swift */; };
-		00B5D85B20FE64DD00583214 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85820FE64DD00583214 /* Diseases.swift */; };
 		00B5D85C20FE64DD00583214 /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */; };
 		00B5D85D20FE64DD00583214 /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */; };
 		00B5D85E20FE686D00583214 /* DiseaseQuestionair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */; };
 		00B5D85F20FE687200583214 /* DiseaseNameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */; };
-		00B5D86020FE687600583214 /* Diseases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B5D85820FE64DD00583214 /* Diseases.swift */; };
 		00B5D86120FE687B00583214 /* DataTermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */; };
 		00B5D86220FE687B00583214 /* PersonSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */; };
 		00B5D86320FE687B00583214 /* BodyPartSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */; };
@@ -240,7 +238,6 @@
 		00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
 		00AFBE5F209D09660098F95A /* CreateAccExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccExtension.swift; sourceTree = "<group>"; };
 		00B5D85420FE61B300583214 /* DiagnosisManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisManager.swift; sourceTree = "<group>"; };
-		00B5D85820FE64DD00583214 /* Diseases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diseases.swift; sourceTree = "<group>"; };
 		00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseQuestionair.swift; sourceTree = "<group>"; };
 		00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiseaseNameScreen.swift; sourceTree = "<group>"; };
 		00BC4F6F1F81746C0018D5D8 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -658,7 +655,6 @@
 			children = (
 				00B5D85A20FE64DD00583214 /* DiseaseNameScreen.swift */,
 				00B5D85920FE64DD00583214 /* DiseaseQuestionair.swift */,
-				00B5D85820FE64DD00583214 /* Diseases.swift */,
 			);
 			path = Sickness;
 			sourceTree = "<group>";
@@ -1017,7 +1013,6 @@
 				00112527203889EF00C3D16A /* DataCenter.swift in Sources */,
 				0031F034208936F800B55DD6 /* BadVersionScreen.swift in Sources */,
 				00C56883204B110100BC5762 /* AccountCreation.swift in Sources */,
-				00B5D85B20FE64DD00583214 /* Diseases.swift in Sources */,
 				00CD77FD1F7844C1002B5C78 /* FileRW.swift in Sources */,
 				0011DBBA1F6C0EBA004212E1 /* ViewController.swift in Sources */,
 				00AA180A203BB8440071CA6A /* GlobalTrendDataCenter.swift in Sources */,
@@ -1049,7 +1044,6 @@
 				00B5D86320FE687B00583214 /* BodyPartSymptomSelector.swift in Sources */,
 				00B5D86420FE687B00583214 /* ResultReporter.swift in Sources */,
 				00B5D86520FE687B00583214 /* DiagnosisManager.swift in Sources */,
-				00B5D86020FE687600583214 /* Diseases.swift in Sources */,
 				00B5D85F20FE687200583214 /* DiseaseNameScreen.swift in Sources */,
 				00B5D85E20FE686D00583214 /* DiseaseQuestionair.swift in Sources */,
 				009E23F620A7B2A2000A144F /* DataCenter.swift in Sources */,

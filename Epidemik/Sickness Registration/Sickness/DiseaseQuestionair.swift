@@ -34,7 +34,7 @@ public class DiseaseQuestionair: UIView {
 		self.accessibilityIdentifier = "DiseaseQuestionair"
 		self.disease_name = disease_name
 		self.superScreen = superScreen
-		self.questions = DISEASE_QUESTIONS.getDiseaseQuestions(diseaseName: disease_name)
+		self.questions = DISEASE_QUESTIONS.DISEASE_QUESTION_MAP[disease_name]!
 		initBlur()
 		initDoneButton()
 		initSelector()

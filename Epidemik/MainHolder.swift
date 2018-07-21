@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 public class MainHolder: UIView {
 	//The UIView that brings the app together
@@ -43,7 +44,7 @@ public class MainHolder: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		self.accessibilityIdentifier = "MainHolder"
-		
+		loadDiagnosisData()
 		initSettings()
 		initMap()
 		initPersonalTrends()
@@ -60,6 +61,39 @@ public class MainHolder: UIView {
 	
 	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+	}
+	
+	func loadDiagnosisData() {
+		func processReturn(value: JSON?) {
+			// Symptom Map
+			for mapItem in value!["symptom_map"].dictionaryValue {
+				DISEASE_QUESTIONS.QUESTION_DICT[Int(mapItem.key)!] = mapItem.value.string!
+			}
+			// Disease Question Map
+			for mapItem in value!["disease_question_map"].dictionaryValue {
+				let vals = mapItem.value
+				var array: Array<Int> = []
+				for item in vals {
+					array.append(item.1.int!)
+				}
+				DISEASE_QUESTIONS.DISEASE_QUESTION_MAP[mapItem.key] = array
+			}
+			// Body Part Map
+			for mapItem in value!["body_part_question_map"].dictionaryValue {
+				let vals = mapItem.value
+				var array: Array<Int> = []
+				for item in vals {
+					array.append(item.1.int!)
+				}
+				DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[mapItem.key] = array
+			}
+			// Disease List
+			for disease in value!["disease_list"].arrayValue {
+				DISEASE_QUESTIONS.diseases.append(disease.string!)
+			}
+		}
+		NetworkAPI.getDiagnosisInfo(callback: processReturn)
+
 	}
 	
 	//Creates the data cennter

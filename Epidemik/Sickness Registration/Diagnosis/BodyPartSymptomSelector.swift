@@ -40,7 +40,7 @@ class BodyPartSymptomSelector: UIView {
 	// Adds the drop down symptom selector the view
 	func initSelector() {
 		let y = self.bodyPartImage.frame.origin.y + self.bodyPartImage.frame.height + 20
-		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: y, width: self.frame.width-20, height: self.frame.height/2), canSelect: DISEASE_QUESTIONS.getBodyPartQuestions(bodyPart: self.partName), selectOrView: true)
+		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: y, width: self.frame.width-20, height: self.frame.height/2), canSelect: DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[self.partName]!, selectOrView: true)
 		self.addSubview(symptomSelector)
 	}
 	
