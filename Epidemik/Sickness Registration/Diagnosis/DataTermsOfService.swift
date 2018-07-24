@@ -35,7 +35,7 @@ class DataTermsOfService: UIView {
 	}
 	
 	func initTitle() {
-		self.title = UITextView(frame: CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height/5-10))
+		self.title = UITextView(frame: CGRect(x: 10, y: 20, width: self.frame.width-20, height: self.frame.height/5-20))
 		self.title.text = "Concerned About Your Health?"
 		self.title.textAlignment = .center
 		self.title.font = PRESETS.FONT_VERY_VERY_BIG

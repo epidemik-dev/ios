@@ -50,6 +50,8 @@
 		006B47AA20FF8EC6004C80C5 /* SymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006B47A920FF8EC6004C80C5 /* SymptomSelector.swift */; };
 		007011682087A58C008DFF49 /* DiseaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007011672087A58C008DFF49 /* DiseaseManager.swift */; };
 		007011692087AD14008DFF49 /* DiseaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007011672087A58C008DFF49 /* DiseaseManager.swift */; };
+		0070FAAD2107750C0068A7B6 /* DiseaseInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */; };
+		0070FAAE210775A90068A7B6 /* DiseaseInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */; };
 		0079189B1FF56C4900DB03D3 /* TransitionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079189A1FF56C4900DB03D3 /* TransitionControls.swift */; };
 		0083AD251F795BD8007AEF87 /* SicknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD241F795BD8007AEF87 /* SicknessView.swift */; };
 		0087EADE2041091B00BDEEC8 /* Asker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0087EADD2041091B00BDEEC8 /* Asker.swift */; };
@@ -226,6 +228,7 @@
 		0056504820E133CB003BCB4F /* SicknessSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessSubmission.swift; sourceTree = "<group>"; };
 		006B47A920FF8EC6004C80C5 /* SymptomSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymptomSelector.swift; sourceTree = "<group>"; };
 		007011672087A58C008DFF49 /* DiseaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseManager.swift; sourceTree = "<group>"; };
+		0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseInfoScreen.swift; sourceTree = "<group>"; };
 		0079189A1FF56C4900DB03D3 /* TransitionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionControls.swift; sourceTree = "<group>"; };
 		0083AD241F795BD8007AEF87 /* SicknessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessView.swift; sourceTree = "<group>"; };
 		0087EADD2041091B00BDEEC8 /* Asker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asker.swift; sourceTree = "<group>"; };
@@ -545,6 +548,7 @@
 		00173B9820882E5B0047916F /* Sickness Registration */ = {
 			isa = PBXGroup;
 			children = (
+				000F3D092066ED0300A191A6 /* DiseaseQuestions.swift */,
 				00B5D85720FE64B000583214 /* Sickness */,
 				00B5D85620FE64A300583214 /* Diagnosis */,
 				0083AD241F795BD8007AEF87 /* SicknessView.swift */,
@@ -588,6 +592,15 @@
 				0056504820E133CB003BCB4F /* SicknessSubmission.swift */,
 			);
 			path = Sickness;
+			sourceTree = "<group>";
+		};
+		0070FAAB210774F50068A7B6 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				00DC41F020F8DD090025BDC2 /* ResultReporter.swift */,
+				0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */,
+			);
+			path = Result;
 			sourceTree = "<group>";
 		};
 		009E23E520A78BB9000A144F /* Account */ = {
@@ -640,11 +653,10 @@
 		00B5D85620FE64A300583214 /* Diagnosis */ = {
 			isa = PBXGroup;
 			children = (
-				000F3D092066ED0300A191A6 /* DiseaseQuestions.swift */,
+				0070FAAB210774F50068A7B6 /* Result */,
 				00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */,
 				00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */,
 				00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */,
-				00DC41F020F8DD090025BDC2 /* ResultReporter.swift */,
 				00B5D85420FE61B300583214 /* DiagnosisManager.swift */,
 			);
 			path = Diagnosis;
@@ -996,6 +1008,7 @@
 				00B5D85C20FE64DD00583214 /* DiseaseQuestionair.swift in Sources */,
 				00BC4F701F81746C0018D5D8 /* Map.swift in Sources */,
 				004E1452205C7D490055ADA3 /* DiseaseGraph.swift in Sources */,
+				0070FAAD2107750C0068A7B6 /* DiseaseInfoScreen.swift in Sources */,
 				0007B17E2051D7A800355DD9 /* PersonalTrendDataCenter.swift in Sources */,
 				00EBE4B11F9D2EC1005A8E6B /* Presets.swift in Sources */,
 				009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */,
@@ -1038,6 +1051,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0070FAAE210775A90068A7B6 /* DiseaseInfoScreen.swift in Sources */,
 				0018286020FFA28400741514 /* SymptomSelector.swift in Sources */,
 				00B5D86120FE687B00583214 /* DataTermsOfService.swift in Sources */,
 				00B5D86220FE687B00583214 /* PersonSymptomSelector.swift in Sources */,

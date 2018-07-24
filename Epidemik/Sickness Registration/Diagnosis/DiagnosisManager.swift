@@ -17,6 +17,8 @@ class DiagnosisManager: UIView {
 	var superScreen: SicknessView!
 	var reporter: ResultReporter!
 	
+	var userSymptoms: Array<Int>!
+	
 	init(frame: CGRect, superScreen: SicknessView) {
 		super.init(frame: frame)
 		self.superScreen = superScreen
@@ -66,6 +68,7 @@ class DiagnosisManager: UIView {
 	}
 	
 	func sendResults(symptoms: Array<Int>) {
+		self.userSymptoms = symptoms
 		NetworkAPI.setSick(username: FileRW.readFile(fileName: "username.epi")!, symptoms: symptoms, callback: processResults)
 	}
 	
@@ -73,7 +76,7 @@ class DiagnosisManager: UIView {
 		DispatchQueue.main.sync {
 			var frame = self.frame
 			frame.origin.x = self.frame.width
-			self.reporter = ResultReporter(frame: frame, results: response, manager: self)
+			self.reporter = ResultReporter(frame: frame, results: response, manager: self, userSymptoms: self.userSymptoms)
 			self.addSubview(self.reporter)
 			UIView.animate(withDuration: 0.5, animations: {
 				self.reporter.frame.origin.x -= self.reporter.frame.width

@@ -18,13 +18,31 @@ class NetworkAPI {
 	//static var baseURL = "http://localhost:3000"
 	static var versionExtension = "?version=" + (Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
 	
-	//Says if this username and password combo exist
+	/**
+	Queries to the API to check that this users login is valid. If it is, will return their authentication token.
+	- parameter username:the username of the user trying to login
+	- parameter password:the password of the user trying to login
+	- parameter result:the function that will be called when the return is sent
+	- returns: the authentication token if the login is correct
+	- complexity: O(N+Network) (N is the number of users)
+    */
 	public static func loginIsValid(username: String, password: String, result: @escaping (JSON?) -> ()) {
 		let queryParams = "&username=" + username + "&password=" + password
 		sendPOSTWithCallback(method: "POST", urlExtensiuon: "/login", queryParams: queryParams, body: Data(), callback: result)
 	}
 	
-	// Creates an account on the database with all this information
+	/** Creates an account on the database with all this information
+	- parameter username:the username of the user trying to create an account
+	- parameter password:the password of the user trying to create an account
+	- parameter latitude: the latitude that this user lives at (exact)
+	- parameter longitude: the longitude that this user lives at (exact)
+	- parameter deviceID: the Device ID of the current device
+	- parameter dob: the day the user was born on
+	- parameter gender: the gender of the given user
+	- parameter result:the function that will be called when the return is sent
+	- returns: the authentication token when the user creates an account
+	- complexity: O(Network)
+	*/
 	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, result: @escaping (JSON?) -> ()) {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -146,6 +164,12 @@ class NetworkAPI {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/diseases/symptoms", queryParams: queryParams, body: Data(), callback: callback)
+	}
+	
+	public static func getDiseaseInfo(diseaseName: String, callback: @escaping (JSON?) -> ()) {
+		let authToken = getAuthToken()
+		let queryParams = "&auth_token=" + authToken
+		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/diseases/" + diseaseName + "/information", queryParams: queryParams, body: Data(), callback: callback)
 	}
 	
 	//Sends this POST string to the given url and calls the given callback when it returns

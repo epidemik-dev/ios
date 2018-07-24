@@ -20,4 +20,15 @@ public class DISEASE_QUESTIONS {
 	public static var BODY_PART_QUESTION_MAP: [String: Array<Int>] = [:]
 	//All the diseses that we display
 	public static var diseases: Array<String> = []
+	//Returns what given symptoms match with the given disease
+	public static func getMatchingSymptoms(diseaseName: String, symptoms: Array<Int>) -> Array<Int> {
+		var toReturn = Array<Int>()
+		let diseaseSymptoms = DISEASE_QUESTION_MAP[diseaseName]
+		for symptom in symptoms {
+			if(diseaseSymptoms!.contains(symptom)) {
+				toReturn.append(symptom)
+			}
+		}
+		return toReturn
+	}
 }

@@ -19,9 +19,13 @@ class ResultReporter: UIView {
 	var insetX = CGFloat(30.0)
 	private var resultItems = Array<ResultItem>()
 	
-	init(frame: CGRect, results: JSON?, manager: DiagnosisManager) {
+	var userSymptoms: Array<Int>!
+	var percentage: Double!
+	
+	init(frame: CGRect, results: JSON?, manager: DiagnosisManager, userSymptoms: Array<Int>) {
 		super.init(frame: frame)
 		self.curY = 3*self.frame.height/16
+		self.userSymptoms = userSymptoms
 		self.manager = manager
 		self.initBlur()
 		self.initTitle()
@@ -34,7 +38,7 @@ class ResultReporter: UIView {
 	}
 	
 	func initTitle() {
-		let title = UITextView(frame: CGRect(x: 0, y: 10, width: self.frame.width, height: self.curY))
+		let title = UITextView(frame: CGRect(x: 0, y: 20, width: self.frame.width, height: self.curY))
 		title.text = "Results"
 		title.textAlignment = .center
 		title.font = PRESETS.FONT_VERY_VERY_BIG
@@ -81,7 +85,22 @@ class ResultReporter: UIView {
 	}
 	
 	@objc func showDetails(_ sender: UIButton?) {
-		print(sender?.accessibilityIdentifier)
+		var diseaseName = sender!.accessibilityIdentifier!
+		diseaseName = diseaseName.replacingOccurrences(of: " ", with: "-")
+		percentage = (sender as! ResultItem).percentage
+		NetworkAPI.getDiseaseInfo(diseaseName: diseaseName, callback: displayDiseaseInformation)
+	}
+	
+	func displayDiseaseInformation(info: JSON?) {
+		DispatchQueue.main.sync {
+			let frame = CGRect(x: self.frame.width, y: 0, width: self.frame.width, height: self.frame.height)
+			let toDisplay = DiseaseInfoScreen(frame: frame, info: info, userSymptoms: userSymptoms, percentage: percentage)
+			self.addSubview(toDisplay)
+			UIView.animate(withDuration: 0.5, animations: {
+				toDisplay.frame.origin.x -= self.frame.width
+			})
+		}
+		
 	}
 	
 }
@@ -98,6 +117,7 @@ private class ResultItem: UIButton {
 		self.percentage = percentage
 		self.displayWarning(percentage: percentage)
 		self.displayTitle(diseaseName: diseaseName)
+		self.initArrow()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -126,13 +146,20 @@ private class ResultItem: UIButton {
 	}
 	
 	func displayTitle(diseaseName: String) {
-		let nameTitle = UITextView(frame: CGRect(x: self.frame.height, y: 0, width: self.frame.width - self.frame.height - self.frame.width/4, height: self.frame.height/2))
+		let nameTitle = UITextView(frame: CGRect(x: self.frame.height, y: 0, width: self.frame.width - self.frame.height - self.frame.width/3, height: self.frame.height/2))
 		nameTitle.text = diseaseName
 		nameTitle.backgroundColor = UIColor.clear
 		nameTitle.font = PRESETS.FONT_BIG
 		nameTitle.isSelectable = false
 		nameTitle.isEditable = false
 		self.addSubview(nameTitle)
+	}
+	
+	func initArrow() {
+		let arrowImage = FileRW.readImage(imageName: "arrow")
+		let arrowView = UIImageView(frame: CGRect(x: 2*self.frame.width/3, y: 0, width: self.frame.width/5, height: self.frame.height))
+		arrowView.image = arrowImage
+		self.addSubview(arrowView)
 	}
 	
 }
