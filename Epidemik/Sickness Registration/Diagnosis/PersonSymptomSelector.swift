@@ -108,7 +108,7 @@ class PersonSymptomSelector: UIView {
 		stomach = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
 		curPersonY += height;
 		stomach.backgroundColor = UIColor.clear
-		stomach.accessibilityIdentifier = "chest"
+		stomach.accessibilityIdentifier = "stomach"
 		stomach.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(stomach)
 	}

@@ -55,21 +55,65 @@ private class SymptomSelectorScroller: UIScrollView {
 	private var curY = CGFloat(0)
 	private var selectOrView: Bool!
 	
+	private var allSymptoms: Array<Int>!
+	
+	private var searchBar: UITextField!
+	
+	private var defaultSearch = "Type your Symptom..."
+	
 	init(frame: CGRect, canSelect: Array<Int>, selectOrView: Bool) {
 		super.init(frame: frame)
+		self.allSymptoms = canSelect
 		self.selectOrView = selectOrView
-		for symptom in canSelect {
-			self.addSymptom(symID: symptom)
+		if(selectOrView) {
+			self.initSearchBar()
 		}
+		self.changeSearch(search: "")
+
 		self.isScrollEnabled = true
 		self.alwaysBounceVertical = true
 		self.autoresizingMask = UIViewAutoresizing.flexibleHeight
 		self.contentSize = CGSize(width: self.frame.width, height: curY)
-		
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+	}
+	
+	func initSearchBar() {
+		searchBar = UITextField(frame: CGRect(x: 0, y: self.curY, width: self.frame.width, height: self.frame.height/10))
+		searchBar.backgroundColor = PRESETS.CLEAR
+		searchBar.textAlignment = .center
+		searchBar.text = defaultSearch
+		searchBar.clearsOnBeginEditing = true
+		self.curY += searchBar.frame.height
+		searchBar.addTarget(self, action: #selector(updateSearch), for: UIControlEvents.allEditingEvents)
+		self.addSubview(searchBar)
+	}
+	
+	//The reactor to editing the search bod
+	//EFFECT: changes the symptoms displayed on the screen
+	@objc func updateSearch(_ sender: UITextField?) {
+		self.curY = sender!.frame.origin.y + sender!.frame.height
+		self.changeSearch(search: sender!.text!)
+	}
+	
+	func changeSearch(search: String) {
+		let oldArray = self.symptoms
+		for view in self.symptoms {
+			view.removeFromSuperview()
+		}
+		self.symptoms = Array<IndivSymptomSelector>()
+		for symptom in self.allSymptoms {
+			if(search == "" || search == defaultSearch || DISEASE_QUESTIONS.QUESTION_DICT[symptom]!.lowercased().contains(search.lowercased())) {
+				self.addSymptom(symID: symptom)
+			}
+		}
+		for symptom in oldArray {
+			if(symptom.isSelected()) {
+				self.setChecked(symID: symptom.symID)
+			}
+		}
 	}
 	
 	func removeSymptomView(symID: Int) {
@@ -96,14 +140,14 @@ private class SymptomSelectorScroller: UIScrollView {
 				return
 			}
 		}
-		let frame = CGRect(x: CGFloat(0), y: curY, width: self.frame.width, height: self.frame.height/5)
+		let height = max(30, self.frame.height/7)
+		let frame = CGRect(x: CGFloat(0), y: curY, width: self.frame.width, height: height)
 		let toAdd = IndivSymptomSelector(frame: frame, symID: symID, selectOrView: selectOrView, removeFunc: removeSymptomView)
 		symptoms.append(toAdd)
 		self.addSubview(toAdd)
 		curY += toAdd.frame.height
 		self.contentSize = CGSize(width: self.frame.width, height: curY)
 		self.flashScrollIndicators()
-
 	}
 	
 	func getSelectedSymptoms() -> Array<Int> {

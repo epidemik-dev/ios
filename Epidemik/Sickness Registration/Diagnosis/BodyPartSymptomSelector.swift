@@ -14,7 +14,7 @@ class BodyPartSymptomSelector: UIView {
 	var doneButton: UIButton!
 	var insetX = CGFloat(30.0)
 	
-	var bodyPartImage: UIView!
+	var bodyPartImage: UIImageView!
 	var symptomSelector: SymptomSelector!
 	var partName: String!
 	var done: ((BodyPartSymptomSelector) -> ())!
@@ -39,29 +39,43 @@ class BodyPartSymptomSelector: UIView {
 	
 	// Adds the drop down symptom selector the view
 	func initSelector() {
-		let y = self.bodyPartImage.frame.origin.y + self.bodyPartImage.frame.height + 20
-		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: y, width: self.frame.width-20, height: self.frame.height/2), canSelect: DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[self.partName]!, selectOrView: true)
+		let y = self.frame.height/4
+		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: y, width: self.frame.width-20, height: self.frame.height/3), canSelect: DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[self.partName]!, selectOrView: true)
 		self.addSubview(symptomSelector)
 	}
 	
 	// Adds the body part image to the top of the view
 	func initImage() {
 		let xInset = CGFloat(150)
-		self.bodyPartImage = UIView(frame: CGRect(x: xInset, y: 10, width: self.frame.width-2*xInset, height:  self.frame.width-2*xInset))
-		self.bodyPartImage.backgroundColor = UIColor.blue
+		self.bodyPartImage = UIImageView(frame: CGRect(x: xInset, y: 40, width: self.frame.width-2*xInset, height:  self.frame.width-2*xInset))
+		if(partName != "full") {
+			self.bodyPartImage.image = FileRW.readImage(imageName: self.partName)
+		}
 		self.addSubview(self.bodyPartImage)
 	}
 	
 	// Adds the title to the top of the view
 	func initTitle() {
-		
+		var toDisplay = self.partName
+		if(self.partName == "full") {
+			toDisplay = "full body"
+		}
+		let yCord = self.bodyPartImage.frame.origin.y + self.bodyPartImage.frame.height + 10
+		let title = UITextView(frame: CGRect(x: 0, y: yCord, width: self.frame.width, height: 50))
+		title.font = PRESETS.FONT_VERY_VERY_BIG
+		title.isSelectable = false
+		title.isEditable = false
+		title.backgroundColor = PRESETS.CLEAR
+		title.textAlignment = .center
+		title.text = toDisplay!.uppercased()
+		self.addSubview(title)
 	}
 	
 	//Creates the done button
 	//EFFECT: initalizes the field doneButton and adds it to the UIView
 	func initDoneButton() {
 		let buttonHeight = self.frame.height/6
-		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
+		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
 		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
 		doneButton.layer.cornerRadius = 40
