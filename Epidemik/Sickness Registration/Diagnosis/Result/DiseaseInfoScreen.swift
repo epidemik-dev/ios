@@ -76,7 +76,7 @@ public class DiseaseInfoScreen: UIView {
 			warningText = "Low Evidence"
 		}
 		
-		let warningView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: self.frame.height/20))
+		let warningView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: self.frame.height/18))
 		warningView.font = PRESETS.FONT_VERY_BIG
 		warningView.text = warningText
 		warningView.isEditable = false
@@ -119,7 +119,7 @@ public class DiseaseInfoScreen: UIView {
 		self.addSubview(descriptionTitleView)
 		self.curY += descriptionTitleView.frame.height
 		
-		let descriptionView = UITextView(frame: CGRect(x: 20, y: curY, width: self.frame.width-20, height: self.frame.height/6))
+		let descriptionView = UITextView(frame: CGRect(x: 20, y: curY, width: self.frame.width-20, height: self.frame.height/10))
 		descriptionView.font = PRESETS.FONT_BIG
 		descriptionView.text = "• " + description
 		descriptionView.isEditable = false
@@ -180,7 +180,7 @@ public class DiseaseInfoScreen: UIView {
 	
 	func initDone() {
 		let buttonHeight = self.frame.height/6
-		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
+		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
 		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
 		doneButton.layer.cornerRadius = 40

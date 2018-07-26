@@ -43,7 +43,7 @@ class NetworkAPI {
 	- returns: the authentication token when the user creates an account
 	- complexity: O(Network)
 	*/
-	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, result: @escaping (JSON?) -> ()) {
+	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, weight: Int, height: Int, smoke: Bool, hypertension: Bool, diabetes: Bool, cholesterol: Bool, result: @escaping (JSON?) -> ()) {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let body = JSON([
@@ -53,7 +53,13 @@ class NetworkAPI {
 			"longitude": longitude,
 			"deviceID": deviceID,
 			"date_of_birth": dateFormatter.string(from: dob),
-			"gender": gender] as [String : Any])
+			"gender": gender,
+			"weight": weight,
+			"height": height,
+			"does_smoke": smoke,
+			"has_hypertension": hypertension,
+			"has_diabetes": diabetes,
+			"has_high_cholesterol": cholesterol] as [String : Any])
 		try? sendPOSTWithCallback(method: "POST", urlExtensiuon: "/users", queryParams: "", body: body.rawData(), callback: result)
 	}
 	

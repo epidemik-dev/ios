@@ -8,8 +8,10 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
-class AddressCreator: UIView, UITextFieldDelegate {
+class AddressCreator: CreateItem, UITextFieldDelegate {
+	
 	//The UIView that holds all the address creation textboxes
 	
 	// The image that goes to the left
@@ -20,14 +22,22 @@ class AddressCreator: UIView, UITextFieldDelegate {
 	var cityBox: UITextField!
 	var stateBox: UITextField!
 	
-	var accCreationView: LoginScreen!
-
+	var slideDown: (() -> ())!
+	var slideUp: (() -> ())!
+	var warnUser: ((String) -> ())!
+	
+	var latitude: Double?
+	var longitude: Double?
+	
 	//Inits this class and creates the checkboxes
-	init(frame: CGRect, toDisplay: UIImage, accCreationView: LoginScreen) {
-		self.toDisplay = toDisplay
-		self.accCreationView = accCreationView
+	init(frame: CGRect, slideUp: @escaping () -> (), slideDown: @escaping () -> (), warnUser: @escaping (String) -> ()) {
+		self.toDisplay = FileRW.readImage(imageName: "address")
+		self.slideUp = slideUp
+		self.slideDown = slideDown
+		self.warnUser = warnUser
 		super.init(frame: frame)
-		self.backgroundColor = PRESETS.CLEAR
+		self.title = "Where do you live?"
+		self.backgroundColor = PRESETS.WHITE
 		initBoxes()
 	}
 	
@@ -57,6 +67,7 @@ class AddressCreator: UIView, UITextFieldDelegate {
 		addressBox.text = "Address"
 		addressBox.clearsOnBeginEditing = true
 		addressBox.textAlignment = .left
+		addressBox.delegate = self
 		addressBox.accessibilityIdentifier = "AddressTextBox"
 		self.addSubview(addressBox)
 		
@@ -66,6 +77,7 @@ class AddressCreator: UIView, UITextFieldDelegate {
 		cityBox.text = "City"
 		cityBox.clearsOnBeginEditing = true
 		cityBox.textAlignment = .left
+		cityBox.delegate = self
 		cityBox.accessibilityIdentifier = "CityTextBox"
 		self.addSubview(cityBox)
 		
@@ -83,22 +95,26 @@ class AddressCreator: UIView, UITextFieldDelegate {
 	
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		textField.clearsOnBeginEditing = false
-		return string == "" || self.stateBox.text!.count < 2
+		if(textField.accessibilityIdentifier == "StateTextBox") {
+			return string == "" || self.stateBox.text!.count < 2
+		} else {
+			return true
+		}
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		accCreationView.slideBackDown()
+		self.slideDown()
 		return false
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-		accCreationView.slideBackDown()
+		self.slideDown()
 	}
 	
 	//Slides everything up just a lil
 	//EFFECT: r moves all the fields and labels up by a keyboard width also sets the slidUp field to true
 	func textFieldDidBeginEditing(_ textField: UITextField) {
-		accCreationView.slideUp()
+		self.slideUp()
 	}
 	
 	//Draws the underline and places the image
@@ -121,4 +137,25 @@ class AddressCreator: UIView, UITextFieldDelegate {
 		underline.lineWidth = 2
 		underline.stroke()
 	}
+	
+	override func getInfo() -> [String] {
+		return [String(latitude!), String(longitude!)]
+	}
+	
+	override func next(result: @escaping (Bool) -> ()) {
+		let address = self.getAddress()
+		let geocoder = CLGeocoder()
+		geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> () in
+			if let buffer = placemarks?[0] {
+				let location = buffer.location;
+				self.latitude = location!.coordinate.latitude
+				self.longitude = location!.coordinate.longitude
+				result(true)
+			} else {
+				self.warnUser("please enter a valid address")
+				result(false)
+			}
+		})
+	}
+	
 }

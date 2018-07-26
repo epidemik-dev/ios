@@ -45,6 +45,13 @@
 		0031F036208963F500B55DD6 /* GenderSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0031F035208963F500B55DD6 /* GenderSelector.swift */; };
 		0032F3421F808295001A9633 /* MapOverlayCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F3411F808295001A9633 /* MapOverlayCreator.swift */; };
 		0039661120A51191005985FF /* DiseaseManagerMeasurments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039661020A51191005985FF /* DiseaseManagerMeasurments.swift */; };
+		003ACA2F2108DA41006730FC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA2E2108DA41006730FC /* Login.swift */; };
+		003ACA312108DE42006730FC /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA302108DE42006730FC /* Create.swift */; };
+		003ACA322108F5A7006730FC /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA2E2108DA41006730FC /* Login.swift */; };
+		003ACA332108F5A7006730FC /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA302108DE42006730FC /* Create.swift */; };
+		003ACA342108F5A7006730FC /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D6750B2108D99B0080071B /* AccountScreen.swift */; };
+		003ACA362108F7D6006730FC /* PersonQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA352108F7D6006730FC /* PersonQuestions.swift */; };
+		003ACA372108FAF2006730FC /* PersonQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003ACA352108F7D6006730FC /* PersonQuestions.swift */; };
 		004E1452205C7D490055ADA3 /* DiseaseGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E1451205C7D490055ADA3 /* DiseaseGraph.swift */; };
 		0056504920E133CB003BCB4F /* SicknessSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056504820E133CB003BCB4F /* SicknessSubmission.swift */; };
 		006B47AA20FF8EC6004C80C5 /* SymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006B47A920FF8EC6004C80C5 /* SymptomSelector.swift */; };
@@ -53,9 +60,15 @@
 		0070FAAD2107750C0068A7B6 /* DiseaseInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */; };
 		0070FAAE210775A90068A7B6 /* DiseaseInfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */; };
 		0079189B1FF56C4900DB03D3 /* TransitionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079189A1FF56C4900DB03D3 /* TransitionControls.swift */; };
+		007E5391210A1A3A00AA9677 /* AgeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5390210A1A3A00AA9677 /* AgeSelector.swift */; };
+		007E5393210A1A4500AA9677 /* WeightHeightSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5392210A1A4500AA9677 /* WeightHeightSelector.swift */; };
+		007E5395210A1A6600AA9677 /* UsernameSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5394210A1A6600AA9677 /* UsernameSelector.swift */; };
+		007E5397210A1C0A00AA9677 /* WeightHeightSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5392210A1A4500AA9677 /* WeightHeightSelector.swift */; };
+		007E5398210A1C0A00AA9677 /* UsernameSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5394210A1A6600AA9677 /* UsernameSelector.swift */; };
+		007E5399210A1C0A00AA9677 /* AgeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5390210A1A3A00AA9677 /* AgeSelector.swift */; };
 		0083AD251F795BD8007AEF87 /* SicknessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083AD241F795BD8007AEF87 /* SicknessView.swift */; };
 		0087EADE2041091B00BDEEC8 /* Asker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0087EADD2041091B00BDEEC8 /* Asker.swift */; };
-		008F79782059F9AE00B794A1 /* AccCreationTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */; };
+		008F79782059F9AE00B794A1 /* AccountTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccountTextBox.swift */; };
 		009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CE9E11F8FFFFD00D224F0 /* MainHolder.swift */; };
 		009E23EE20A78D21000A144F /* CreateAccExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5F209D09660098F95A /* CreateAccExtension.swift */; };
 		009E23EF20A78D21000A144F /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */; };
@@ -91,8 +104,7 @@
 		009E241320A7B2A2000A144F /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000F3D072066E30C00A191A6 /* CheckBox.swift */; };
 		009E241420A7B2A2000A144F /* Asker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0087EADD2041091B00BDEEC8 /* Asker.swift */; };
 		009E241520A7B2A2000A144F /* AddressChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD46301FE1C6F20009A4B5 /* AddressChanger.swift */; };
-		009E241620A7B2A2000A144F /* AccountCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C56882204B110100BC5762 /* AccountCreation.swift */; };
-		009E241720A7B2A2000A144F /* AccCreationTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */; };
+		009E241720A7B2A2000A144F /* AccountTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccountTextBox.swift */; };
 		009E241820A7B2A2000A144F /* BadVersionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0031F033208936F800B55DD6 /* BadVersionScreen.swift */; };
 		009E241920A7B2A2000A144F /* AddressCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F28346208A507F00AA34E8 /* AddressCreator.swift */; };
 		009E241B20A7B2A2000A144F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0011DBB71F6C0EBA004212E1 /* AppDelegate.swift */; };
@@ -118,9 +130,9 @@
 		00BD462F1FE19C620009A4B5 /* DetailSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD462E1FE19C620009A4B5 /* DetailSelector.swift */; };
 		00BD46311FE1C6F20009A4B5 /* AddressChanger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BD46301FE1C6F20009A4B5 /* AddressChanger.swift */; };
 		00C0DB9D20EBF0D6003D452C /* BadVersionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0031F033208936F800B55DD6 /* BadVersionScreen.swift */; };
-		00C56883204B110100BC5762 /* AccountCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C56882204B110100BC5762 /* AccountCreation.swift */; };
 		00CD77FD1F7844C1002B5C78 /* FileRW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CD77FC1F7844C1002B5C78 /* FileRW.swift */; };
 		00D665511FB5348F00C3C680 /* Trend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D665501FB5348F00C3C680 /* Trend.swift */; };
+		00D6750C2108D99B0080071B /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D6750B2108D99B0080071B /* AccountScreen.swift */; };
 		00DC41EB20F8DCA00025BDC2 /* DataTermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */; };
 		00DC41ED20F8DCB90025BDC2 /* PersonSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */; };
 		00DC41EF20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */; };
@@ -223,6 +235,9 @@
 		0032F3411F808295001A9633 /* MapOverlayCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverlayCreator.swift; sourceTree = "<group>"; };
 		00347985209BAA480012B1A5 /* LogInProcessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInProcessTests.swift; sourceTree = "<group>"; };
 		0039661020A51191005985FF /* DiseaseManagerMeasurments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseManagerMeasurments.swift; sourceTree = "<group>"; };
+		003ACA2E2108DA41006730FC /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		003ACA302108DE42006730FC /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		003ACA352108F7D6006730FC /* PersonQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonQuestions.swift; sourceTree = "<group>"; };
 		004E1451205C7D490055ADA3 /* DiseaseGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseGraph.swift; sourceTree = "<group>"; };
 		005459151F749FCF00F73872 /* Epidemik.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Epidemik.entitlements; sourceTree = "<group>"; };
 		0056504820E133CB003BCB4F /* SicknessSubmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessSubmission.swift; sourceTree = "<group>"; };
@@ -230,9 +245,12 @@
 		007011672087A58C008DFF49 /* DiseaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseManager.swift; sourceTree = "<group>"; };
 		0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiseaseInfoScreen.swift; sourceTree = "<group>"; };
 		0079189A1FF56C4900DB03D3 /* TransitionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionControls.swift; sourceTree = "<group>"; };
+		007E5390210A1A3A00AA9677 /* AgeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeSelector.swift; sourceTree = "<group>"; };
+		007E5392210A1A4500AA9677 /* WeightHeightSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightHeightSelector.swift; sourceTree = "<group>"; };
+		007E5394210A1A6600AA9677 /* UsernameSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameSelector.swift; sourceTree = "<group>"; };
 		0083AD241F795BD8007AEF87 /* SicknessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SicknessView.swift; sourceTree = "<group>"; };
 		0087EADD2041091B00BDEEC8 /* Asker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asker.swift; sourceTree = "<group>"; };
-		008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccCreationTextBox.swift; sourceTree = "<group>"; };
+		008F79772059F9AE00B794A1 /* AccountTextBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTextBox.swift; sourceTree = "<group>"; };
 		009CE9E11F8FFFFD00D224F0 /* MainHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHolder.swift; sourceTree = "<group>"; };
 		009E23E620A78BEB000A144F /* LoginViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewTests.swift; sourceTree = "<group>"; };
 		009E23F320A7B22A000A144F /* GenderSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectorTests.swift; sourceTree = "<group>"; };
@@ -247,9 +265,9 @@
 		00BD462C1FE19AF50009A4B5 /* BarSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarSelector.swift; sourceTree = "<group>"; };
 		00BD462E1FE19C620009A4B5 /* DetailSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelector.swift; sourceTree = "<group>"; };
 		00BD46301FE1C6F20009A4B5 /* AddressChanger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressChanger.swift; sourceTree = "<group>"; };
-		00C56882204B110100BC5762 /* AccountCreation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCreation.swift; sourceTree = "<group>"; };
 		00CD77FC1F7844C1002B5C78 /* FileRW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileRW.swift; sourceTree = "<group>"; };
 		00D665501FB5348F00C3C680 /* Trend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trend.swift; sourceTree = "<group>"; };
+		00D6750B2108D99B0080071B /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
 		00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTermsOfService.swift; sourceTree = "<group>"; };
 		00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonSymptomSelector.swift; sourceTree = "<group>"; };
 		00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartSymptomSelector.swift; sourceTree = "<group>"; };
@@ -560,11 +578,11 @@
 		00173B9B20882E7E0047916F /* Start Up */ = {
 			isa = PBXGroup;
 			children = (
-				00C56882204B110100BC5762 /* AccountCreation.swift */,
-				008F79772059F9AE00B794A1 /* AccCreationTextBox.swift */,
+				003ACA2D2108D9EE006730FC /* Login */,
+				003ACA2C2108D9E8006730FC /* Creation */,
+				008F79772059F9AE00B794A1 /* AccountTextBox.swift */,
 				0031F033208936F800B55DD6 /* BadVersionScreen.swift */,
-				0031F035208963F500B55DD6 /* GenderSelector.swift */,
-				00F28346208A507F00AA34E8 /* AddressCreator.swift */,
+				00D6750B2108D99B0080071B /* AccountScreen.swift */,
 			);
 			path = "Start Up";
 			sourceTree = "<group>";
@@ -586,6 +604,23 @@
 			path = DiseaseManager;
 			sourceTree = "<group>";
 		};
+		003ACA2C2108D9E8006730FC /* Creation */ = {
+			isa = PBXGroup;
+			children = (
+				007E5396210A1BFE00AA9677 /* Subviews */,
+				003ACA302108DE42006730FC /* Create.swift */,
+			);
+			path = Creation;
+			sourceTree = "<group>";
+		};
+		003ACA2D2108D9EE006730FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				003ACA2E2108DA41006730FC /* Login.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		0056504720E1339F003BCB4F /* Sickness */ = {
 			isa = PBXGroup;
 			children = (
@@ -601,6 +636,19 @@
 				0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */,
 			);
 			path = Result;
+			sourceTree = "<group>";
+		};
+		007E5396210A1BFE00AA9677 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				003ACA352108F7D6006730FC /* PersonQuestions.swift */,
+				007E5390210A1A3A00AA9677 /* AgeSelector.swift */,
+				007E5392210A1A4500AA9677 /* WeightHeightSelector.swift */,
+				007E5394210A1A6600AA9677 /* UsernameSelector.swift */,
+				0031F035208963F500B55DD6 /* GenderSelector.swift */,
+				00F28346208A507F00AA34E8 /* AddressCreator.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		009E23E520A78BB9000A144F /* Account */ = {
@@ -1012,12 +1060,16 @@
 				0007B17E2051D7A800355DD9 /* PersonalTrendDataCenter.swift in Sources */,
 				00EBE4B11F9D2EC1005A8E6B /* Presets.swift in Sources */,
 				009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */,
+				007E5393210A1A4500AA9677 /* WeightHeightSelector.swift in Sources */,
 				00E9D5282038A9A900C353AF /* DiseaseDataCenter.swift in Sources */,
 				00DC41EB20F8DCA00025BDC2 /* DataTermsOfService.swift in Sources */,
+				00D6750C2108D99B0080071B /* AccountScreen.swift in Sources */,
 				00BD46311FE1C6F20009A4B5 /* AddressChanger.swift in Sources */,
 				00B5D85520FE61B300583214 /* DiagnosisManager.swift in Sources */,
+				003ACA2F2108DA41006730FC /* Login.swift in Sources */,
 				00B5D85D20FE64DD00583214 /* DiseaseNameScreen.swift in Sources */,
 				00DC41EF20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift in Sources */,
+				007E5395210A1A6600AA9677 /* UsernameSelector.swift in Sources */,
 				0087EADE2041091B00BDEEC8 /* Asker.swift in Sources */,
 				00315DE320584F440060D56E /* StatusDataCenter.swift in Sources */,
 				00D665511FB5348F00C3C680 /* Trend.swift in Sources */,
@@ -1025,17 +1077,19 @@
 				00DC41ED20F8DCB90025BDC2 /* PersonSymptomSelector.swift in Sources */,
 				00112527203889EF00C3D16A /* DataCenter.swift in Sources */,
 				0031F034208936F800B55DD6 /* BadVersionScreen.swift in Sources */,
-				00C56883204B110100BC5762 /* AccountCreation.swift in Sources */,
 				00CD77FD1F7844C1002B5C78 /* FileRW.swift in Sources */,
 				0011DBBA1F6C0EBA004212E1 /* ViewController.swift in Sources */,
 				00AA180A203BB8440071CA6A /* GlobalTrendDataCenter.swift in Sources */,
 				00DC41F120F8DD090025BDC2 /* ResultReporter.swift in Sources */,
+				003ACA312108DE42006730FC /* Create.swift in Sources */,
 				000F3D082066E30C00A191A6 /* CheckBox.swift in Sources */,
 				007011682087A58C008DFF49 /* DiseaseManager.swift in Sources */,
 				0032F3421F808295001A9633 /* MapOverlayCreator.swift in Sources */,
+				003ACA362108F7D6006730FC /* PersonQuestions.swift in Sources */,
 				0018BCD81FE0BDB7008DCDE5 /* SettingsView.swift in Sources */,
 				00BD462D1FE19AF50009A4B5 /* BarSelector.swift in Sources */,
-				008F79782059F9AE00B794A1 /* AccCreationTextBox.swift in Sources */,
+				007E5391210A1A3A00AA9677 /* AgeSelector.swift in Sources */,
+				008F79782059F9AE00B794A1 /* AccountTextBox.swift in Sources */,
 				00F28347208A507F00AA34E8 /* AddressCreator.swift in Sources */,
 				0007C2F5203CDCE8009EA7A8 /* PTrendsView.swift in Sources */,
 				006B47AA20FF8EC6004C80C5 /* SymptomSelector.swift in Sources */,
@@ -1051,6 +1105,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				003ACA372108FAF2006730FC /* PersonQuestions.swift in Sources */,
+				003ACA322108F5A7006730FC /* Login.swift in Sources */,
+				007E5398210A1C0A00AA9677 /* UsernameSelector.swift in Sources */,
+				003ACA332108F5A7006730FC /* Create.swift in Sources */,
+				003ACA342108F5A7006730FC /* AccountScreen.swift in Sources */,
 				0070FAAE210775A90068A7B6 /* DiseaseInfoScreen.swift in Sources */,
 				0018286020FFA28400741514 /* SymptomSelector.swift in Sources */,
 				00B5D86120FE687B00583214 /* DataTermsOfService.swift in Sources */,
@@ -1061,6 +1120,7 @@
 				00B5D85F20FE687200583214 /* DiseaseNameScreen.swift in Sources */,
 				00B5D85E20FE686D00583214 /* DiseaseQuestionair.swift in Sources */,
 				009E23F620A7B2A2000A144F /* DataCenter.swift in Sources */,
+				007E5397210A1C0A00AA9677 /* WeightHeightSelector.swift in Sources */,
 				009E23F720A7B2A2000A144F /* Disease.swift in Sources */,
 				009E23F820A7B2A2000A144F /* Trend.swift in Sources */,
 				009E23F920A7B2A2000A144F /* LoadingGraphic.swift in Sources */,
@@ -1089,8 +1149,7 @@
 				009E241320A7B2A2000A144F /* CheckBox.swift in Sources */,
 				009E241420A7B2A2000A144F /* Asker.swift in Sources */,
 				009E241520A7B2A2000A144F /* AddressChanger.swift in Sources */,
-				009E241620A7B2A2000A144F /* AccountCreation.swift in Sources */,
-				009E241720A7B2A2000A144F /* AccCreationTextBox.swift in Sources */,
+				009E241720A7B2A2000A144F /* AccountTextBox.swift in Sources */,
 				009E241820A7B2A2000A144F /* BadVersionScreen.swift in Sources */,
 				009E241920A7B2A2000A144F /* AddressCreator.swift in Sources */,
 				009E241B20A7B2A2000A144F /* AppDelegate.swift in Sources */,
@@ -1098,6 +1157,7 @@
 				009E241D20A7B2A2000A144F /* ViewController.swift in Sources */,
 				009E23F520A7B25B000A144F /* GenderSelector.swift in Sources */,
 				009E23EE20A78D21000A144F /* CreateAccExtension.swift in Sources */,
+				007E5399210A1C0A00AA9677 /* AgeSelector.swift in Sources */,
 				009E23EF20A78D21000A144F /* LoginExtension.swift in Sources */,
 				009E23F020A78D21000A144F /* MainAppButtons.swift in Sources */,
 				00F28350208A6FE200AA34E8 /* NetworkTests.swift in Sources */,

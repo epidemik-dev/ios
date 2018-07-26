@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class GenderSelector: UIView {
+class GenderSelector: CreateItem {
+	
 	//The UIView object for selecting the gender of a user
 	
 	//The tree checkboxes
@@ -24,6 +25,7 @@ class GenderSelector: UIView {
 	//Creates this class and creates the textboxes + their labels
 	override init(frame: CGRect) {
 		super.init(frame: frame)
+		self.title = "Check your gender"
 		initCheckBoxes()
 		initTextBoxes()
 	}
@@ -31,25 +33,30 @@ class GenderSelector: UIView {
 	//Makes the checkboxes and adds the target to the method
 	//EFFECT: overwrite and recreates the checkboxes
 	func initCheckBoxes() {
-		maleSelector = CheckBox(frame: CGRect(x: 0, y: 0, width: self.frame.height - textHeight, height: self.frame.height - textHeight))
+		let height = self.frame.height/5
+		maleSelector = CheckBox(frame: CGRect(x: 10, y: 10, width: height, height: height))
 		maleSelector.accessibilityIdentifier = "MaleButton"
 		maleSelector.addTarget(self, action: #selector(GenderSelector.genderChanged(_:)), for: .touchUpInside)
 		self.addSubview(maleSelector)
-		femaleSelector = CheckBox(frame: CGRect(x: self.frame.width/2 - (self.frame.height - textHeight)/2, y: 0, width: self.frame.height - textHeight, height: self.frame.height - textHeight))
+		femaleSelector = CheckBox(frame: CGRect(x: 10, y: self.frame.height/2 - height/2, width: height, height: height))
 		femaleSelector.accessibilityIdentifier = "FemaleButton"
 		femaleSelector.addTarget(self, action: #selector(GenderSelector.genderChanged(_:)), for: .touchUpInside)
 		self.addSubview(femaleSelector)
-		otherSelector = CheckBox(frame: CGRect(x: self.frame.width - (self.frame.height - textHeight), y: 0, width: self.frame.height - textHeight, height: self.frame.height - textHeight))
+		otherSelector = CheckBox(frame: CGRect(x: 10, y: self.frame.height - height, width: height, height: height))
 		otherSelector.accessibilityIdentifier = "OtherButton"
 		otherSelector.addTarget(self, action: #selector(GenderSelector.genderChanged(_:)), for: .touchUpInside)
 		self.addSubview(otherSelector)
+		otherSelector.isChecked = true
+		otherSelector.updateImage()
 	}
 	
 	//Creates the checkbox labels
 	//EFFECT: adds the labels to the UIView
 	func initTextBoxes() {
-		let maleTextbox = UITextView(frame: CGRect(x: 0, y: self.frame.height - textHeight, width: textWidth, height: textHeight))
-		maleTextbox.font = PRESETS.FONT_SMALL
+		let height = self.frame.height/5
+		let textInset = height + 10
+		let maleTextbox = UITextView(frame: CGRect(x: textInset, y: 10, width: self.frame.width - textInset, height: height))
+		maleTextbox.font = PRESETS.FONT_VERY_VERY_BIG
 		maleTextbox.text = "Male"
 		maleTextbox.textAlignment = .left
 		maleTextbox.isEditable = false
@@ -57,19 +64,19 @@ class GenderSelector: UIView {
 		maleTextbox.backgroundColor = PRESETS.CLEAR
 		self.addSubview(maleTextbox)
 		
-		let femaleTextbox = UITextView(frame: CGRect(x: self.frame.width/2 - (textWidth)/2, y: self.frame.height - textHeight, width: textWidth, height: textHeight))
-		femaleTextbox.font = PRESETS.FONT_SMALL
+		let femaleTextbox = UITextView(frame: CGRect(x: textInset, y: self.frame.height/2 - height/2, width: self.frame.width - textInset, height: height))
+		femaleTextbox.font = PRESETS.FONT_VERY_VERY_BIG
 		femaleTextbox.text = "Female"
-		femaleTextbox.textAlignment = .center
+		femaleTextbox.textAlignment = .left
 		femaleTextbox.isEditable = false
 		femaleTextbox.isSelectable = false
 		femaleTextbox.backgroundColor = PRESETS.CLEAR
 		self.addSubview(femaleTextbox)
 		
-		let otherTextbox = UITextView(frame: CGRect(x: self.frame.width - textWidth, y: self.frame.height - textHeight, width: textWidth, height: textHeight))
-		otherTextbox.font = PRESETS.FONT_SMALL
+		let otherTextbox = UITextView(frame: CGRect(x: textInset, y: self.frame.height - height, width: self.frame.width - textInset, height: height))
+		otherTextbox.font = PRESETS.FONT_VERY_VERY_BIG
 		otherTextbox.text = "Other"
-		otherTextbox.textAlignment = .right
+		otherTextbox.textAlignment = .left
 		otherTextbox.isEditable = false
 		otherTextbox.isSelectable = false
 		otherTextbox.backgroundColor = PRESETS.CLEAR
@@ -88,6 +95,10 @@ class GenderSelector: UIView {
 			return "Other"
 		}
 		return "Did Not Choose"
+	}
+	
+	override func getInfo() -> [String] {
+		return [self.getGender()]
 	}
 	
 	//What is called when any checkbox is check

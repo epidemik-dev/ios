@@ -132,7 +132,7 @@ class PersonSymptomSelector: UIView {
 		full = UIButton(frame: CGRect(x: self.frame.width/2-armWidth, y: arms.frame.origin.y + 20, width: armWidth/2, height: armWidth/2))
 		full.backgroundColor = PRESETS.RED
 		full.setTitle("FULL BODY", for: .normal)
-		full.titleLabel!.font = PRESETS.FONT_MEDIUM
+		full.titleLabel!.font = PRESETS.FONT_SMALL_BOLD
 		full.layer.cornerRadius = 10
 		full.clipsToBounds = true
 		full.accessibilityIdentifier = "full"

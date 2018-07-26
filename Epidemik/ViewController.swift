@@ -26,7 +26,7 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
 	
-	var accCreation: LoginScreen!
+	var accountScreen: AccountScreen!
 	
 	var mainView: MainHolder!
 	
@@ -80,10 +80,10 @@ class ViewController: UIViewController {
 	
 	// Creates the view that holds all the intro screens
 	func initWalkthrough() {
-		accCreation = LoginScreen(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), vc: self) //Calls initDatabase when done
-		if(accCreation.shouldAdd) {
-			self.view.addSubview(accCreation)
-			self.view.sendSubview(toBack: accCreation)
+		accountScreen = AccountScreen(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), vc: self) //Calls initDatabase when done
+		if(accountScreen.shouldAdd) {
+			self.view.addSubview(accountScreen)
+			self.view.sendSubview(toBack: accountScreen)
 		}
 		self.removeIntroGraphics()
 	}
@@ -101,10 +101,10 @@ class ViewController: UIViewController {
 	// Removes the graphics that lead the user through account creation
 	func removeWalkthrough() {
 		UIView.animate(withDuration: 0.5, animations: {
-			self.accCreation.frame.origin.x -= self.view.frame.width
+			self.accountScreen.frame.origin.x -= self.view.frame.width
 		}, completion: {
 			(value: Bool) in
-			self.accCreation.removeFromSuperview()
+			self.accountScreen.removeFromSuperview()
 		})
 	}
 	
@@ -145,14 +145,14 @@ class ViewController: UIViewController {
 	//Runs the test to see if the login is valid that is written to the disk
 	//EFFECT: if it is not, deletes it from the disk and restarts the app
 	func checkLogin() {
-		if(accCreation.shouldAdd == false) {
+		if(accountScreen.shouldAdd == false) {
 			let username = FileRW.readFile(fileName: "username.epi")
 			let password = FileRW.readFile(fileName: "password.epi")
 			NetworkAPI.loginIsValid(username: username!, password: password!, result: {(response: JSON?) -> () in
 				if(response == nil) {
 					DispatchQueue.main.sync {
-						self.view.addSubview(self.accCreation)
-						self.view.sendSubview(toBack: self.accCreation)
+						self.view.addSubview(self.accountScreen)
+						self.view.sendSubview(toBack: self.accountScreen)
 					}
 				} else {
 					FileRW.writeFile(fileName: "auth_token.epi", contents: response!.string!)
@@ -162,8 +162,8 @@ class ViewController: UIViewController {
 				}
 			})
 		} else {
-			self.view.addSubview(self.accCreation)
-			self.view.sendSubview(toBack: self.accCreation)
+			self.view.addSubview(self.accountScreen)
+			self.view.sendSubview(toBack: self.accountScreen)
 		}
 	}
 	
