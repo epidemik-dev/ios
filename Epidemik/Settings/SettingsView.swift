@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import SwiftyJSON
 
 public class SettingsView: UIView {
 	
@@ -51,6 +52,7 @@ public class SettingsView: UIView {
 		initDetailSelector()
 		initBugReporter()
 		initLogOut()
+		initDelete()
 	}
 	
 	//Creates the address changer
@@ -135,12 +137,12 @@ public class SettingsView: UIView {
 		toAdd.isEditable = false
 		self.addSubview(toAdd)
 	}
-	
+
 	//Creates the done button
 	//EFFECT: adds it to the UIView
 	func initDone() {
-		let y = 4*smallButtonGap+5*smallButtonHeight
-		let done = UIButton(frame: CGRect(x: 20, y: y, width: self.frame.width-40, height: self.frame.height - y - smallButtonGap))
+		let y = 5*smallButtonGap+6*smallButtonHeight
+		let done = UIButton(frame: CGRect(x: (self.frame.width-smallButtonWidth)/2, y: y, width:  smallButtonWidth, height: smallButtonHeight))
 		done.backgroundColor = PRESETS.RED
 		done.addTarget(self, action: #selector(SettingsView.removeSelf(_:)), for: .touchUpInside)
 		done.layer.cornerRadius = 20
@@ -159,6 +161,37 @@ public class SettingsView: UIView {
 			self.removeFromSuperview()
 		})
 		
+	}
+	
+	// Creates the button that can be used to delete a users account
+	func initDelete() {
+		let y = 4*smallButtonGap+5*smallButtonHeight
+		let delete = UIButton(frame: CGRect(x: (self.frame.width-smallButtonWidth)/2, y: y, width:  smallButtonWidth, height: smallButtonHeight))
+		delete.backgroundColor = PRESETS.GRAY
+		delete.addTarget(self, action: #selector(SettingsView.deleteAccount(_:)), for: .touchUpInside)
+		delete.layer.cornerRadius = 20
+		delete.titleLabel?.font = PRESETS.FONT_BIG
+		delete.setTitle("Delete Account", for: .normal)
+		self.addSubview(delete)
+	}
+	
+	// The function that is called when the user presseds the delete button
+	// shows a window asking for confirmation
+	@objc func deleteAccount(_ sender: UIButton?) {
+		let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete your account and all associated information?", preferredStyle: UIAlertControllerStyle.alert)
+		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+			NetworkAPI.deleteUser(username: FileRW.readFile(fileName: "username.epi")!, callback: self.accountDeleted)
+		}))
+		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
+			print("cancling")
+		}))
+		self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+	}
+	
+	func accountDeleted(result: JSON?) {
+		DispatchQueue.main.sync {
+			self.logOut(nil)
+		}
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {

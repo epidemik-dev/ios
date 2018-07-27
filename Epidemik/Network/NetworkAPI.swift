@@ -32,15 +32,22 @@ class NetworkAPI {
 	}
 	
 	/** Creates an account on the database with all this information
-	- parameter username:the username of the user trying to create an account
-	- parameter password:the password of the user trying to create an account
-	- parameter latitude: the latitude that this user lives at (exact)
-	- parameter longitude: the longitude that this user lives at (exact)
-	- parameter deviceID: the Device ID of the current device
-	- parameter dob: the day the user was born on
-	- parameter gender: the gender of the given user
-	- parameter result:the function that will be called when the return is sent
-	- returns: the authentication token when the user creates an account
+	- parameters:
+		- username:the username of the user trying to create an account
+		- password:the password of the user trying to create an account
+		- latitude: the latitude that this user lives at (exact)
+		- longitude: the longitude that this user lives at (exact)
+		- deviceID: the Device ID of the current device
+		- dob: the day the user was born on
+		- gender: the gender of the given user
+		- weight: the weight of the given user in pounds
+		- height: the height of the given user in inches
+		- smoke: whether or not the given user smokes
+		- hypertension: whether or not the given user has hypertension
+		- diabetes: whether or not the given user has diabetes
+		- cholesterol: whether or not the given user has high cholesterol
+		- result: the function that will be called when the return is sent
+		- returns: the authentication token when the user creates an account
 	- complexity: O(Network)
 	*/
 	public static func createAccount(username: String, password: String, latitude: Double, longitude: Double, deviceID: String, dob: Date, gender: String, weight: Int, height: Int, smoke: Bool, hypertension: Bool, diabetes: Bool, cholesterol: Bool, result: @escaping (JSON?) -> ()) {
@@ -63,8 +70,11 @@ class NetworkAPI {
 		try? sendPOSTWithCallback(method: "POST", urlExtensiuon: "/users", queryParams: "", body: body.rawData(), callback: result)
 	}
 	
-	// Pulls all the current disease infromation from the server where
-	// the disease point is still sick and not healthy
+	/**Pulls all the current disease infromation from the server where the disease point is still sick and not healthy
+	- parameter result: the function that is callled with the JSON to represent the diseases
+	- complexity: O(N + Network)
+	
+	*/
 	public static func loadAllDiseaseData(result: @escaping (JSON?) -> ()) {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
@@ -178,6 +188,12 @@ class NetworkAPI {
 		sendPOSTWithCallback(method: "GET", urlExtensiuon: "/diseases/" + diseaseName + "/information", queryParams: queryParams, body: Data(), callback: callback)
 	}
 	
+	public static func deleteUser(username: String, callback: @escaping (JSON?) -> ()) {
+		let authToken = getAuthToken()
+		let queryParams = "&auth_token=" + authToken
+		sendPOSTWithCallback(method: "DELETE", urlExtensiuon: "/users/" + username, queryParams: queryParams, body: Data(), callback: callback)
+	}
+	
 	//Sends this POST string to the given url and calls the given callback when it returns
 	//If the url errors or the user is offline it calls the callback with the string "error"
 	public static func sendPOSTWithCallback(method: String, urlExtensiuon: String, queryParams: String, body: Data, callback: @escaping (JSON?) -> ()) {
@@ -232,5 +248,6 @@ class NetworkAPI {
 			return ""
 		}
 	}
+	
 	
 }

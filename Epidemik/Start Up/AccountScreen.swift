@@ -29,6 +29,7 @@ class AccountScreen: UIView {
 	//Inits this class and sets the variable that says whether we need to login/create account
 	init(frame: CGRect, vc: ViewController) {
 		super.init(frame: frame)
+		self.backgroundColor = PRESETS.WHITE
 		self.vc = vc
 		self.accessibilityIdentifier = "LoginScreen"
 		setShouldAdd()

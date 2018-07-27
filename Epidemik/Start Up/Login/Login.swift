@@ -74,7 +74,9 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	func initLoginButton() {
 		self.loginButton = UIButton(frame: CGRect(x: 0, y: 200, width: self.frame.width, height: 50))
 		self.loginButton.backgroundColor = PRESETS.OFF_WHITE
-		self.loginButton.setTitle("LOGIN", for: .normal)
+		self.loginButton.setTitle("Login", for: .normal)
+		self.loginButton.setTitleColor(PRESETS.BLACK, for: .normal)
+		self.loginButton.titleLabel!.font = PRESETS.FONT_VERY_BIG
 		self.loginButton.addTarget(self, action: #selector(LoginScreen.login(_:)), for: .touchUpInside)
 		self.addSubview(self.loginButton)
 	}
@@ -99,13 +101,14 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	}
 	
 	func reportBadLogin() {
-		self.passwordTextBox.text = "Wrong Username or Password"
+		self.usernameTextBox.text = "Invalid Login"
 	}
 	
 	func initCreateAccountButton() {
-		self.createAnAccount = UIButton(frame: CGRect(x: 0, y: 300, width: self.frame.width, height: 50))
-		self.createAnAccount.backgroundColor = PRESETS.OFF_WHITE
-		self.createAnAccount.setTitle("CREATE AN ACCOUNT", for: .normal)
+		self.createAnAccount = UIButton(frame: CGRect(x: 0, y: self.frame.height-40, width: self.frame.width, height: 30))
+		self.createAnAccount.setTitle("Create An Account", for: .normal)
+		self.createAnAccount.setTitleColor(PRESETS.BLACK, for: .normal)
+		self.createAnAccount.titleLabel!.font = PRESETS.FONT_MEDIUM
 		self.createAnAccount.addTarget(self, action: #selector(LoginScreen.turnToCreate(_:)), for: .touchUpInside)
 		self.addSubview(self.createAnAccount)
 	}

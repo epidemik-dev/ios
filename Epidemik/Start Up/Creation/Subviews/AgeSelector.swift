@@ -22,7 +22,7 @@ class AgeSelector: CreateItem {
 			toDisplay.append(String(i) + " years old")
 		}
 		
-		selector = ScrollSelector(frame: CGRect(x: self.frame.width/4, y: 0, width: self.frame.width/2, height: self.frame.height), items: toDisplay)
+		selector = ScrollSelector(frame: CGRect(x: self.frame.width/5, y: 0, width: 3*self.frame.width/5, height: self.frame.height), items: toDisplay)
 		self.addSubview(selector)
 	}
 	

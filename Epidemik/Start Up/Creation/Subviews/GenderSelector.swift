@@ -56,7 +56,7 @@ class GenderSelector: CreateItem {
 		let height = self.frame.height/5
 		let textInset = height + 10
 		let maleTextbox = UITextView(frame: CGRect(x: textInset, y: 10, width: self.frame.width - textInset, height: height))
-		maleTextbox.font = PRESETS.FONT_VERY_VERY_BIG
+		maleTextbox.font = PRESETS.FONT_VERY_BIG
 		maleTextbox.text = "Male"
 		maleTextbox.textAlignment = .left
 		maleTextbox.isEditable = false
@@ -65,7 +65,7 @@ class GenderSelector: CreateItem {
 		self.addSubview(maleTextbox)
 		
 		let femaleTextbox = UITextView(frame: CGRect(x: textInset, y: self.frame.height/2 - height/2, width: self.frame.width - textInset, height: height))
-		femaleTextbox.font = PRESETS.FONT_VERY_VERY_BIG
+		femaleTextbox.font = PRESETS.FONT_VERY_BIG
 		femaleTextbox.text = "Female"
 		femaleTextbox.textAlignment = .left
 		femaleTextbox.isEditable = false
@@ -74,7 +74,7 @@ class GenderSelector: CreateItem {
 		self.addSubview(femaleTextbox)
 		
 		let otherTextbox = UITextView(frame: CGRect(x: textInset, y: self.frame.height - height, width: self.frame.width - textInset, height: height))
-		otherTextbox.font = PRESETS.FONT_VERY_VERY_BIG
+		otherTextbox.font = PRESETS.FONT_VERY_BIG
 		otherTextbox.text = "Other"
 		otherTextbox.textAlignment = .left
 		otherTextbox.isEditable = false

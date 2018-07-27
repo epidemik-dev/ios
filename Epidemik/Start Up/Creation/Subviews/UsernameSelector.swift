@@ -20,7 +20,7 @@ class UsernameSelector: CreateItem, UITextFieldDelegate {
 	
 	init(frame: CGRect, slideUp: @escaping () -> (), slideDown: @escaping () -> (), warnUser: @escaping (String) -> ()) {
 		super.init(frame: frame)
-		self.title = "FINALLY! Enter your username, password"
+		self.title = "Enter your username, password"
 		self.slideDown = slideDown
 		self.slideUp = slideUp
 		self.warnUser = warnUser

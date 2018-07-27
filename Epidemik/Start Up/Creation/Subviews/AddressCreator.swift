@@ -61,17 +61,18 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 	//Creates all the textboxes
 	//EFFECT: updates all the fields and adds them to the UIView
 	func initBoxes() {
-		addressBox = UITextField(frame: CGRect(x: self.frame.height/3, y: 0, width: self.frame.width, height: self.frame.height/3))
+		addressBox = UITextField(frame: CGRect(x: self.frame.height/3, y: 10, width: self.frame.width, height: self.frame.height/3))
 		addressBox.autocorrectionType = .no
 		addressBox.autocapitalizationType = .none
 		addressBox.text = "Address"
+		addressBox.backgroundColor = PRESETS.CLEAR
 		addressBox.clearsOnBeginEditing = true
 		addressBox.textAlignment = .left
 		addressBox.delegate = self
 		addressBox.accessibilityIdentifier = "AddressTextBox"
 		self.addSubview(addressBox)
 		
-		cityBox = UITextField(frame: CGRect(x: self.frame.height/3, y: self.frame.height/3, width: self.frame.width, height: self.frame.height/3))
+		cityBox = UITextField(frame: CGRect(x: self.frame.height/3, y: self.frame.height/3+10, width: self.frame.width, height: self.frame.height/3))
 		cityBox.autocorrectionType = .no
 		cityBox.autocapitalizationType = .none
 		cityBox.text = "City"
@@ -81,7 +82,7 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		cityBox.accessibilityIdentifier = "CityTextBox"
 		self.addSubview(cityBox)
 		
-		stateBox = UITextField(frame: CGRect(x: self.frame.height/3, y: 2*self.frame.height/3, width: self.frame.width, height: self.frame.height/3))
+		stateBox = UITextField(frame: CGRect(x: self.frame.height/3, y: 2*self.frame.height/3+10, width: self.frame.width, height: self.frame.height/3))
 		stateBox.autocorrectionType = .no
 		stateBox.autocapitalizationType = .none
 		stateBox.text = "ST"
@@ -120,12 +121,15 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 	//Draws the underline and places the image
 	override func draw(_ rect: CGRect) {
 		PRESETS.BLACK.set()
+		if(self.frame.height == 0) {
+			return
+		}
 		self.drawUnderline(y: self.frame.height/3)
 		self.drawUnderline(y: 2*self.frame.height/3)
 		self.drawUnderline(y: self.frame.height)
 		
 		let imageHeight = self.frame.height / 4
-		let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: imageHeight, height: imageHeight))
+		let imageView = UIImageView(frame: CGRect(x: 0, y: 10, width: imageHeight, height: imageHeight))
 		imageView.image = toDisplay
 		self.addSubview(imageView)
 	}
