@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyButton
 
 class PersonSymptomSelector: UIView {
 	
@@ -22,10 +23,11 @@ class PersonSymptomSelector: UIView {
 	var stomach: UIButton!
 	var leg1: UIButton!
 	var leg2: UIButton!
-	var full: UIButton!
+	var full: PressableButton!
 	
-	var backButton: UIButton!
-	var doneButton: UIButton!
+	var backButton: PressableButton!
+	var doneButton: CustomPressableButton!
+	var indicator: UIActivityIndicatorView!
 	
 	//Where the buttons are placed on the screen
 	let buttonInShift = CGFloat(25.0)
@@ -129,11 +131,11 @@ class PersonSymptomSelector: UIView {
 	}
 	
 	func initFullBody(armWidth: CGFloat) {
-		full = UIButton(frame: CGRect(x: self.frame.width/2-armWidth, y: arms.frame.origin.y + 20, width: armWidth/2, height: armWidth/2))
-		full.backgroundColor = PRESETS.RED
+		full = PressableButton(frame: CGRect(x: self.frame.width/2-armWidth, y: arms.frame.origin.y + 20, width: armWidth/2, height: armWidth/2))
+		full.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		full.setTitle("FULL BODY", for: .normal)
 		full.titleLabel!.font = PRESETS.FONT_SMALL_BOLD
-		full.layer.cornerRadius = 10
+		full.cornerRadius = 10
 		full.clipsToBounds = true
 		full.accessibilityIdentifier = "full"
 		full.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -162,25 +164,30 @@ class PersonSymptomSelector: UIView {
 	// A SendButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to send their sickness data to the server
 	func initDoneButton() {
-		doneButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/5-2*buttonInShift))
+		let height = self.frame.height/5-2*buttonInShift
+		doneButton = CustomPressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: height))
 		doneButton.accessibilityIdentifier = "SubmitButton"
 		doneButton.setTitle("SUBMIT", for: .normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		doneButton.backgroundColor = PRESETS.RED
+		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		doneButton.addTarget(self, action: #selector(done), for: .touchUpInside)
-		doneButton.layer.cornerRadius = 15
+		doneButton.cornerRadius = 15
 		self.addSubview(doneButton)
+		
+		self.indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+		self.indicator.frame = CGRect(x: 20, y: height/2 - 7, width: 15, height: 15)
+		self.doneButton.contentView.addSubview(indicator)
 	}
 	
 	// A BackButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to go back to the sickness screen
 	func initBackButton() {
-		backButton = UIButton(frame: CGRect(x: buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/5 - 2*buttonInShift))
+		backButton = PressableButton(frame: CGRect(x: buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/5 - 2*buttonInShift))
 		backButton.setTitle("BACK", for: .normal)
-		backButton.backgroundColor = PRESETS.GRAY
+		backButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		backButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-		backButton.layer.cornerRadius = 15
+		backButton.cornerRadius = 15
 		self.addSubview(backButton)
 	}
 	
@@ -191,9 +198,7 @@ class PersonSymptomSelector: UIView {
 	
 	// When the user is finished selecting all their symptoms
 	@objc func done(_ sender: UIButton?) {
-		UIView.animate(withDuration: 0.5, animations: {
-			self.frame.origin.x -= self.frame.width
-		})
+		self.indicator.startAnimating()
 		manager.sendResults(symptoms: self.symptomDisplay.getSelectedSymptoms())
 	}
 	

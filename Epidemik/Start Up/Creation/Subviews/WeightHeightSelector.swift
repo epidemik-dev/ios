@@ -29,7 +29,7 @@ class WeightHeightSelector: CreateItem {
 		
 		var heights = Array<String>()
 		for feet in 3..<9 {
-			for inches in 0 ..< 11 {
+			for inches in 0 ..< 12 {
 				heights.append(String(feet) + "'" + String(inches) + "\"")
 			}
 		}

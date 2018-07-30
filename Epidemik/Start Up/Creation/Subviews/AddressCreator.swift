@@ -162,4 +162,10 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		})
 	}
 	
+	override func resetItem() {
+		self.addressBox.text = "Address"
+		self.cityBox.text = "City"
+		self.stateBox.text = "ST"
+	}
+	
 }

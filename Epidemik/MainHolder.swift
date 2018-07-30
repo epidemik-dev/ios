@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import SwiftyButton
 
 public class MainHolder: UIView {
 	//The UIView that brings the app together

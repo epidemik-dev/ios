@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import SwiftyButton
 
 class LoginScreen: UIView, UITextFieldDelegate {
 	
@@ -20,7 +21,9 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	var passwordTextBox: AccCreationTextBox!
 	var createAnAccount: UIButton!
 	
-	@objc var loginButton: UIButton!
+	@objc var loginButton: CustomPressableButton!
+	
+	var loginIndicator: UIActivityIndicatorView!
 
 	
 	init(frame: CGRect, slideUp: @escaping () -> (), slideDown: @escaping () -> (), slideAway: @escaping () -> (), turnToCreate: @escaping () -> ()) {
@@ -72,20 +75,31 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	}
 	
 	func initLoginButton() {
-		self.loginButton = UIButton(frame: CGRect(x: 0, y: 200, width: self.frame.width, height: 50))
-		self.loginButton.backgroundColor = PRESETS.OFF_WHITE
+		let loginHeight = CGFloat(50)
+		self.loginButton = CustomPressableButton(frame: CGRect(x: 0, y: 200, width: self.frame.width, height: loginHeight))
+		self.loginButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		self.loginButton.setTitle("Login", for: .normal)
-		self.loginButton.setTitleColor(PRESETS.BLACK, for: .normal)
 		self.loginButton.titleLabel!.font = PRESETS.FONT_VERY_BIG
 		self.loginButton.addTarget(self, action: #selector(LoginScreen.login(_:)), for: .touchUpInside)
 		self.addSubview(self.loginButton)
+		
+		self.loginIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+		self.loginIndicator.frame = CGRect(x: 20, y: loginHeight/2 - 7, width: 15, height: 15)
+		self.loginButton.contentView.addSubview(loginIndicator)
 	}
 	
 	@objc func login(_ sender: UIButton?) {
+		self.loginIndicator.startAnimating()
+		if((self.usernameTextBox.text?.contains(" "))! || (self.passwordTextBox.text?.contains(" "))!) {
+			self.loginIndicator.stopAnimating()
+			self.reportBadLogin()
+			return
+		}
 		NetworkAPI.loginIsValid(username: self.usernameTextBox.text!, password:  self.passwordTextBox.text!, result: ({(result: JSON?) -> ()
 			in
 			if(result == nil || result!.string == nil) {
 				DispatchQueue.main.sync {
+					self.loginIndicator.stopAnimating()
 					self.reportBadLogin()
 				}
 			} else {

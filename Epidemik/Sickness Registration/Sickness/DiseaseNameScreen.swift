@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import SwiftyButton
 
 public class DiseaseNameScreen: UIView {
 	
@@ -16,8 +17,8 @@ public class DiseaseNameScreen: UIView {
 	var sadFace: UIImageView!
 	
 	//The two action buttons
-	var backButton: UIButton!
-	var submitButton: UIButton!
+	var backButton: PressableButton!
+	var submitButton: PressableButton!
 	
 	//The place where you select the disease name
 	var diseaseSelector: ScrollSelector!
@@ -134,25 +135,25 @@ public class DiseaseNameScreen: UIView {
 	// A SendButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to send their sickness data to the server
 	func initSendButton() {
-		submitButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
+		submitButton = PressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
 		submitButton.accessibilityIdentifier = "SubmitButton"
 		submitButton.setTitle("SUBMIT", for: .normal)
 		submitButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		submitButton.backgroundColor = PRESETS.RED
+		submitButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		submitButton.addTarget(self, action: #selector(gatherAndSendInfo), for: .touchUpInside)
-		submitButton.layer.cornerRadius = 15
+		submitButton.cornerRadius = 15
 		self.addSubview(submitButton)
 	}
 	
 	// A BackButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to go back to the sickness screen
 	func initBackButton() {
-		backButton = UIButton(frame: CGRect(x: buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
+		backButton = PressableButton(frame: CGRect(x: buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
 		backButton.setTitle("BACK", for: .normal)
-		backButton.backgroundColor = PRESETS.GRAY
+		backButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		backButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
-		backButton.layer.cornerRadius = 15
+		backButton.cornerRadius = 15
 		self.addSubview(backButton)
 	}
 	

@@ -8,10 +8,11 @@
 
 import Foundation
 import UIKit
+import SwiftyButton
 
 class BodyPartSymptomSelector: UIView {
 	
-	var doneButton: UIButton!
+	var doneButton: PressableButton!
 	var insetX = CGFloat(30.0)
 	
 	var bodyPartImage: UIImageView!
@@ -76,12 +77,12 @@ class BodyPartSymptomSelector: UIView {
 	func initDoneButton() {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
-		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
-		doneButton.layer.cornerRadius = 40
+		doneButton.cornerRadius = 40
 		doneButton.setTitle("Continue", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		doneButton.backgroundColor = PRESETS.RED
+		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		doneButton.addTarget(self, action: #selector(BodyPartSymptomSelector.done(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
 	}

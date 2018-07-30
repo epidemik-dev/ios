@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import SwiftyButton
 
 public class DiseaseInfoScreen: UIView {
 	
@@ -22,7 +23,7 @@ public class DiseaseInfoScreen: UIView {
 	var medicalAttentionRecomended: Int!
 	var diseaseDescription: String!
 	
-	var doneButton: UIButton!
+	var doneButton: PressableButton!
 	
 	
 	init(frame: CGRect, info: JSON?, userSymptoms: Array<Int>, percentage: Double) {
@@ -181,12 +182,12 @@ public class DiseaseInfoScreen: UIView {
 	func initDone() {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
-		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
-		doneButton.layer.cornerRadius = 40
+		doneButton.cornerRadius = 40
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		doneButton.backgroundColor = PRESETS.RED
+		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		doneButton.addTarget(self, action: #selector(DiseaseInfoScreen.done(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
 	}

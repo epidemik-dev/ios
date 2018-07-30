@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyButton
 
 public class SicknessView: UIView {
 	//The screen where users report their sickness
@@ -15,11 +16,13 @@ public class SicknessView: UIView {
 	var insetX = 30.0
 	
 	//The button to report health
-	var healthyButton: UIButton!
+	var healthyButton: PressableButton!
 	//The button to report sickness
-	public var sicknessButton: UIButton!
+	public var sicknessButton: PressableButton!
 	// The button to diagnose the user
-	public var diagnoseButton: UIButton!
+	public var diagnoseButton: PressableButton!
+	//The button to make it all go away
+	var doneButton: PressableButton!
 
 	
 	var buttonWidth: CGFloat!
@@ -27,9 +30,6 @@ public class SicknessView: UIView {
 	
 	let buttonChampher = CGFloat(40.0)
 	let buttonFont = PRESETS.FONT_BIG_BOLD
-	
-	//The button to make it all go away
-	var doneButton: UIButton!
 	
 	var sickYCord: CGFloat!
 	var doneYCord: CGFloat!
@@ -75,12 +75,12 @@ public class SicknessView: UIView {
 	
 	// Creates the button that the user can press to say they are sick
 	func initSickButton() {
-		sicknessButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: sickYCord, width: buttonWidth, height: buttonHeight))
+		sicknessButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: sickYCord, width: buttonWidth, height: buttonHeight))
 		sicknessButton.accessibilityIdentifier = "SickButton"
-		sicknessButton.layer.cornerRadius = buttonChampher
+		sicknessButton.cornerRadius = buttonChampher
 		sicknessButton.setTitle("REPORT SICK", for: UIControlState.normal)
 		sicknessButton.titleLabel?.font = buttonFont
-		sicknessButton.backgroundColor = PRESETS.GRAY
+		sicknessButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		sicknessButton.addTarget(self, action: #selector(SicknessView.amSick(_:)), for: .touchUpInside)
 		self.addSubview(sicknessButton)
 		
@@ -90,12 +90,12 @@ public class SicknessView: UIView {
 	}
 	
 	func initDiagnoseButton() {
-		diagnoseButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: diagnoseYCord, width: buttonWidth, height: buttonHeight))
+		diagnoseButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: diagnoseYCord, width: buttonWidth, height: buttonHeight))
 		diagnoseButton.accessibilityIdentifier = "DiagButton"
-		diagnoseButton.layer.cornerRadius = buttonChampher
+		diagnoseButton.cornerRadius = buttonChampher
 		diagnoseButton.setTitle("DIAGNOSE ME", for: UIControlState.normal)
 		diagnoseButton.titleLabel?.font = buttonFont
-		diagnoseButton.backgroundColor = PRESETS.GRAY
+		diagnoseButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		diagnoseButton.addTarget(self, action: #selector(SicknessView.diagnoseMe(_:)), for: .touchUpInside)
 		self.addSubview(diagnoseButton)
 		
@@ -106,10 +106,10 @@ public class SicknessView: UIView {
 	
 	// Creates the button that the user can say they are healthy in
 	func initHealthyButton() {
-		healthyButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: sickYCord, width: buttonWidth, height: buttonHeight))
+		healthyButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: sickYCord, width: buttonWidth, height: buttonHeight))
 		healthyButton.accessibilityIdentifier = "HealthyButton"
-		healthyButton.layer.cornerRadius = buttonChampher
-		healthyButton.backgroundColor = PRESETS.WHITE
+		healthyButton.cornerRadius = buttonChampher
+		healthyButton.colors = .init(button: PRESETS.WHITE, shadow: PRESETS.WHITE)
 		healthyButton.titleLabel?.font = buttonFont
 		healthyButton.setTitleColor(PRESETS.GRAY, for: .normal)
 		healthyButton.setTitle("REPORT HEALTHY", for: UIControlState.normal)
@@ -124,12 +124,12 @@ public class SicknessView: UIView {
 	//Creates the done button
 	//EFFECT: adds the button to the screen and adds the target to the button
 	func initDoneButton() {
-		doneButton = UIButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: doneYCord, width: buttonWidth, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: doneYCord, width: buttonWidth, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
-		doneButton.layer.cornerRadius = buttonChampher
+		doneButton.cornerRadius = buttonChampher
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = buttonFont
-		doneButton.backgroundColor = PRESETS.RED
+		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		doneButton.addTarget(self, action: #selector(SicknessView.amDone(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
 		

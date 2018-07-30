@@ -8,6 +8,7 @@ target 'Epidemik' do
 
   # Pods for Epidemik
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftyButton'
 
   target 'EpidemikTests' do
     inherit! :search_paths
@@ -24,6 +25,8 @@ end
 target 'EpidemikWidget' do
   platform :ios, '10.0'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'SwiftyButton'
+  
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 

@@ -78,7 +78,9 @@ class DiagnosisManager: UIView {
 			frame.origin.x = self.frame.width
 			self.reporter = ResultReporter(frame: frame, results: response, manager: self, userSymptoms: self.userSymptoms)
 			self.addSubview(self.reporter)
+			self.personSelector.indicator.stopAnimating()
 			UIView.animate(withDuration: 0.5, animations: {
+				self.personSelector.frame.origin.x -=  self.reporter.frame.width
 				self.reporter.frame.origin.x -= self.reporter.frame.width
 			})
 		}

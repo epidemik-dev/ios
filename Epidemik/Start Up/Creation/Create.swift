@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import UserNotifications
 import SwiftyJSON
+import SwiftyButton
 
 public class CreateScreen: UIView {
 	
@@ -22,8 +23,10 @@ public class CreateScreen: UIView {
 	var curIndex = 0
 	
 	var warningBox: UITextView!
-	var nextButton: UIButton!
-	var backButton: UIButton!
+	var nextButton: CustomPressableButton!
+	var backButton: PressableButton!
+	
+	var indicator: UIActivityIndicatorView!
 	
 	var title: UITextView!
 	
@@ -82,6 +85,24 @@ public class CreateScreen: UIView {
 		self.addSubview(title)
 	}
 	
+	// A SendButton is a button in the bottom right of the screen
+	// Creates the button that allows the user to send their sickness data to the server
+	func initNextButton() {
+		let height = self.frame.height/4-2*buttonInShift
+		nextButton = CustomPressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: height))
+		nextButton.accessibilityIdentifier = "AgreeButton"
+		nextButton.setTitle("NEXT", for: .normal)
+		nextButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
+		nextButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
+		nextButton.addTarget(self, action: #selector(nextItem), for: .touchUpInside)
+		nextButton.layer.cornerRadius = 15
+		self.addSubview(nextButton)
+		
+		self.indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+		self.indicator.frame = CGRect(x: 20, y: height/2 - 7, width: 15, height: 15)
+		self.nextButton.contentView.addSubview(indicator)
+	}
+	
 	@objc func nextItem(_ sender: UIButton?) {
 		self.slideDown()
 		self.setWarning(text: "")
@@ -89,9 +110,11 @@ public class CreateScreen: UIView {
 			if(curIndex == 0) {
 				next(canGo: true)
 			} else {
+				self.indicator.startAnimating()
 				self.items[self.curIndex-1].next(result: self.next)
 			}
 		}
+		
 	}
 	
 	func next(canGo: Bool) {
@@ -99,7 +122,11 @@ public class CreateScreen: UIView {
 			self.askForNotifications()
 			return
 		}
+		if(self.indicator != nil) {
+			self.indicator.stopAnimating()
+		}
 		if(canGo) {
+			self.items[self.curIndex].resetItem()
 			UIView.animate(withDuration: 0.5, animations: {
 				self.items[self.curIndex].frame.origin.x -= self.frame.width
 				self.title.text = self.items[self.curIndex].title
@@ -119,7 +146,6 @@ public class CreateScreen: UIView {
 	}
 	
 	func createAccount(deviceID: String) {
-		print(deviceID)
 		if(self.warningBox.text == "") {
 			let username = self.usernamePasswordSelector.getInfo()[0]
 			let password = self.usernamePasswordSelector.getInfo()[1]
@@ -141,6 +167,7 @@ public class CreateScreen: UIView {
 			NetworkAPI.createAccount(username: username, password: password, latitude: latitude, longitude: longitude, deviceID: deviceID, dob: dob, gender: gender, weight: weight, height: height, smoke: doesSmoke, hypertension: hypertension, diabetes: diabetes, cholesterol: cholesterol, result: {(result: JSON?) -> () in
 				if(result == nil || result!.string == nil) {
 					DispatchQueue.main.sync {
+						self.indicator.stopAnimating()
 						self.setWarning(text: "Username Taken")
 					}
 				} else {
@@ -148,6 +175,7 @@ public class CreateScreen: UIView {
 					FileRW.writeFile(fileName: "password.epi", contents: password)
 					FileRW.writeFile(fileName: "auth_token.epi", contents: result!.string!)
 					DispatchQueue.main.sync {
+						self.indicator.stopAnimating()
 						self.slideAway()
 					}
 				}
@@ -174,6 +202,8 @@ public class CreateScreen: UIView {
 		warningBox = UITextView(frame: CGRect(x: 0, y: 40, width: self.frame.width, height: 20))
 		warningBox.font = PRESETS.FONT_SMALL
 		warningBox.textColor = PRESETS.RED
+		warningBox.isEditable = false
+		warningBox.isSelectable = false
 		warningBox.textAlignment = .center
 		self.addSubview(warningBox)
 	}
@@ -182,25 +212,13 @@ public class CreateScreen: UIView {
 		self.warningBox.text = text
 	}
 	
-	// A SendButton is a button in the bottom right of the screen
-	// Creates the button that allows the user to send their sickness data to the server
-	func initNextButton() {
-		nextButton = UIButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
-		nextButton.accessibilityIdentifier = "AgreeButton"
-		nextButton.setTitle("NEXT", for: .normal)
-		nextButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		nextButton.backgroundColor = PRESETS.RED
-		nextButton.addTarget(self, action: #selector(nextItem), for: .touchUpInside)
-		nextButton.layer.cornerRadius = 15
-		self.addSubview(nextButton)
-	}
 	
 	// A BackButton is a button in the bottom right of the screen
 	// Creates the button that allows the user to go back to the sickness screen
 	func initBackButton() {
-		backButton = UIButton(frame: CGRect(x: buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
+		backButton = PressableButton(frame: CGRect(x: buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2 - 2*buttonInShift, height: self.frame.height/4 - 2*buttonInShift))
 		backButton.setTitle("BACK", for: .normal)
-		backButton.backgroundColor = PRESETS.GRAY
+		backButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		backButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
 		backButton.layer.cornerRadius = 15
@@ -234,6 +252,10 @@ public class CreateItem: UIView {
 	
 	func next(result: @escaping (Bool) -> ()) {
 		result(true)
+	}
+	
+	func resetItem() {
+		
 	}
 	
 }

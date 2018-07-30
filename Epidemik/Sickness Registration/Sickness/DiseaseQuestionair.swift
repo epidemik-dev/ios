@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyButton
 
 public class DiseaseQuestionair: UIView {
 	
@@ -16,7 +17,7 @@ public class DiseaseQuestionair: UIView {
 	//The sickness screen that this one was created from
 	var superScreen: SicknessView?
 	//The done button to submit
-	var doneButton: UIButton!
+	var doneButton: PressableButton!
 	//The x cordinate that everything is pushed in by
 	var insetX = CGFloat(30.0)
 
@@ -75,12 +76,12 @@ public class DiseaseQuestionair: UIView {
 	func initDoneButton() {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
-		doneButton = UIButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "DoneButton"
-		doneButton.layer.cornerRadius = 40
+		doneButton.cornerRadius = 40
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		doneButton.backgroundColor = PRESETS.RED
+		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		doneButton.addTarget(self, action: #selector(DiseaseQuestionair.amDone(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
 	}

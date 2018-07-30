@@ -19,6 +19,9 @@ class Asker {
 			let textf1 = alert.textFields![0] as UITextField
 			resp(textf1.text!)
 		}))
+		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler:{ (alertAction:UIAlertAction) in
+			
+		}))
 		alert.addTextField(configurationHandler: {(textField: UITextField) in
 			textField.placeholder = placeHolder
 			textField.isSecureTextEntry = isSecure
