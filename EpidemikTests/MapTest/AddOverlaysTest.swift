@@ -42,7 +42,7 @@ class AddOverlaysTest: XCTestCase {
 		let creator = MapOverlayCreator(data: toUse)
 
         self.measure {
-			creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "")
+			let _ = creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "")
 		}
     }
     

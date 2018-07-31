@@ -57,7 +57,7 @@ public class MapOverlayCreator {
 		//Keeps track of what X,Y cordinates have polygons in them
 		var averageCounter = Dictionary<String, Int>()
 		//The total number of disease points in the region
-		let total = manager!.getWeightForRange(curLatMin: minLat, curLatMax: maxLat, curLongMin: minLong, curLongMax: maxLong, diseaseName: diseaseName)
+		var total = 0.0
 		
 		//Keeps track of what lat,long region we are currently in
 		var realLat = minLat
@@ -77,6 +77,7 @@ public class MapOverlayCreator {
 			while realLong < maxLong {
 				//Gets the number of points in the current region
 				let intensity = Double(manager!.getWeightForRange(curLatMin: realLat, curLatMax: realLat+scaleLat, curLongMin: realLong, curLongMax: realLong+scaleLong, diseaseName: diseaseName))
+				total += intensity
 				//Does not inlucde of no intensity
 				if(intensity != 0) {
 					let deltaLong = realLong - minLong
@@ -99,7 +100,7 @@ public class MapOverlayCreator {
 		if(averageCounter.count == 0){
 			self.averageIntensity = 1
 		} else {
-			self.averageIntensity = Double(total / averageCounter.count)
+			self.averageIntensity = total / Double(averageCounter.count)
 		}
 		
 		return toDraw
