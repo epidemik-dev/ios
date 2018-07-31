@@ -41,9 +41,9 @@ class LogInProcessTest: XCTestCase {
 		
 		XCTAssertTrue(app.isDisplayLogin())
 		
-		app.fillOutUsername(name: "rya")
-		app.fillOutPassword(password: "passsssss")
-		app.fillOutUsername(name: "n")
+		app.fillOutUsername(name: "use")
+		app.fillOutPassword(password: "password1")
+		app.fillOutUsername(name: "jasdh")
 		
 		app.pressLogin()
 		

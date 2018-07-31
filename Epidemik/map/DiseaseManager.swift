@@ -20,13 +20,13 @@ class DiseaseManager {
 	}
 	
 	//Returns the count of all the disease points in this range
-	func getWeightForRange(curLatMin: Double, curLatMax: Double, curLongMin: Double, curLongMax: Double) -> Int {
-		return corner.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin:curLongMin, curLongMax: curLongMax)
+	func getWeightForRange(curLatMin: Double, curLatMax: Double, curLongMin: Double, curLongMax: Double, diseaseName: String?) -> Int {
+		return corner.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin:curLongMin, curLongMax: curLongMax, diseaseName: diseaseName)
 	}
 	
 	//Adds this disease point to the data structure
-	func addDisease(lat: Double, long: Double) {
-		corner = corner.addDisease(lat: lat, long: long)
+	func addDisease(lat: Double, long: Double, diseaseName: String) {
+		corner = corner.addDisease(lat: lat, long: long, diseaseName: diseaseName)
 	}
 	
 	// Returns the count of every disease stored in the system
@@ -60,6 +60,7 @@ class DiseaseBranch {
 	//The number of diseases stored in this branch
 	//Should only be non-zero if this branch is an end branch
 	var numDiseases: Int
+	var diseaseDiseaseMap: [String:Int] = [:]
 	
 	//The range limit for when it should stop recuring
 	var errorBound = 0.005
@@ -83,9 +84,15 @@ class DiseaseBranch {
 	//If this branch is an end branch it increases this count
 	//Else it finds what branch to slot it into
 	//Only turns the proper branch into a non-nil branch if it needs to
-	func addDisease(lat: Double, long: Double) -> DiseaseBranch {
+	func addDisease(lat: Double, long: Double, diseaseName: String) -> DiseaseBranch {
 		if(latWidth < errorBound && longWidth < errorBound) {
 			numDiseases += 1
+			let mapResult = self.diseaseDiseaseMap[diseaseName]
+			if(mapResult == nil) {
+				self.diseaseDiseaseMap[diseaseName] = 1
+			} else {
+				self.diseaseDiseaseMap[diseaseName] = self.diseaseDiseaseMap[diseaseName]! + 1
+			}
 			return self
 		}
 		if(lat <= latMin + latWidth / 2) {
@@ -94,14 +101,14 @@ class DiseaseBranch {
 				if(bottomLeft == nil) {
 					bottomLeft = DiseaseBranch(latMin: latMin, latMax: latMin + latWidth / 2, longMin: longMin, longMax: longMin + longWidth / 2)
 				}
-				bottomLeft = bottomLeft?.addDisease(lat: lat, long: long)
+				bottomLeft = bottomLeft?.addDisease(lat: lat, long: long, diseaseName: diseaseName)
 				// Bottom Left
 				return self
 			} else {
 				if(bottomRight == nil) {
 					bottomRight = DiseaseBranch(latMin: latMin, latMax: latMin + latWidth / 2, longMin: longMin + longWidth / 2, longMax: longMax)
 				}
-				bottomRight = bottomRight?.addDisease(lat: lat, long: long)
+				bottomRight = bottomRight?.addDisease(lat: lat, long: long, diseaseName: diseaseName)
 				// Bottom Right
 				return self
 			}
@@ -111,14 +118,14 @@ class DiseaseBranch {
 				if(topLeft == nil) {
 					topLeft = DiseaseBranch(latMin: latMin + latWidth / 2, latMax: latMax, longMin: longMin, longMax: longMin + longWidth / 2)
 				}
-				topLeft = topLeft?.addDisease(lat: lat, long: long)
+				topLeft = topLeft?.addDisease(lat: lat, long: long, diseaseName: diseaseName)
 				//Top Left
 				return self
 			} else {
 				if(topRight == nil) {
 					topRight = DiseaseBranch(latMin: latMin + latWidth / 2, latMax: latMax, longMin: longMin + longWidth / 2, longMax: longMax)
 				}
-				topRight = topRight?.addDisease(lat: lat, long: long)
+				topRight = topRight?.addDisease(lat: lat, long: long, diseaseName: diseaseName)
 				//Top Right
 				return self
 			}
@@ -128,7 +135,7 @@ class DiseaseBranch {
 	//Returns the weight for this branch in the given range
 	//If the range is out of bounds, it returns zero
 	//Else it returns this count + the count for every sub branch
-	func getWeightForRange(curLatMin: Double, curLatMax: Double, curLongMin: Double, curLongMax: Double) -> Int {
+	func getWeightForRange(curLatMin: Double, curLatMax: Double, curLongMin: Double, curLongMax: Double, diseaseName: String?) -> Int {
 		if(curLatMin > self.latMax || curLatMax < self.latMin || curLongMin > self.longMax || curLongMax < self.longMin) {
 			return 0
 		} else {
@@ -136,27 +143,36 @@ class DiseaseBranch {
 			if(topLeft != nil
 				&& curLatMin <= self.topLeft!.latMax && curLatMax >= self.topLeft!.latMin
 				&& curLongMin <= self.topLeft!.longMax && curLongMax >= self.topLeft!.longMin) {
-				total = total + (self.topLeft!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax))
+				total = total + (self.topLeft!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax, diseaseName: diseaseName))
 			}
 			if(self.topRight != nil
 				&& curLatMin <= self.topRight!.latMax && curLatMax >= self.topRight!.latMin
 				&& curLongMin <= self.topRight!.longMax && curLongMax >= self.topRight!.longMin) {
-				total = total + (self.topRight!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax))
+				total = total + (self.topRight!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax, diseaseName: diseaseName))
 				
 			}
 			if(self.bottomLeft != nil
 				&& curLatMin <= self.bottomLeft!.latMax && curLatMax >= self.bottomLeft!.latMin
 				&& curLongMin <= self.bottomLeft!.longMax && curLongMax >= self.bottomLeft!.longMin) {
-				total = total + (self.bottomLeft!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax))
+				total = total + (self.bottomLeft!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax, diseaseName: diseaseName))
 				
 			}
 			if(self.bottomRight != nil
 				&& curLatMin <= self.bottomRight!.latMax && curLatMax >= self.bottomRight!.latMin
 				&& curLongMin <= self.bottomRight!.longMax && curLongMax >= self.bottomRight!.longMin) {
-				total = total + (self.bottomRight!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax))
+				total = total + (self.bottomRight!.getWeightForRange(curLatMin: curLatMin, curLatMax: curLatMax, curLongMin: curLongMin, curLongMax: curLongMax, diseaseName: diseaseName))
 				
 			}
-			return self.numDiseases + total
+			if(diseaseName == nil) {
+				return self.numDiseases + total
+			} else {
+				let map = self.diseaseDiseaseMap[diseaseName!]
+				if(map != nil) {
+					return map! + total
+				} else {
+					return total
+				}
+			}
 		}
 	}
 	

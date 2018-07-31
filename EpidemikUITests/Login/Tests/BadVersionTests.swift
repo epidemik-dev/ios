@@ -23,7 +23,7 @@ class BadVersionTests: XCTestCase {
 		
 		
 		app = XCUIApplication()
-		app.launchArguments.append("--uitesting")
+		app.launchArguments.append("--login")
 		app.launchArguments.append("--reset")
 		app.launchArguments.append("--reset-data")
 		app.launchArguments.append("--bad-version")

@@ -13,60 +13,66 @@ extension XCUIApplication {
 	
 	// Puts the given string into the address box
 	func fillOutAddress(name: String) {
-		fillOutAddressTextbox(id: "AddressTextBox", text: name)
+		fillOutTextbox(id: "AddressTextBox", text: name)
 	}
 	
 	// Puts the given string into the city box
 	func fillOutCity(name: String) {
-		fillOutAddressTextbox(id: "CityTextBox", text: name)
+		fillOutTextbox(id: "CityTextBox", text: name)
 	}
 	
 	// Puts the given string into the state box
 	func fillOutState(name: String) {
-		fillOutAddressTextbox(id: "StateTextBox", text: name)
+		fillOutTextbox(id: "StateTextBox", text: name)
 	}
 	
 	// Sets the gender option for this user
 	func setMaleOrFemaleOrOther(gender: String) {
-		let login = otherElements["LoginScreen"]
-		let genderSelector = login.otherElements["GenderSelector"]
 		if(gender == "Male") {
-			genderSelector.buttons["MaleButton"].tap()
+			self.buttons["MaleButton"].tap()
 		} else if(gender == "Female") {
-			genderSelector.buttons["FemaleButton"].tap()
+			self.buttons["FemaleButton"].tap()
 		} else {
-			genderSelector.buttons["OtherButton"].tap()
+			self.buttons["OtherButton"].tap()
 		}
-	}
-	
-	// Sets the date of birth of this user
-	func setDOB(month: String, day: String, year: String) {
-		let login = otherElements["LoginScreen"]
-		login.datePickers["DOBPicker"].pickerWheels.element(boundBy: 0).adjust(toPickerWheelValue: month)
-		login.datePickers["DOBPicker"].pickerWheels.element(boundBy: 1).adjust(toPickerWheelValue: day)
-		login.datePickers["DOBPicker"].pickerWheels.element(boundBy: 2).adjust(toPickerWheelValue: year)
 	}
 	
 	// Changes the login screen to the create acc screen
 	func turnToCreateAcc() {
-		let login = otherElements["LoginScreen"]
-		login.buttons["CreateAccButton"].tap()
+		self.buttons["CreateAccButton"].tap()
+	}
+	
+	// Goes to the next create screen
+	func nextCreateScreen() {
+		self.buttons["next"].tap()
 	}
 	
 	// Puts the given string into the given box in the login screen
-	func fillOutAddressTextbox(id: String, text: String) {
-		let login = otherElements["LoginScreen"]
-		let createAcc = login.otherElements["AddressCreator"]
-		
-		let textField = createAcc.children(matching: XCUIElement.ElementType.textField)[id]
+	func fillOutTextbox(id: String, text: String) {
+		let textField = self.textFields[id]
 		
 		textField.tap()
 		textField.typeText(text)
 	}
 	
 	func getPasswordWarningVal() -> String {
-		let login = otherElements["LoginScreen"]
-		return login.textViews["PasswordWarning"].value as! String
+		return self.textViews["Warning"].value as! String
+	}
+	
+	// Puts the given string into the username box
+	func createUsername(name: String) {
+		let textField = self.textFields["usernameCreate"]
+		
+		textField.tap()
+		textField.typeText(name)
+	}
+	
+	// Puts the given string into the password box
+	func createPassword(password: String) {
+		let textField = self.secureTextFields["passwordCreate"]
+		
+		textField.tap()
+		textField.typeText(password)
 	}
 	
 }

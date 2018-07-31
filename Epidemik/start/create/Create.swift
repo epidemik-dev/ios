@@ -90,7 +90,7 @@ public class CreateScreen: UIView {
 	func initNextButton() {
 		let height = self.frame.height/4-2*buttonInShift
 		nextButton = CustomPressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: height))
-		nextButton.accessibilityIdentifier = "AgreeButton"
+		nextButton.accessibilityIdentifier = "next"
 		nextButton.setTitle("NEXT", for: .normal)
 		nextButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		nextButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
@@ -201,6 +201,7 @@ public class CreateScreen: UIView {
 	func initWarningBox() {
 		warningBox = UITextView(frame: CGRect(x: 0, y: 40, width: self.frame.width, height: 20))
 		warningBox.font = PRESETS.FONT_SMALL
+		warningBox.accessibilityIdentifier = "Warning"
 		warningBox.textColor = PRESETS.RED
 		warningBox.isEditable = false
 		warningBox.isSelectable = false

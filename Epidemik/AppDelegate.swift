@@ -18,15 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
-		
+		if CommandLine.arguments.contains("--bad-version") {
+			NetworkAPI.versionExtension = "?version=0.01"
+		}
 		if CommandLine.arguments.contains("--reset") {
 			FileRW.deleteFile(fileName: "username.epi")
 			FileRW.deleteFile(fileName: "password.epi")
 		}
-		
 		if CommandLine.arguments.contains("--login") {
-			FileRW.writeFile(fileName: "username.epi", contents: "ryan")
-			FileRW.writeFile(fileName: "password.epi", contents: "pass")
+			FileRW.writeFile(fileName: "username.epi", contents: "user")
+			FileRW.writeFile(fileName: "password.epi", contents: "password1")
 		}
 		
 		mainVC = ViewController()

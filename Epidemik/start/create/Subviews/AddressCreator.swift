@@ -36,6 +36,7 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		self.slideDown = slideDown
 		self.warnUser = warnUser
 		super.init(frame: frame)
+		self.accessibilityIdentifier = "AddressCreator"
 		self.title = "Where do you live?"
 		self.backgroundColor = PRESETS.WHITE
 		initBoxes()

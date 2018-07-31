@@ -31,7 +31,7 @@ public class DiseaseDataCenter {
 		for disease in toDraw!.arrayValue {
 			let lat = Double(disease["latitude"].string!)!
 			let long = Double(disease["longitude"].string!)!
-			let diseaseName = disease["diease_name"].rawString()!
+			let diseaseName = (disease.dictionaryObject!["disease_name"])! as! String
 			let dateSick = disease["date_sick"].string!
 			let dateHealthy = disease["date_healthy"].string
 			self.datapoints.append(Disease(lat: lat, long: long, diseaseName: diseaseName, date: dateSick, date_healthy: dateHealthy))

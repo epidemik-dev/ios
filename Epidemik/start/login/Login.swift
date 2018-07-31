@@ -32,6 +32,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 		self.slideUp = slideUp
 		self.slideAway = slideAway
 		self.turnToCreate = turnToCreate
+		self.accessibilityIdentifier = "LoginScreen"
 		initUsernameTextbox()
 		initPasswordTextbox()
 		initLoginButton()
@@ -45,6 +46,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	func initUsernameTextbox() {
 		self.usernameTextBox = AccCreationTextBox(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50), toDisplay: FileRW.readImage(imageName: "username"))
 		self.usernameTextBox.text = "username"
+		self.usernameTextBox.accessibilityIdentifier = "username"
 		self.usernameTextBox.clearsOnBeginEditing = true
 		self.usernameTextBox.delegate = self
 		self.addSubview(self.usernameTextBox)
@@ -54,6 +56,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 		self.passwordTextBox = AccCreationTextBox(frame: CGRect(x: 0, y: 100, width: self.frame.width, height: 50), toDisplay: FileRW.readImage(imageName: "password"))
 		self.passwordTextBox.isSecureTextEntry = true
 		self.passwordTextBox.text = "password"
+		self.passwordTextBox.accessibilityIdentifier = "password"
 		self.passwordTextBox.clearsOnBeginEditing = true
 		self.passwordTextBox.delegate = self
 		self.addSubview(self.passwordTextBox)
@@ -77,6 +80,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	func initLoginButton() {
 		let loginHeight = CGFloat(50)
 		self.loginButton = CustomPressableButton(frame: CGRect(x: 0, y: 200, width: self.frame.width, height: loginHeight))
+		self.loginButton.accessibilityIdentifier = "login"
 		self.loginButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
 		self.loginButton.setTitle("Login", for: .normal)
 		self.loginButton.titleLabel!.font = PRESETS.FONT_VERY_BIG
@@ -120,6 +124,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	
 	func initCreateAccountButton() {
 		self.createAnAccount = UIButton(frame: CGRect(x: 0, y: self.frame.height-40, width: self.frame.width, height: 30))
+		self.createAnAccount.accessibilityIdentifier = "CreateAccButton"
 		self.createAnAccount.setTitle("Create An Account", for: .normal)
 		self.createAnAccount.setTitleColor(PRESETS.BLACK, for: .normal)
 		self.createAnAccount.titleLabel!.font = PRESETS.FONT_MEDIUM

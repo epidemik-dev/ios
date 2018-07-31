@@ -43,17 +43,17 @@ extension XCUIApplication {
 	
 	// Presses the button to say the user is healthy
 	func pressHealthy() {
-		self.otherElements["MainHolder"].buttons["HealthyButton"].tap()
+		self.buttons["HealthyButton"].tap()
 	}
 	
 	// Says if the screen shows the sick button
 	func doesShowSickButton() -> Bool {
-		return self.otherElements["MainHolder"].buttons["SickButton"].frame.origin.x >= 0
+		return self.buttons["SickButton"].frame.origin.x >= 0
 	}
 	
 	// Says if the screen shows the healthy button
 	func doesShowHealthyButton() -> Bool {
-		return self.otherElements["MainHolder"].buttons["HealthyButton"].frame.origin.x >= 0
+		return self.buttons["HealthyButton"].frame.origin.x >= 0
 	}
 	
 }

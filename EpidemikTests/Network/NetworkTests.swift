@@ -38,7 +38,7 @@ class NetworkTests: XCTestCase {
     }
     
 	func testCreateAcc() {
-		NetworkAPI.createAccount(username: String(username), password: "password1", latitude: 0, longitude: 0, deviceID: "", dob: Date(), gender: "Male", result: accountCreated)
+		NetworkAPI.createAccount(username: String(username), password: "password1", latitude: 1, longitude: 1, deviceID: "", dob: Date(), gender: "Male", weight: 1, height: 1, smoke: false, hypertension: false, diabetes: false, cholesterol: false, result: accountCreated)
 		wait(for: [expectation1], timeout: 10)
 	}
 	

@@ -23,7 +23,7 @@ class GenderSelectorTests: XCTestCase {
 	// Tests that the single selected functionality of the gender selector works
 	func testGenderSelector() {
 		let selector = GenderSelector(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-		XCTAssertEqual(selector.getGender(), "Did Not Choose")
+		XCTAssertEqual(selector.getGender(), "Other")
 		selector.genderChanged(selector.maleSelector)
 		XCTAssert(selector.maleSelector.isChecked)
 		XCTAssertFalse(selector.femaleSelector.isChecked)

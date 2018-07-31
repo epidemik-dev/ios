@@ -27,19 +27,19 @@ class DiseaseManagementMeasurments: XCTestCase {
 	func initChunk() {
 		chunk = DiseaseManager()
 		for _ in 0...self.numPoints {
-			chunk.addDisease(lat: 14*drand48() + 30, long: 60*drand48() - 123)
+			chunk.addDisease(lat: 14*drand48() + 30, long: 60*drand48() - 123, diseaseName: "")
 		}
 	}
 	
 	func oneRange() {
-		_ = chunk.getWeightForRange(curLatMin: 15, curLatMax: 15.1, curLongMin: -113, curLongMax: -113.1)
+		_ = chunk.getWeightForRange(curLatMin: 15, curLatMax: 15.1, curLongMin: -113, curLongMax: -113.1, diseaseName: "")
 		
 	}
 	
 	func allRange() {
 		for x in 0...20 {
 			for y in 0...20 {
-				_ = chunk.getWeightForRange(curLatMin: Double(14/20*x+30), curLatMax: Double(14/20*(x+1)+30), curLongMin: Double(3*(y)-123), curLongMax: Double(3*(y+1)-123))
+				_ = chunk.getWeightForRange(curLatMin: Double(14/20*x+30), curLatMax: Double(14/20*(x+1)+30), curLongMin: Double(3*(y)-123), curLongMax: Double(3*(y+1)-123), diseaseName: "")
 			}
 		}
 		

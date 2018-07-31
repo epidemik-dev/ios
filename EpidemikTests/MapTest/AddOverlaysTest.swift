@@ -29,9 +29,9 @@ class AddOverlaysTest: XCTestCase {
 		let d5 = Disease(lat: 100, long: -1, diseaseName: "Common Cold", date: Date(), date_healthy: Date())
 
 		let map = Map(frame: CGRect(x: 0, y: 0, width: 100, height: 100), settingsButton: UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100)))
-        let creator = MapOverlayCreator(map: map, longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, data: [d1, d2, d3, d4, d5])
+        let creator = MapOverlayCreator(data: [d1, d2, d3, d4, d5])
 		XCTAssertEqual(creator.manager.getAll(), 5)
-		XCTAssertEqual(creator.createOverlays().count, 3)
+		XCTAssertEqual(creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "Common Cold").count, 3)
     }
     
     func testAddOverlaysPreformance() {
@@ -39,11 +39,10 @@ class AddOverlaysTest: XCTestCase {
 		for _ in 0...100000 {
 			toUse.append(Disease(lat: 14*drand48() + 30, long: 14*drand48() + 30, diseaseName: "Common Cold", date: Date(), date_healthy: Date()))
 		}
-		let map = Map(frame: CGRect(x: 0, y: 0, width: 100, height: 100), settingsButton: UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100)))
-		let creator = MapOverlayCreator(map: map, longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, data: toUse)
+		let creator = MapOverlayCreator(data: toUse)
 
         self.measure {
-			creator.updateOverlay()
+			creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "")
 		}
     }
     

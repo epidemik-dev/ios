@@ -16,53 +16,35 @@ extension XCUIApplication {
 		return otherElements["LoginScreen"].exists
 	}
 	
-	func isDisplayStage1() -> Bool {
+	func isDisplayStageAddress() -> Bool {
 		return otherElements["AddressCreator"].frame.origin.x >= 0
 	}
 	
 	// Puts the given string into the username box
 	func fillOutUsername(name: String) {
-		fillOutLoginTextbox(id: "UsernameTextBox", text: name)
+		let textField = self.textFields["username"]
+		
+		textField.tap()
+		textField.typeText(name)
+		
 	}
 	
 	// Puts the given string into the password box
 	func fillOutPassword(password: String) {
-		let login = otherElements["LoginScreen"]
-		
-		let textField = login.children(matching: XCUIElement.ElementType.secureTextField)["PasswordTextBox"]
+		let textField = self.secureTextFields["password"]
 		
 		textField.tap()
 		textField.typeText(password)
 	}
 	
-	// Puts the given string into the given box in the login screen
-	func fillOutLoginTextbox(id: String, text: String) {
-		let login = otherElements["LoginScreen"]
-		
-		let textField = login.children(matching: XCUIElement.ElementType.textField)[id]
-		
-		textField.tap()
-		textField.typeText(text)
-	}
-	
 	// Presses login/create account button on the login screen
 	func pressLogin() {
-		let login = otherElements["LoginScreen"]
-		let loginButton = login.buttons["LoginButton"]
+		let loginButton = self.buttons["login"]
 		loginButton.tap()
 	}
 	
-	func loginTestUser() {
-		self.fillOutUsername(name: "rya")
-		self.fillOutPassword(password: "pass")
-		self.fillOutUsername(name: "n")
-		
-		self.pressLogin()
-	}
-	
 	func loginIsInFocus() -> Bool {
-		let login = otherElements["LoginScreen"]
-		return login.textFields["UsernameTextBox"].frame.origin.y > 0
+		return self.textFields["username"].frame.origin.y > 0
 	}
 	
 }

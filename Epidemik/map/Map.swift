@@ -24,12 +24,15 @@ class Map: MKMapView, MKMapViewDelegate, UIGestureRecognizerDelegate {
 	//The settings button for the map
 	var settingsButton: UIButton!
 	
+	var diseaseSelector: DropDownSelector!
+	
 	// Creates the map view, given a view frame, a lat,long width in meters, and a start lat,long in degrees
 	// OTHER: starts the loading animation
 	init(frame: CGRect, settingsButton: UIButton) {
 		super.init(frame: frame)
 		self.accessibilityIdentifier = "Map"
 		self.settingsButton = settingsButton
+		
 		
 		doLoadingAnimation()
 	}
@@ -41,9 +44,16 @@ class Map: MKMapView, MKMapViewDelegate, UIGestureRecognizerDelegate {
 	//Creates all the map fields
 	//EFFECT: creates all the data for the map and draws everything
 	func initAfterData() {
+		initDiseaseSelector()
 		initOverlayCreator()
 		initMapPrefs()
 		initGestureControls()
+	}
+	
+	func initDiseaseSelector() {
+		let inset = self.frame.height/8
+		self.diseaseSelector = DropDownSelector(frame: CGRect(x: inset, y: settingsButton.frame.origin.y, width: self.frame.width-inset*2, height: 2*settingsButton.frame.height/3), items: DISEASE_QUESTIONS.diseases, title: "Select a Disease", update: self.updateOverlays)
+		self.addSubview(self.diseaseSelector)
 	}
 	
 	//Runs the loading animation
@@ -72,23 +82,21 @@ class Map: MKMapView, MKMapViewDelegate, UIGestureRecognizerDelegate {
 	//Creates the overlay creator
 	//EFFECT: creates a new overlay creator and updates the map overlays
 	func initOverlayCreator() {
-		let region = self.region
-		let latWidth = region.span.latitudeDelta*2 //I dont know why this is *2
-		let longWidth = region.span.longitudeDelta*2 //I dont know why this is *2
-		let startLat = region.center.latitude
-		let startLong = region.center.longitude
-		overlayCreator = MapOverlayCreator(map: self, longWidth: longWidth, latWidth: latWidth, startLong: startLong - longWidth/2, startLat: startLat - latWidth/2, data: dataCenter.getDiseaseData())
+		self.overlayCreator = MapOverlayCreator(data: self.dataCenter.getDiseaseData())
+		self.updateOverlays()
 	}
 	
 	//Updates the overlay creator
 	//EFFECT: creates a new overlay creator and updates the map overlays
 	func updateOverlays() {
-		let region = self.region
+		//Removes every overlay from the map
+		self.removeOverlays(self.overlays)
 		let latWidth = region.span.latitudeDelta
 		let longWidth = region.span.longitudeDelta
-		let startLat = region.center.latitude
-		let startLong = region.center.longitude
-		overlayCreator = MapOverlayCreator(map: self, longWidth: longWidth, latWidth: latWidth, startLong: startLong - longWidth/2, startLat: startLat - latWidth/2, data: dataCenter.getDiseaseData())
+		let startLat = region.center.latitude - latWidth/2
+		let startLong = region.center.longitude - longWidth/2
+		let overlays = overlayCreator.createOverlays(longWidth: longWidth, latWidth: latWidth, startLong: startLong, startLat: startLat, diseaseName: self.diseaseSelector.getSelected())
+		self.addOverlays(overlays)
 	}
 	
 	// The function that is called when the map draws a new overlay
@@ -123,7 +131,7 @@ class Map: MKMapView, MKMapViewDelegate, UIGestureRecognizerDelegate {
 	//If the user moves, the overlays update
 	@objc func didDragMap(sender: UIGestureRecognizer!) {
 		if sender.state == .ended {
-			overlayCreator.updateOverlay()
+			self.updateOverlays()
 		}
 	}
 

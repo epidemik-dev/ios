@@ -49,15 +49,18 @@ class SicknessSubmission: XCTestCase {
 		sleep(1)
 		XCTAssertTrue(app.doesShowHealthyButton())
 		
-		testSubmitHealthy()
+		submitHealthy()
 	}
 	
-	func testSubmitHealthy() {
-		app.launch()
+	func submitHealthy() {
+		XCTAssertTrue(app.doesShowHealthyButton())
 		
 		app.pressHealthy()
+		sleep(2)
 		
 		app.launch()
+		
+		sleep(1)
 		
 		XCTAssertTrue(app.doesShowSickButton())
 	}

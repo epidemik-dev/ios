@@ -44,46 +44,25 @@ class LoginViewTests: XCTestCase {
 		XCTAssert(app.isDisplayLogin())
 		XCTAssert(app.loginIsInFocus())
 		
-		app.fillOutUsername(name: "test")
+		app.fillOutUsername(name: "user")
 		XCTAssert(app.loginIsInFocus())
 		
-		app.fillOutPassword(password: "testt")
+		app.fillOutPassword(password: "pass")
 		XCTAssert(app.loginIsInFocus())
 		
 		app.fillOutPassword(password: "\n")
 		XCTAssert(app.loginIsInFocus())
 		
-		app.fillOutPassword(password: "testt")
+		app.fillOutPassword(password: "passs")
 		XCTAssert(app.loginIsInFocus())
 
 		app.fillOutUsername(name: "\n")
 		XCTAssert(app.loginIsInFocus())
 		
-		app.fillOutUsername(name: "test")
+		app.fillOutUsername(name: "user")
 		XCTAssert(app.loginIsInFocus())
 		
 		app.fillOutUsername(name: "\n")
-		XCTAssert(app.loginIsInFocus())
-		
-		app.turnToCreateAcc()
-		XCTAssert(app.loginIsInFocus())
-		
-		app.fillOutAddress(name: "test")
-		XCTAssert(app.loginIsInFocus())
-		
-		app.fillOutPassword(password: "slkfmnsdkjmfsdklm")
-		XCTAssert(app.loginIsInFocus())
-		
-		app.pressLogin()
-		XCTAssert(app.loginIsInFocus())
-		
-		app.setDOB(month: "May", day: "5", year: "1999")
-		XCTAssert(app.loginIsInFocus())
-		
-		app.setMaleOrFemaleOrOther(gender: "Male")
-		XCTAssert(app.loginIsInFocus())
-		
-		app.fillOutUsername(name: "test")
 		XCTAssert(app.loginIsInFocus())
 
 	}

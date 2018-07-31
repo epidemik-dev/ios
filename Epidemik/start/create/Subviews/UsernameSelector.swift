@@ -36,7 +36,7 @@ class UsernameSelector: CreateItem, UITextFieldDelegate {
 	func initUsernameTextbox() {
 		self.usernameTextBox = AccCreationTextBox(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 50), toDisplay: FileRW.readImage(imageName: "username"))
 		self.usernameTextBox.text = "username"
-		self.usernameTextBox.accessibilityIdentifier = "username"
+		self.usernameTextBox.accessibilityIdentifier = "usernameCreate"
 		self.usernameTextBox.clearsOnBeginEditing = true
 		self.usernameTextBox.delegate = self
 		self.addSubview(self.usernameTextBox)
@@ -46,8 +46,9 @@ class UsernameSelector: CreateItem, UITextFieldDelegate {
 		self.passwordTextBox = AccCreationTextBox(frame: CGRect(x: 0, y: 100, width: self.frame.width, height: 50), toDisplay: FileRW.readImage(imageName: "password"))
 		self.passwordTextBox.isSecureTextEntry = true
 		self.passwordTextBox.text = "password"
-		self.passwordTextBox.accessibilityIdentifier = "password"
+		self.passwordTextBox.accessibilityIdentifier = "passwordCreate"
 		self.passwordTextBox.clearsOnBeginEditing = true
+		self.passwordTextBox.clearsOnInsertion = true
 		self.passwordTextBox.delegate = self
 		self.addSubview(self.passwordTextBox)
 	}
@@ -72,7 +73,7 @@ class UsernameSelector: CreateItem, UITextFieldDelegate {
 				totalText = String(totalText.dropLast())
 			}
 		}
-		updateWarning(passwordOrUsername: textField.accessibilityIdentifier == "password", text: totalText)
+		updateWarning(passwordOrUsername: textField.accessibilityIdentifier == "passwordCreate", text: totalText)
 		return true
 	}
 	
@@ -80,18 +81,18 @@ class UsernameSelector: CreateItem, UITextFieldDelegate {
 		if(passwordOrUsername) {
 			if(text.count < 6) {
 				self.warnUser("Password Too Short")
-				return
 			} else if(text.lowercased() == "password") {
 				self.warnUser("Invalid password")
-				return
+			} else {
+				self.warnUser("")
 			}
 		} else {
 			if(text.contains(" ") || text.contains("\\")) {
 				self.warnUser("Invalid username")
-				return
+			} else {
+				self.updateWarning(passwordOrUsername: true, text: self.passwordTextBox.text!)
 			}
 		}
-		self.warnUser("")
 	}
 	
 	override func getInfo() -> [String] {

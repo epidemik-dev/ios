@@ -13,6 +13,8 @@ class CreateAccTest: XCTestCase {
 	
 	var app: XCUIApplication!
 	
+	var username = String(arc4random())
+	
 	override func setUp() {
 		super.setUp()
 		
@@ -42,29 +44,27 @@ class CreateAccTest: XCTestCase {
 		app.launch()
 		
 		app.turnToCreateAcc()
-		
-		app.pressLogin()
-		
-		sleep(2)
-		
-		XCTAssertTrue(app.isDisplayLogin())
-		
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+
 		app.fillOutAddress(name: "1 Main St")
 		app.fillOutCity(name: "New York")
 		app.fillOutState(name: "NY")
-		app.fillOutPassword(password: "testPass")
-		app.fillOutUsername(name: "ryan1")
-		app.pressLogin()
-		app.setDOB(month: "April", day: "20", year: "1989")
-		app.setMaleOrFemaleOrOther(gender: "Male")
-		app.setMaleOrFemaleOrOther(gender: "Female")
-		app.setMaleOrFemaleOrOther(gender: "Other")
-		app.setMaleOrFemaleOrOther(gender: "Female")
 		
+		app.nextCreateScreen()
+		sleep(1)
+		
+		app.createPassword(password: "password")
+		XCTAssertEqual(app.getPasswordWarningVal(), "Invalid password")
+		app.createPassword(password: "d")
 		XCTAssertEqual(app.getPasswordWarningVal(), "")
-		
-		app.pressLogin()
-		
+		app.createUsername(name: username)
+		XCTAssertTrue(app.isDisplayLogin())
+
+		app.nextCreateScreen()
+
 		sleep(2)
 		
 		XCTAssertFalse(app.isDisplayLogin())
@@ -86,8 +86,8 @@ class CreateAccTest: XCTestCase {
 		
 		XCTAssertTrue(app.isDisplayLogin())
 		
-		app.fillOutUsername(name: "ryan1")
-		app.fillOutPassword(password: "testPass")
+		app.fillOutUsername(name: username)
+		app.fillOutPassword(password: "passwordd")
 		
 		app.pressLogin()
 		
@@ -101,18 +101,26 @@ class CreateAccTest: XCTestCase {
 	// password
 	func testCreateAccountFailShortPassword() {
 		app.launch()
+		
 		app.turnToCreateAcc()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
 		
 		app.fillOutAddress(name: "1 Main St")
 		app.fillOutCity(name: "New York")
 		app.fillOutState(name: "NY")
-		app.fillOutPassword(password: "testt")
-		app.fillOutUsername(name: "ryan1")
-		app.pressLogin()
 		
-		XCTAssertEqual(app.getPasswordWarningVal(), "Password Must Be Longer")
+		app.nextCreateScreen()
+		sleep(1)
 		
-		app.pressLogin()
+		app.createPassword(password: "testt")
+		app.createUsername(name: "ryan1")
+		
+		XCTAssertEqual(app.getPasswordWarningVal(), "Password Too Short")
+		
+		app.nextCreateScreen()
 		
 		sleep(2)
 		XCTAssertTrue(app.isDisplayLogin())
@@ -122,60 +130,66 @@ class CreateAccTest: XCTestCase {
 	func testCreateAccountFailPasswordPassword() {
 		app.launch()
 		app.turnToCreateAcc()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
 		
 		app.fillOutAddress(name: "1 Main St")
 		app.fillOutCity(name: "New York")
 		app.fillOutState(name: "NY")
-		app.fillOutPassword(password: "password")
-		app.fillOutUsername(name: "ryan1")
 		
-		XCTAssertEqual(app.getPasswordWarningVal(), "Invalid Password")
+		app.nextCreateScreen()
+		sleep(1)
 		
-		app.pressLogin()
+		app.createPassword(password: "password")
+		app.createUsername(name: "ryan1")
+		
+		XCTAssertEqual(app.getPasswordWarningVal(), "Invalid password")
+		
+		app.nextCreateScreen()
 		
 		sleep(1)
-		XCTAssertTrue(app.isDisplayStage1())
+		XCTAssertTrue(app.isDisplayLogin())
 	}
 	
 	// Test that you cannot create an account with an invalid address
 	func testCreateAccountFailBadAddress() {
 		app.launch()
 		app.turnToCreateAcc()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
 		
 		app.fillOutAddress(name: "BadAddress")
 		app.fillOutCity(name: "BadAddress")
 		app.fillOutState(name: "BadAddress")
-		app.fillOutPassword(password: "passwordd")
-		app.fillOutUsername(name: "ryan1")
-		app.pressLogin()
+		app.nextCreateScreen()
 		
-		XCTAssertEqual(app.getPasswordWarningVal(), "")
-				
 		sleep(1)
-		XCTAssertTrue(app.isDisplayStage1())
+		XCTAssertTrue(app.isDisplayStageAddress())
 	}
 	
 	// Test that you cannot create an account as an already existing user
 	func testCreateAccountFailExistingUser() {
 		app.launch()
 		app.turnToCreateAcc()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
+		app.nextCreateScreen()
 		
 		app.fillOutAddress(name: "1 Main St")
 		app.fillOutCity(name: "New York")
 		app.fillOutState(name: "NY")
-		app.fillOutPassword(password: "passwordd")
-		app.fillOutUsername(name: "ryan-bradford")
-		app.pressLogin()
-		app.setDOB(month: "April", day: "20", year: "1989")
-		app.setMaleOrFemaleOrOther(gender: "Male")
-		app.setMaleOrFemaleOrOther(gender: "Female")
-		app.setMaleOrFemaleOrOther(gender: "Other")
-		app.setMaleOrFemaleOrOther(gender: "Female")
+		app.nextCreateScreen()
+		sleep(1)
 		
-		XCTAssertEqual(app.getPasswordWarningVal(), "")
-		
-		app.pressLogin()
-		
+		app.createPassword(password: "passwordd")
+		app.createUsername(name: "ryan-bradford")
+		app.nextCreateScreen()
+						
 		sleep(2)
 		XCTAssertTrue(app.isDisplayLogin())
 	}
