@@ -12,15 +12,15 @@ import UIKit
 public class DetailSelector: BarSelector {
 	// The bar for selecting detail on the map
 	
-	var overlayCreator: MapOverlayCreator!
+	var map: Map!
 	
 	let base = 20.0
 	let totalVariability = 30.0
 	
 	//Creates this detail selector with the fields
 	//Draws the bar at a the base ration
-	init(frame: CGRect, overlayCreator: MapOverlayCreator) {
-		self.overlayCreator = overlayCreator
+	init(frame: CGRect, map: Map) {
+		self.map = map
 		super.init(frame: frame)
 		self.updateBar(ratio: self.getRatio())
 	}
@@ -29,14 +29,15 @@ public class DetailSelector: BarSelector {
 	//EFFECT: updates the numLong and numLat on the OverlayCreator
 	@objc override func update(sender:UIGestureRecognizer) -> CGFloat {
 		let ratio = super.update(sender: sender)
-		overlayCreator.numLong = Double(CGFloat(base)+CGFloat(totalVariability)*ratio)
-		overlayCreator.numLat = Double(CGFloat(base)+CGFloat(totalVariability)*ratio)
+		map.overlayCreator.numLong = Double(CGFloat(base)+CGFloat(totalVariability)*ratio)
+		map.overlayCreator.numLat = Double(CGFloat(base)+CGFloat(totalVariability)*ratio)
+		map.updateOverlays()
 		return ratio
 	}
 	
 	//Returns the ratio given the one set on the map
 	func getRatio() -> CGFloat {
-		return CGFloat((overlayCreator.numLong-base)/totalVariability)
+		return CGFloat((map.overlayCreator.numLong-base)/totalVariability)
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {

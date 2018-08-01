@@ -30,13 +30,13 @@ public class DropDownSelector: UIButton {
 		self.items = items
 		self.title = title
 		self.update = update
-		self.curSelected = 0
 		self.curY = 0
 		self.displays = Array<UILabel>()
 		self.clipsToBounds = true
 		self.addItem(text: title)
 		self.addItem(text: "All")
 		self.displays[1].backgroundColor = PRESETS.RED
+		self.curSelected = 1
 		for item in items {
 			self.addItem(text: item)
 		}

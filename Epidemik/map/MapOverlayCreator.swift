@@ -13,8 +13,8 @@ import MapKit
 public class MapOverlayCreator {
 	
 	//The number of overlays in the given direction
-	var numLat = 50.0
-	var numLong = 50.0
+	var numLat = 35.0
+	var numLong = 35.0
 	
 	//The average intensity of an EXISTING overlay
 	//Does not include empty overlays

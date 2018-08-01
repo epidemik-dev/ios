@@ -141,7 +141,7 @@ private class SymptomSelectorScroller: UIScrollView {
 				return
 			}
 		}
-		let height = max(30, self.frame.height/7)
+		let height = max(30, self.frame.height/5)
 		let frame = CGRect(x: CGFloat(0), y: curY, width: self.frame.width, height: height)
 		let toAdd = IndivSymptomSelector(frame: frame, symID: symID, selectOrView: selectOrView, removeFunc: removeSymptomView)
 		symptoms.append(toAdd)

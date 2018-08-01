@@ -15,6 +15,8 @@ class BodyPartSymptomSelector: UIView {
 	var doneButton: PressableButton!
 	var insetX = CGFloat(30.0)
 	
+	var curY = CGFloat(20.0)
+	
 	var bodyPartImage: UIImageView!
 	var symptomSelector: SymptomSelector!
 	var partName: String!
@@ -41,17 +43,18 @@ class BodyPartSymptomSelector: UIView {
 	// Adds the drop down symptom selector the view
 	func initSelector() {
 		let y = self.frame.height/4
-		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: y, width: self.frame.width-20, height: self.frame.height/3), canSelect: DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[self.partName]!, selectOrView: true)
+		symptomSelector = SymptomSelector(frame: CGRect(x: 20, y: self.curY + 10, width: self.frame.width-20, height: self.frame.height/3), canSelect: DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[self.partName]!, selectOrView: true)
 		self.addSubview(symptomSelector)
 	}
 	
 	// Adds the body part image to the top of the view
 	func initImage() {
-		let xInset = CGFloat(150)
-		self.bodyPartImage = UIImageView(frame: CGRect(x: xInset, y: 40, width: self.frame.width-2*xInset, height:  self.frame.width-2*xInset))
+		let height = self.frame.height/5
+		self.bodyPartImage = UIImageView(frame: CGRect(x: self.frame.width/2 - height/2, y: self.curY, width: height, height: height))
 		if(partName != "full") {
 			self.bodyPartImage.image = FileRW.readImage(imageName: self.partName)
 		}
+		self.curY += height
 		self.addSubview(self.bodyPartImage)
 	}
 	
@@ -61,8 +64,9 @@ class BodyPartSymptomSelector: UIView {
 		if(self.partName == "full") {
 			toDisplay = "full body"
 		}
-		let yCord = self.bodyPartImage.frame.origin.y + self.bodyPartImage.frame.height + 10
+		let yCord = self.curY + 10
 		let title = UITextView(frame: CGRect(x: 0, y: yCord, width: self.frame.width, height: 50))
+		self.curY += title.frame.height 
 		title.font = PRESETS.FONT_VERY_VERY_BIG
 		title.isSelectable = false
 		title.isEditable = false

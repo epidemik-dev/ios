@@ -77,7 +77,7 @@ public class SettingsView: UIView {
 	//Initilzies the bar that the user can select the level of map detail on
 	//EFFECT: initilizes and adds the detail selector and creates two lable textboxes
 	func initDetailSelector() {
-		detailSelector = DetailSelector(frame: CGRect(x: (self.frame.width-smallButtonWidth)/2, y: 2*smallButtonGap+smallButtonHeight, width: smallButtonWidth, height: smallButtonHeight), overlayCreator: mainView.mapView.overlayCreator)
+		detailSelector = DetailSelector(frame: CGRect(x: (self.frame.width-smallButtonWidth)/2, y: 2*smallButtonGap+smallButtonHeight, width: smallButtonWidth, height: smallButtonHeight), map: mainView.mapView)
 		self.addSubview(detailSelector)
 		let textOffset = CGFloat(10)
 		createDetailTextBox(x: 0, y: 2*smallButtonGap+smallButtonHeight+textOffset, message: "High Performance")
