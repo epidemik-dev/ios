@@ -1,14 +1,14 @@
 //
-//  SicknessSubmission.swift
+//  DiagnosisTest.swift
 //  EpidemikUITests
 //
-//  Created by Ryan Bradford on 6/25/18.
+//  Created by Ryan Bradford on 8/1/18.
 //  Copyright © 2018 RBradford Studios. All rights reserved.
 //
 
 import XCTest
 
-class SicknessSubmission: XCTestCase {
+class DiagnosisTest: XCTestCase {
 
 	var app: XCUIApplication!
 	
@@ -25,48 +25,53 @@ class SicknessSubmission: XCTestCase {
 		app.launchArguments.append("--reset")
 		app.launchArguments.append("--reset-data")
 		app.launchArguments.append("--login")
-
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testSubmitSick() {
+		
+	}
+	
+	override func tearDown() {
+		// Put teardown code here. This method is called after the invocation of each test method in the class.
+	}
+	
+	func testDiagnosis() {
 		app.launch()
 		XCTAssertFalse(app.isDisplayLogin())
-		sleep(1)
+		sleep(3)
 		if(app.doesShowHealthyButton()) {
 			app.pressHealthy()
 			sleep(1)
 		}
 		XCTAssertTrue(app.doesShowSickButton())
-		app.pressSick()
-		app.submitSick()
+		app.pressDiagnose()
+		app.pressAgree()
+		app.pressHead()
+		app.selectSymptom(symID: 1)
+		app.pressContinue()
 		app.pressSubmit()
-		XCTAssertTrue(app.doesShowHealthyButton())
-		
-		app.launchArguments.remove(at: 2)
-		app.launchArguments.remove(at: 1)
-
-		app.launch()
 		sleep(1)
+		XCTAssertTrue(app.couldDiagnose())
+		XCTAssertTrue(app.hasDiagnosedWith(diseaseName: "Common Cold"))
+		app.pressExit()
 		XCTAssertTrue(app.doesShowHealthyButton())
-		
-		submitHealthy()
+		app.launch()
+		sleep(3)
+		XCTAssertTrue(app.doesShowHealthyButton())
 	}
 	
-	func submitHealthy() {
-		XCTAssertTrue(app.doesShowHealthyButton())
-		
-		app.pressHealthy()
-		sleep(2)
-		
+	func testCannotDiagnose() {
 		app.launch()
-		
-		sleep(1)
-		
+		XCTAssertFalse(app.isDisplayLogin())
+		sleep(3)
+		if(app.doesShowHealthyButton()) {
+			app.pressHealthy()
+			sleep(1)
+		}
 		XCTAssertTrue(app.doesShowSickButton())
+		app.pressDiagnose()
+		app.pressAgree()
+		app.pressSubmit()
+		sleep(1)
+		XCTAssertFalse(app.couldDiagnose())
 	}
+
 
 }

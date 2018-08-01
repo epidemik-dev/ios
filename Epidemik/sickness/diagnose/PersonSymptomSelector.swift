@@ -166,7 +166,7 @@ class PersonSymptomSelector: UIView {
 	func initDoneButton() {
 		let height = self.frame.height/5-2*buttonInShift
 		doneButton = CustomPressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 7*self.frame.height/8 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: height))
-		doneButton.accessibilityIdentifier = "SubmitButton"
+		doneButton.accessibilityIdentifier = "submit"
 		doneButton.setTitle("SUBMIT", for: .normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)

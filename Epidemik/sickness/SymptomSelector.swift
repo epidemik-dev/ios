@@ -18,6 +18,7 @@ public class SymptomSelector: UIView {
 		self.initBlur(blurType: UIBlurEffectStyle.extraLight)
 		self.layer.cornerRadius = 20
 		self.clipsToBounds = true
+		self.accessibilityIdentifier = "selector"
 		let frame = CGRect(x: 10, y: 10, width: self.frame.width-20, height: self.frame.height-20)
 		symptomSelector = SymptomSelectorScroller(frame: frame, canSelect: canSelect, selectOrView: selectOrView)
 		self.addSubview(symptomSelector)
@@ -180,7 +181,7 @@ private class SymptomSelectorScroller: UIScrollView {
 	
 }
 
-private class IndivSymptomSelector: UIButton {
+private class IndivSymptomSelector: UIView {
 	
 	var removeFunc: ((Int) -> ())!
 	var symID: Int!
@@ -197,6 +198,7 @@ private class IndivSymptomSelector: UIButton {
 		addTitle()
 		if(selectOrView) { // We want the symptoms to be selectable
 			addSelector()
+			self.selector.accessibilityIdentifier = "symptom" + String(symID)
 		} else { // We want the symptoms to be deletable
 			addDeleteButton()
 		}

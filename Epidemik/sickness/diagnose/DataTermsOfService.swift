@@ -65,7 +65,7 @@ class DataTermsOfService: UIView {
 	// Creates the button that allows the user to send their sickness data to the server
 	func initAgreeButton() {
 		agreeButton = PressableButton(frame: CGRect(x: self.frame.width/2+buttonInShift, y: 3*self.frame.height/4 - buttonUpShift, width: self.frame.width/2-2*buttonInShift, height: self.frame.height/4-2*buttonInShift))
-		agreeButton.accessibilityIdentifier = "AgreeButton"
+		agreeButton.accessibilityIdentifier = "agree"
 		agreeButton.setTitle("AGREE", for: .normal)
 		agreeButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		agreeButton.addTarget(self, action: #selector(agreed), for: .touchUpInside)

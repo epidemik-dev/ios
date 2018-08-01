@@ -30,7 +30,11 @@ class ResultReporter: UIView {
 		self.manager = manager
 		self.initBlur()
 		self.initTitle()
-		self.initResults(results: results!)
+		if(results == nil || results!.count == 0) {
+			self.initNoResults()
+		} else {
+			self.initResults(results: results!)
+		}
 		self.initDoneButton()
 	}
 	
@@ -44,6 +48,18 @@ class ResultReporter: UIView {
 		title.textAlignment = .center
 		title.font = PRESETS.FONT_VERY_VERY_BIG
 		title.backgroundColor = UIColor.clear
+		title.isSelectable = false
+		title.isEditable = false
+		self.addSubview(title)
+	}
+	
+	func initNoResults() {
+		let title = UITextView(frame: CGRect(x: 40, y: self.curY + 20, width: self.frame.width-80, height: 100))
+		title.text = "Sorry, there was not enough information to diagnose you."
+		title.textAlignment = .center
+		title.font = PRESETS.FONT_VERY_BIG
+		title.backgroundColor = UIColor.clear
+		title.accessibilityIdentifier = "noinfo"
 		title.isSelectable = false
 		title.isEditable = false
 		self.addSubview(title)
@@ -72,7 +88,7 @@ class ResultReporter: UIView {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
 		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
-		doneButton.accessibilityIdentifier = "DoneButton"
+		doneButton.accessibilityIdentifier = "exit"
 		doneButton.cornerRadius = 40
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD

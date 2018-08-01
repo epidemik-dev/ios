@@ -91,7 +91,7 @@ public class SicknessView: UIView {
 	
 	func initDiagnoseButton() {
 		diagnoseButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: diagnoseYCord, width: buttonWidth, height: buttonHeight))
-		diagnoseButton.accessibilityIdentifier = "DiagButton"
+		diagnoseButton.accessibilityIdentifier = "diagnose"
 		diagnoseButton.cornerRadius = buttonChampher
 		diagnoseButton.setTitle("DIAGNOSE ME", for: UIControlState.normal)
 		diagnoseButton.titleLabel?.font = buttonFont
@@ -125,7 +125,7 @@ public class SicknessView: UIView {
 	//EFFECT: adds the button to the screen and adds the target to the button
 	func initDoneButton() {
 		doneButton = PressableButton(frame: CGRect(x: self.frame.width + self.frame.width/2 - buttonWidth/2, y: doneYCord, width: buttonWidth, height: buttonHeight))
-		doneButton.accessibilityIdentifier = "DoneButton"
+		doneButton.accessibilityIdentifier = "done"
 		doneButton.cornerRadius = buttonChampher
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = buttonFont

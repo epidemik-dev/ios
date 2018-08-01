@@ -118,6 +118,7 @@
 		008F79782059F9AE00B794A1 /* AccountTextBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008F79772059F9AE00B794A1 /* AccountTextBox.swift */; };
 		009CE9E21F8FFFFD00D224F0 /* MainHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009CE9E11F8FFFFD00D224F0 /* MainHolder.swift */; };
 		009E23F120A7ADC6000A144F /* LoginViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009E23E620A78BEB000A144F /* LoginViewTests.swift */; };
+		00A8658D2112060100507F66 /* DiagnosisTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A8658C2112060100507F66 /* DiagnosisTest.swift */; };
 		00AA180A203BB8440071CA6A /* GlobalTrendDataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AA1809203BB8440071CA6A /* GlobalTrendDataCenter.swift */; };
 		00AFBE5B209CE4B20098F95A /* LogInProcessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00347985209BAA480012B1A5 /* LogInProcessTests.swift */; };
 		00AFBE5E209CEFCB0098F95A /* LoginExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */; };
@@ -253,6 +254,7 @@
 		009E23E620A78BEB000A144F /* LoginViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewTests.swift; sourceTree = "<group>"; };
 		009E23F320A7B22A000A144F /* GenderSelectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectorTests.swift; sourceTree = "<group>"; };
 		009E242120A7B886000A144F /* AddOverlaysTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOverlaysTest.swift; sourceTree = "<group>"; };
+		00A8658C2112060100507F66 /* DiagnosisTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiagnosisTest.swift; path = EpidemikUITests/Sickness/DiagnosisTest.swift; sourceTree = SOURCE_ROOT; };
 		00AA1809203BB8440071CA6A /* GlobalTrendDataCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalTrendDataCenter.swift; sourceTree = "<group>"; };
 		00AFBE5D209CEFCB0098F95A /* LoginExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExtension.swift; sourceTree = "<group>"; };
 		00AFBE5F209D09660098F95A /* CreateAccExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccExtension.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 		0013D230209D41D100314360 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				00A8658C2112060100507F66 /* DiagnosisTest.swift */,
 				009E23E520A78BB9000A144F /* Account */,
 				0015C7D3209D486A005F8FA4 /* BadVersionTests.swift */,
 			);
@@ -1189,6 +1192,7 @@
 				001334D720A0FEE8001DCCDA /* MainAppButtons.swift in Sources */,
 				0015C7D4209D486A005F8FA4 /* BadVersionTests.swift in Sources */,
 				009E23F120A7ADC6000A144F /* LoginViewTests.swift in Sources */,
+				00A8658D2112060100507F66 /* DiagnosisTest.swift in Sources */,
 				00AFBE60209D09660098F95A /* CreateAccExtension.swift in Sources */,
 				0015C7DE209E3781005F8FA4 /* LogOutTest.swift in Sources */,
 			);

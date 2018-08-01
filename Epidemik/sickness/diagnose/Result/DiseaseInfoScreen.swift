@@ -183,7 +183,7 @@ public class DiseaseInfoScreen: UIView {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
 		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
-		doneButton.accessibilityIdentifier = "DoneButton"
+		doneButton.accessibilityIdentifier = "done"
 		doneButton.cornerRadius = 40
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
