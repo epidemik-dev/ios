@@ -628,13 +628,13 @@
 			path = Sickness;
 			sourceTree = "<group>";
 		};
-		0070FAAB210774F50068A7B6 /* Result */ = {
+		0070FAAB210774F50068A7B6 /* result */ = {
 			isa = PBXGroup;
 			children = (
 				00DC41F020F8DD090025BDC2 /* ResultReporter.swift */,
 				0070FAAC2107750C0068A7B6 /* DiseaseInfoScreen.swift */,
 			);
-			path = Result;
+			path = result;
 			sourceTree = "<group>";
 		};
 		007E5396210A1BFE00AA9677 /* Subviews */ = {
@@ -699,7 +699,7 @@
 		00B5D85620FE64A300583214 /* diagnose */ = {
 			isa = PBXGroup;
 			children = (
-				0070FAAB210774F50068A7B6 /* Result */,
+				0070FAAB210774F50068A7B6 /* result */,
 				00DC41EA20F8DCA00025BDC2 /* DataTermsOfService.swift */,
 				00DC41EC20F8DCB90025BDC2 /* PersonSymptomSelector.swift */,
 				00DC41EE20F8DCD20025BDC2 /* BodyPartSymptomSelector.swift */,

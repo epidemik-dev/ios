@@ -31,7 +31,7 @@ class AddOverlaysTest: XCTestCase {
 		let map = Map(frame: CGRect(x: 0, y: 0, width: 100, height: 100), settingsButton: UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100)))
         let creator = MapOverlayCreator(data: [d1, d2, d3, d4, d5])
 		XCTAssertEqual(creator.manager.getAll(), 5)
-		XCTAssertEqual(creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "Common Cold").count, 3)
+		XCTAssertEqual(creator.createOverlays(longWidth: 400, latWidth: 400, startLong: -200, startLat: -200, diseaseName: "Common Cold").count, 2)
     }
     
     func testAddOverlaysPreformance() {

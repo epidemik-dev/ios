@@ -16,6 +16,7 @@ class ResultReporter: UIView {
 	var totalProbability = 0.0
 	var curY: CGFloat!
 	var doneButton: PressableButton!
+	var addButton: PressableButton!
 	var manager: DiagnosisManager!
 	var insetX = CGFloat(30.0)
 	private var resultItems = Array<ResultItem>()
@@ -34,6 +35,7 @@ class ResultReporter: UIView {
 			self.initNoResults()
 		} else {
 			self.initResults(results: results!)
+			self.initAddButton()
 		}
 		self.initDoneButton()
 	}
@@ -84,21 +86,43 @@ class ResultReporter: UIView {
 		curY += toAdd.frame.height*2
 	}
 	
+	func initAddButton() {
+		let buttonHeight = self.frame.height/6
+		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
+		addButton = PressableButton(frame: CGRect(x: self.frame.width/2+insetX, y: doneYCord, width: self.frame.width/2-2*insetX, height: buttonHeight))
+		addButton.accessibilityIdentifier = "exit"
+		addButton.cornerRadius = 40
+		addButton.setTitle("Add To Map", for: UIControlState.normal)
+		addButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
+		addButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
+		addButton.addTarget(self, action: #selector(ResultReporter.done(_:)), for: .touchUpInside)
+		self.addSubview(addButton)
+	}
+	
 	func initDoneButton() {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
-		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width/2-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "exit"
 		doneButton.cornerRadius = 40
-		doneButton.setTitle("Done", for: UIControlState.normal)
+		doneButton.setTitle("Exit", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
-		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
-		doneButton.addTarget(self, action: #selector(ResultReporter.done(_:)), for: .touchUpInside)
+		doneButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
+		doneButton.addTarget(self, action: #selector(ResultReporter.removeFromMap(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
 	}
 	
 	@objc func done(_ sender: UIButton?) {
 		manager.done()
+	}
+	
+	@objc func removeFromMap(_ sender: UIButton?) {
+		NetworkAPI.deleteHealthy(username: FileRW.readFile(fileName: "username.epi")!, callback: self.processResult)
+		manager.done()
+	}
+	
+	func processResult(result: JSON?) {
+		print(result)
 	}
 	
 	@objc func showDetails(_ sender: UIButton?) {

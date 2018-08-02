@@ -14,8 +14,8 @@ class NetworkAPI {
 	
 	//The URL where all the backend code is stored
 	static var view: UIView!
-	static var baseURL = "https://epidemik.us/api"
-	//static var baseURL = "http://localhost:3000"
+	//static var baseURL = "https://epidemik.us/api"
+	static var baseURL = "http://localhost:3000"
 	static var versionExtension = "?version=" + (Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
 	
 	/**
@@ -192,6 +192,12 @@ class NetworkAPI {
 		let authToken = getAuthToken()
 		let queryParams = "&auth_token=" + authToken
 		sendPOSTWithCallback(method: "DELETE", urlExtensiuon: "/users/" + username, queryParams: queryParams, body: Data(), callback: callback)
+	}
+	
+	public static func deleteHealthy(username: String, callback: @escaping (JSON?) -> ()) {
+		let authToken = getAuthToken()
+		let queryParams = "&auth_token=" + authToken
+		sendPOSTWithCallback(method: "DELETE", urlExtensiuon: "/users/" + username + "/diseases", queryParams: queryParams, body: Data(), callback: callback)
 	}
 	
 	//Sends this POST string to the given url and calls the given callback when it returns
