@@ -90,7 +90,7 @@ class ResultReporter: UIView {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 5*self.frame.height/8 + buttonHeight/2
 		addButton = PressableButton(frame: CGRect(x: self.frame.width/2+insetX, y: doneYCord, width: self.frame.width/2-2*insetX, height: buttonHeight))
-		addButton.accessibilityIdentifier = "exit"
+		addButton.accessibilityIdentifier = "add"
 		addButton.cornerRadius = 40
 		addButton.setTitle("Add To Map", for: UIControlState.normal)
 		addButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
