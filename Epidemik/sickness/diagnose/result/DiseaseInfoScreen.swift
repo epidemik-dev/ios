@@ -13,6 +13,22 @@ import SwiftyButton
 
 public class DiseaseInfoScreen: UIView {
 	
+	init(frame: CGRect, info: JSON?, userSymptoms: Array<Int>, percentage: Double) {
+		super.init(frame: frame)
+		self.initBlur()
+		let toSetFrame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+		let toAdd = DiseaseInfoScroll(frame: toSetFrame, info: info, userSymptoms: userSymptoms, percentage: percentage)
+		self.addSubview(toAdd)
+	}
+	
+	public required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+}
+
+public class DiseaseInfoScroll: UIScrollView {
+	
 	var curY = CGFloat(20)
 	var insetX = CGFloat(30.0)
 	
@@ -25,10 +41,8 @@ public class DiseaseInfoScreen: UIView {
 	
 	var doneButton: PressableButton!
 	
-	
 	init(frame: CGRect, info: JSON?, userSymptoms: Array<Int>, percentage: Double) {
 		super.init(frame: frame)
-		self.initBlur()
 		self.readJSON(result: info, symptoms: userSymptoms)
 		self.initTitle(diseaseName: self.diseaseName)
 		self.initWarning(percentage: percentage)
@@ -37,6 +51,9 @@ public class DiseaseInfoScreen: UIView {
 		self.initMedicines(medicines: self.medicinesRecomended)
 		self.initMatchingSymtoms(symptoms: self.symptomsMatched)
 		self.initDone()
+		self.isScrollEnabled = true
+		self.autoresizingMask = UIViewAutoresizing.flexibleHeight
+		self.contentSize = CGSize(width: self.frame.width, height: self.curY+10)
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
@@ -61,6 +78,7 @@ public class DiseaseInfoScreen: UIView {
 		titleView.text = diseaseName
 		titleView.isEditable = false
 		titleView.isSelectable = false
+		titleView.isScrollEnabled = false
 		titleView.textAlignment = .center
 		titleView.backgroundColor = UIColor.clear
 		self.addSubview(titleView)
@@ -82,6 +100,7 @@ public class DiseaseInfoScreen: UIView {
 		warningView.text = warningText
 		warningView.isEditable = false
 		warningView.isSelectable = false
+		warningView.isScrollEnabled = false
 		warningView.textAlignment = .center
 		warningView.backgroundColor = UIColor.clear
 		self.addSubview(warningView)
@@ -103,6 +122,7 @@ public class DiseaseInfoScreen: UIView {
 		warningView.text = warningText
 		warningView.isEditable = false
 		warningView.isSelectable = false
+		warningView.isScrollEnabled = false
 		warningView.textAlignment = .center
 		warningView.backgroundColor = UIColor.clear
 		self.addSubview(warningView)
@@ -115,6 +135,7 @@ public class DiseaseInfoScreen: UIView {
 		descriptionTitleView.text = "Description:"
 		descriptionTitleView.isEditable = false
 		descriptionTitleView.isSelectable = false
+		descriptionTitleView.isScrollEnabled = false
 		descriptionTitleView.textAlignment = .left
 		descriptionTitleView.backgroundColor = UIColor.clear
 		self.addSubview(descriptionTitleView)
@@ -125,6 +146,7 @@ public class DiseaseInfoScreen: UIView {
 		descriptionView.text = "• " + description
 		descriptionView.isEditable = false
 		descriptionView.isSelectable = false
+		descriptionView.isScrollEnabled = false
 		descriptionView.textAlignment = .left
 		descriptionView.backgroundColor = UIColor.clear
 		self.addSubview(descriptionView)
@@ -137,6 +159,7 @@ public class DiseaseInfoScreen: UIView {
 		medicinesTitleView.text = "Possible Medications:"
 		medicinesTitleView.isEditable = false
 		medicinesTitleView.isSelectable = false
+		medicinesTitleView.isScrollEnabled = false
 		medicinesTitleView.textAlignment = .left
 		medicinesTitleView.backgroundColor = UIColor.clear
 		self.addSubview(medicinesTitleView)
@@ -148,6 +171,7 @@ public class DiseaseInfoScreen: UIView {
 			medicineView.text = "• " + medicine
 			medicineView.isEditable = false
 			medicineView.isSelectable = false
+			medicineView.isScrollEnabled = false
 			medicineView.textAlignment = .left
 			medicineView.backgroundColor = UIColor.clear
 			self.addSubview(medicineView)
@@ -161,6 +185,7 @@ public class DiseaseInfoScreen: UIView {
 		symptomTitleView.text = "Matching Symptoms:"
 		symptomTitleView.isEditable = false
 		symptomTitleView.isSelectable = false
+		symptomTitleView.isScrollEnabled = false
 		symptomTitleView.textAlignment = .left
 		symptomTitleView.backgroundColor = UIColor.clear
 		self.addSubview(symptomTitleView)
@@ -172,6 +197,7 @@ public class DiseaseInfoScreen: UIView {
 			symptomView.text = "• " + DISEASE_QUESTIONS.QUESTION_DICT[symptom]!
 			symptomView.isEditable = false
 			symptomView.isSelectable = false
+			symptomView.isScrollEnabled = false
 			symptomView.textAlignment = .left
 			symptomView.backgroundColor = UIColor.clear
 			self.addSubview(symptomView)
@@ -182,22 +208,23 @@ public class DiseaseInfoScreen: UIView {
 	func initDone() {
 		let buttonHeight = self.frame.height/6
 		let doneYCord = 11*self.frame.height/16 + buttonHeight/2
-		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width-2*insetX, height: buttonHeight))
+		doneButton = PressableButton(frame: CGRect(x: insetX, y: self.curY + 10, width: self.frame.width-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "done"
 		doneButton.cornerRadius = 40
 		doneButton.setTitle("Done", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		doneButton.colors = .init(button: PRESETS.RED, shadow: PRESETS.RED)
-		doneButton.addTarget(self, action: #selector(DiseaseInfoScreen.done(_:)), for: .touchUpInside)
+		doneButton.addTarget(self, action: #selector(DiseaseInfoScroll.done(_:)), for: .touchUpInside)
 		self.addSubview(doneButton)
+		self.curY += doneButton.frame.height
 	}
 	
 	@objc func done(_ sender: UIButton?) {
 		UIView.animate(withDuration: 0.5, animations: {
-			self.frame.origin.x += self.frame.width
+			self.superview!.frame.origin.x += self.frame.width
 		}, completion: {
 			(value: Bool) in
-			self.removeFromSuperview()
+			self.superview!.removeFromSuperview()
 		})
 	}
 	

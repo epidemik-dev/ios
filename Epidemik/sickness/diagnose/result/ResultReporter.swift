@@ -153,6 +153,7 @@ private class ResultItem: UIButton {
 	init(frame: CGRect, diseaseName: String, percentage: Double) {
 		super.init(frame: frame)
 		self.diseaseName = diseaseName
+		self.backgroundColor = UIColor.clear
 		self.accessibilityIdentifier = diseaseName
 		self.percentage = percentage
 		self.displayWarning(percentage: percentage)
@@ -211,6 +212,7 @@ private class PercentageViewer: UIView {
 	init(frame: CGRect, percentage: Double) {
 		super.init(frame: frame)
 		self.percentage = percentage
+		self.backgroundColor = UIColor.clear
 	}
 	
 	override func draw(_ rect: CGRect) {
