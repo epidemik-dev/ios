@@ -68,6 +68,7 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		addressBox.text = "Address"
 		addressBox.backgroundColor = PRESETS.CLEAR
 		addressBox.clearsOnBeginEditing = true
+		addressBox.clearsOnInsertion = true
 		addressBox.textAlignment = .left
 		addressBox.delegate = self
 		addressBox.accessibilityIdentifier = "AddressTextBox"
@@ -78,6 +79,7 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		cityBox.autocapitalizationType = .none
 		cityBox.text = "City"
 		cityBox.clearsOnBeginEditing = true
+		cityBox.clearsOnInsertion = true
 		cityBox.textAlignment = .left
 		cityBox.delegate = self
 		cityBox.accessibilityIdentifier = "CityTextBox"
@@ -88,6 +90,7 @@ class AddressCreator: CreateItem, UITextFieldDelegate {
 		stateBox.autocapitalizationType = .none
 		stateBox.text = "ST"
 		stateBox.clearsOnBeginEditing = true
+		stateBox.clearsOnInsertion = true
 		stateBox.textAlignment = .left
 		stateBox.delegate = self
 		stateBox.accessibilityIdentifier = "StateTextBox"

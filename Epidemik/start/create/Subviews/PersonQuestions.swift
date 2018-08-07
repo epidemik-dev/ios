@@ -21,13 +21,14 @@ public class PersonQuestions: CreateItem {
 		self.addQuestion(question: "I have hypertension.")
 		self.addQuestion(question: "I have diabetes.")
 		self.addQuestion(question: "I have high cholesterol.")
+		self.addQuestion(question: "None of the above")
 	}
 	
 	func addQuestion(question: String) {
-		let toAdd = IndivQuestion(frame: CGRect(x: 0.0, y: curY, width: self.frame.width, height: self.frame.height/5), question: question)
+		let toAdd = IndivQuestion(frame: CGRect(x: 0.0, y: curY, width: self.frame.width, height: self.frame.height/6), question: question)
 		questions.append(toAdd)
 		self.addSubview(toAdd)
-		curY += self.frame.height/4
+		curY += self.frame.height/5
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

@@ -18,7 +18,8 @@ class AgeSelector: CreateItem {
 		self.title = "How old are you?"
 		self.backgroundColor = PRESETS.WHITE
 		var toDisplay = Array<String>()
-		for i in 5..<120 {
+		toDisplay.append("< 12 Months")
+		for i in 1..<120 {
 			toDisplay.append(String(i) + " years old")
 		}
 		
@@ -31,7 +32,11 @@ class AgeSelector: CreateItem {
 	}
 	
 	override func getInfo() -> [String] {
-		return [self.selector.currentTextField!.text!]
+		if(self.selector.currentTextField?.text == "< 12 Months") {
+			return ["0 years old"]
+		} else {
+			return [self.selector.currentTextField!.text!]
+		}
 	}
 	
 }

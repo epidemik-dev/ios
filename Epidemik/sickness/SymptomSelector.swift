@@ -50,7 +50,7 @@ public class SymptomSelector: UIView {
 	
 }
 
-private class SymptomSelectorScroller: UIScrollView {
+private class SymptomSelectorScroller: UIScrollView, UISearchBarDelegate {
 	
 	private var symptoms = Array<IndivSymptomSelector>()
 	private var curY = CGFloat(0)
@@ -58,7 +58,7 @@ private class SymptomSelectorScroller: UIScrollView {
 	
 	private var allSymptoms: Array<Int>!
 	
-	private var searchBar: UITextField!
+	private var searchBar: UISearchBar!
 	
 	private var defaultSearch = "Type your Symptom..."
 	
@@ -82,21 +82,30 @@ private class SymptomSelectorScroller: UIScrollView {
 	}
 	
 	func initSearchBar() {
-		searchBar = UITextField(frame: CGRect(x: 0, y: self.curY, width: self.frame.width, height: self.frame.height/10))
+		searchBar = UISearchBar(frame: CGRect(x: 0, y: self.curY, width: self.frame.width, height: self.frame.height/10))
 		searchBar.backgroundColor = PRESETS.CLEAR
-		searchBar.textAlignment = .center
-		searchBar.text = defaultSearch
-		searchBar.clearsOnBeginEditing = true
+		searchBar.layer.cornerRadius = 5
+		searchBar.clipsToBounds = true
+		searchBar.delegate = self
+		searchBar.placeholder = defaultSearch
+		searchBar.showsCancelButton = true
+		searchBar.isTranslucent = true
+		searchBar.backgroundColor = .clear
 		self.curY += searchBar.frame.height
-		searchBar.addTarget(self, action: #selector(updateSearch), for: UIControlEvents.allEditingEvents)
-		self.addSubview(searchBar)
+		self.addSubview(self.searchBar)
 	}
 	
-	//The reactor to editing the search bod
-	//EFFECT: changes the symptoms displayed on the screen
-	@objc func updateSearch(_ sender: UITextField?) {
-		self.curY = sender!.frame.origin.y + sender!.frame.height
-		self.changeSearch(search: sender!.text!)
+	func searchBar(_ sender: UISearchBar, textDidChange searchText: String) {
+		self.curY = sender.frame.origin.y + sender.frame.height
+		self.changeSearch(search: sender.text!)
+	}
+	
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		self.endEditing(true)
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		self.endEditing(true)
 	}
 	
 	func changeSearch(search: String) {

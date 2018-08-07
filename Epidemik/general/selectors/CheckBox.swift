@@ -47,6 +47,7 @@ class CheckBox: UIButton {
 			isChecked = !isChecked
 		}
 		updateImage()
+		self.window?.rootViewController?.view?.endEditing(true)
 	}
 	
 	//Updates the image based on what is checked is set to

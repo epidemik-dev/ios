@@ -50,10 +50,13 @@ public class DropDownSelector: UIButton {
 		if(isExpanded) {
 			let touches = event.touches(for: self)
 			let touch = touches!.first!
-			self.displays![curSelected].backgroundColor = PRESETS.WHITE
-			self.curSelected = Int(floor(touch.location(in: self).y / self.initialHeight))
-			self.displays![curSelected].backgroundColor = PRESETS.RED
-			self.update()
+			let newSelect = Int(floor(touch.location(in: self).y / self.initialHeight))
+			if(newSelect > 0) {
+				self.displays![curSelected].backgroundColor = PRESETS.WHITE
+				self.curSelected = newSelect
+				self.displays![curSelected].backgroundColor = PRESETS.RED
+				self.update()
+			}
 			UIView.animate(withDuration: 0.5, animations: {
 				self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: self.frame.height * CGFloat(1)/CGFloat(self.displays.count))
 			})

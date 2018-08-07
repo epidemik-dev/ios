@@ -50,7 +50,7 @@ class SicknessSubmission: XCTestCase {
 		app.launchArguments.remove(at: 1)
 
 		app.launch()
-		sleep(1)
+		sleep(2)
 		XCTAssertTrue(app.doesShowHealthyButton())
 		
 		submitHealthy()
