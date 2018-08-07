@@ -82,7 +82,7 @@ class PersonSymptomSelector: UIView {
 	
 	func initHead(width: CGFloat, height: CGFloat) {
 		head = UIButton(frame: CGRect(x: self.frame.width/2 - width/2, y: curPersonY, width: width, height: height))
-		curPersonY += height
+		curPersonY = curPersonY + height
 		head.backgroundColor = UIColor.clear
 		head.accessibilityIdentifier = "head"
 		head.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -99,7 +99,7 @@ class PersonSymptomSelector: UIView {
 	
 	func initChest(width: CGFloat, height: CGFloat) {
 		chest = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
-		curPersonY += height;
+		curPersonY = curPersonY + height;
 		chest.backgroundColor = UIColor.clear
 		chest.accessibilityIdentifier = "chest"
 		chest.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -108,7 +108,7 @@ class PersonSymptomSelector: UIView {
 	
 	func initStomach(width: CGFloat, height: CGFloat) {
 		stomach = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
-		curPersonY += height;
+		curPersonY = curPersonY + height;
 		stomach.backgroundColor = UIColor.clear
 		stomach.accessibilityIdentifier = "stomach"
 		stomach.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
@@ -127,7 +127,7 @@ class PersonSymptomSelector: UIView {
 		leg2.accessibilityIdentifier = "legs"
 		leg2.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(leg2)
-		curPersonY += height;
+		curPersonY = curPersonY + height;
 	}
 	
 	func initFullBody(armWidth: CGFloat) {

@@ -76,11 +76,11 @@ public class DropDownSelector: UIButton {
 		toAdd.layer.borderColor = PRESETS.BLACK.cgColor
 		toAdd.layer.borderWidth = 2
 		self.addSubview(toAdd)
-		self.curY += self.frame.height
+		self.curY = self.curY + self.frame.height
 		self.displays.append(toAdd)
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
@@ -89,7 +89,6 @@ public class DropDownSelector: UIButton {
 		if(toReturn.text == self.title || toReturn.text == "All") {
 			return nil
 		} else {
-			print(toReturn.text)
 			return toReturn.text
 		}
 	}

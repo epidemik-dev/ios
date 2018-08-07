@@ -31,7 +31,7 @@ public class PersonQuestions: CreateItem {
 		curY += self.frame.height/5
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	

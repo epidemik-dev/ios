@@ -83,7 +83,7 @@ class ResultReporter: UIView {
 		resultItems.append(toAdd)
 		toAdd.addTarget(self, action: #selector(ResultReporter.showDetails(_:)), for: .touchUpInside)
 		self.addSubview(toAdd)
-		curY += toAdd.frame.height*2
+		curY = curY + CGFloat(toAdd.frame.height*2)
 	}
 	
 	func initAddButton() {
@@ -122,7 +122,6 @@ class ResultReporter: UIView {
 	}
 	
 	func processResult(result: JSON?) {
-		print(result)
 	}
 	
 	@objc func showDetails(_ sender: UIButton?) {

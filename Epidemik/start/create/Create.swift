@@ -226,7 +226,7 @@ public class CreateScreen: UIView {
 		self.addSubview(backButton)
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
@@ -243,7 +243,7 @@ public class CreateItem: UIView {
 		self.backgroundColor = UIColor.white
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	

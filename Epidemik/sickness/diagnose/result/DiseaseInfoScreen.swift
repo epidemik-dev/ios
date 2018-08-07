@@ -39,7 +39,7 @@ public class DiseaseInfoScreen: UIView {
 		self.initDone()
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
 	
