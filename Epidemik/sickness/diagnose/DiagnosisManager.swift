@@ -64,6 +64,9 @@ class DiagnosisManager: UIView {
 		superScreen.initHealthyButton()
 		UIView.animate(withDuration: 0.5, animations: {
 			self.frame.origin.x -= self.frame.width
+		}, completion: {
+			(value: Bool) in
+			self.removeFromSuperview()
 		})
 	}
 	

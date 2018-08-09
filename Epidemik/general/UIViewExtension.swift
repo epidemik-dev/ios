@@ -18,7 +18,6 @@ extension UIView {
 		//always fill the view
 		blur.frame = self.bounds
 		blur.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		
 		self.addSubview(blur) //if you have more UIViews, use an insertSubview API to place it where needed
 	}
 	

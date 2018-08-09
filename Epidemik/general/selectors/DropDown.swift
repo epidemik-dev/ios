@@ -86,9 +86,13 @@ public class DropDownSelector: UIButton {
 	
 	func getSelected() -> String? {
 		let toReturn = self.displays[curSelected]
-		if(toReturn.text == self.title || toReturn.text == "All") {
+		if(toReturn.text == self.title) {
+			return nil
+		} else if (toReturn.text == "All") {
+			self.displays[0].text = self.title
 			return nil
 		} else {
+			self.displays[0].text = toReturn.text
 			return toReturn.text
 		}
 	}

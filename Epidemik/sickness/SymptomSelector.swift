@@ -91,7 +91,7 @@ private class SymptomSelectorScroller: UIScrollView, UISearchBarDelegate {
 		searchBar.showsCancelButton = true
 		searchBar.isTranslucent = true
 		searchBar.backgroundColor = .clear
-		self.curY += searchBar.frame.height
+		self.curY += searchBar.frame.height+5
 		self.addSubview(self.searchBar)
 	}
 	
@@ -135,10 +135,10 @@ private class SymptomSelectorScroller: UIScrollView, UISearchBarDelegate {
 				height = symptom.frame.height
 				symptom.removeFromSuperview()
 				symptoms.remove(at: i)
-				self.curY -= height!
+				self.curY -= (height!+5)
 				i = i - 1
 			} else if(height != nil) {
-				symptom.frame.origin.y -= height!
+				symptom.frame.origin.y -= (height!+5)
 			}
 		 	i += 1
 		}
@@ -155,7 +155,7 @@ private class SymptomSelectorScroller: UIScrollView, UISearchBarDelegate {
 		let toAdd = IndivSymptomSelector(frame: frame, symID: symID, selectOrView: selectOrView, removeFunc: removeSymptomView)
 		symptoms.append(toAdd)
 		self.addSubview(toAdd)
-		curY += toAdd.frame.height
+		curY += toAdd.frame.height+5
 		self.contentSize = CGSize(width: self.frame.width, height: curY)
 		self.flashScrollIndicators()
 	}

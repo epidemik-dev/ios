@@ -23,7 +23,8 @@ public class DISEASE_QUESTIONS {
 	//Returns what given symptoms match with the given disease
 	public static func getMatchingSymptoms(diseaseName: String, symptoms: Array<Int>) -> Array<Int> {
 		var toReturn = Array<Int>()
-		let diseaseSymptoms = DISEASE_QUESTION_MAP[diseaseName]
+		let diseaseName2 = diseaseName.replacingOccurrences(of: "-", with: " ")
+		let diseaseSymptoms = DISEASE_QUESTION_MAP[diseaseName2]
 		for symptom in symptoms {
 			if(diseaseSymptoms!.contains(symptom)) {
 				toReturn.append(symptom)

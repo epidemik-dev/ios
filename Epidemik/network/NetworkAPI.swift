@@ -14,8 +14,8 @@ class NetworkAPI {
 	
 	//The URL where all the backend code is stored
 	static var view: UIView!
-	static var baseURL = "https://epidemik.us/api"
-	//static var baseURL = "http://localhost:3000"
+	//static var baseURL = "https://epidemik.us/api"
+	static var baseURL = "http://localhost:3000"
 	static var versionExtension = "?version=" + (Bundle.main.infoDictionary?["CFBundleVersion"] as! String)
 	
 	/**

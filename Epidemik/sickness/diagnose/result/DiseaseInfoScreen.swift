@@ -108,23 +108,25 @@ public class DiseaseInfoScroll: UIScrollView {
 	}
 	
 	func initMedicalAttention(medicalAttention: Int) {
-		var warningText = "Medical Attention "
-		if(medicalAttention == 0) {
-			warningText += "Not Nessecarry"
-		} else if(medicalAttention == 1) {
-			warningText += "Possibly Recomended"
-		} else {
-			warningText += "Strongly Recomended"
-		}
-		
 		let warningView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: self.frame.height/20))
 		warningView.font = PRESETS.FONT_BIG
-		warningView.text = warningText
 		warningView.isEditable = false
 		warningView.isSelectable = false
 		warningView.isScrollEnabled = false
 		warningView.textAlignment = .center
 		warningView.backgroundColor = UIColor.clear
+		var warningText = "Medical Attention "
+		if(medicalAttention == 0) {
+			warningText += "Mildly Recommended"
+			warningView.textColor = UIColor.yellow
+		} else if(medicalAttention == 1) {
+			warningText += "Moderately Recommended"
+			warningView.textColor = UIColor.orange
+		} else {
+			warningText += "Strongly Recommended"
+			warningView.textColor = PRESETS.RED
+		}
+		warningView.text = warningText
 		self.addSubview(warningView)
 		self.curY += warningView.frame.height
 	}

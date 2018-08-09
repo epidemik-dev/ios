@@ -89,6 +89,7 @@ public class MainHolder: UIView {
 				DISEASE_QUESTIONS.BODY_PART_QUESTION_MAP[mapItem.key] = array
 			}
 			// Disease List
+			DISEASE_QUESTIONS.diseases = Array<String>()
 			for disease in value!["disease_list"].arrayValue {
 				DISEASE_QUESTIONS.diseases.append(disease.string!)
 			}

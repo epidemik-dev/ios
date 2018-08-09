@@ -93,6 +93,7 @@ class LoginScreen: UIView, UITextFieldDelegate {
 	}
 	
 	@objc func login(_ sender: UIButton?) {
+		self.endEditing(true)
 		self.loginIndicator.startAnimating()
 		if((self.usernameTextBox.text?.contains(" "))! || (self.passwordTextBox.text?.contains(" "))!) {
 			self.loginIndicator.stopAnimating()
@@ -111,7 +112,6 @@ class LoginScreen: UIView, UITextFieldDelegate {
 					FileRW.writeFile(fileName: "username.epi", contents: self.usernameTextBox.text!)
 					FileRW.writeFile(fileName: "password.epi", contents: self.passwordTextBox.text!)
 					FileRW.writeFile(fileName: "auth_token.epi", contents: result!.string!)
-					print(result!.string!)
 					self.slideAway()
 				}
 			}

@@ -17,7 +17,9 @@ class PersonSymptomSelector: UIView {
 	var manager: DiagnosisManager!
 	
 	var curPersonY: CGFloat!
+	var personImage: UIImageView!
 	var head: UIButton!
+	var neck: UIButton!
 	var arms: UIButton!
 	var chest: UIButton!
 	var stomach: UIButton!
@@ -44,6 +46,7 @@ class PersonSymptomSelector: UIView {
 		self.manager = manager
 		self.initTitle()
 		self.initPerson()
+		//self.displayBodyOutline()
 		self.initSymptomDisplay(symptoms: Array<Int>())
 		
 		self.initDoneButton()
@@ -70,14 +73,15 @@ class PersonSymptomSelector: UIView {
 		let image = FileRW.readImage(imageName: "body.jpg")
 		let personDimensions = PersonDimensions(height: self.frame.height/3)
 		initHead(width: personDimensions.HEAD_WIDTH, height: personDimensions.HEAD_HEIGHT)
+		initNeck(width: personDimensions.NECK_WIDTH, height: personDimensions.NECK_HEIGHT)
 		initArms(width: personDimensions.ARM_WIDTH, height: personDimensions.ARM_HEIGHT)
 		initChest(width: personDimensions.CHEST_WIDTH, height: personDimensions.CHEST_HEIGHT)
 		initStomach(width: personDimensions.CHEST_WIDTH, height: personDimensions.STOMACH_HEIGHT)
 		initLegs(width: personDimensions.LEG_WIDTH, height: personDimensions.LEG_HEIGHT, chestWidth: personDimensions.CHEST_WIDTH)
 		initFullBody(armWidth: personDimensions.ARM_WIDTH)
-		let imageView = UIImageView(frame: CGRect(x: self.frame.width/2 - personDimensions.ARM_WIDTH/2, y: startY!, width: personDimensions.ARM_WIDTH, height: self.curPersonY - startY!))
-		imageView.image = image
-		self.addSubview(imageView)
+		personImage = UIImageView(frame: CGRect(x: self.frame.width/2 - personDimensions.ARM_WIDTH/2, y: startY!, width: personDimensions.ARM_WIDTH, height: self.curPersonY - startY!))
+		personImage.image = image
+		self.addSubview(personImage)
 	}
 	
 	func initHead(width: CGFloat, height: CGFloat) {
@@ -95,6 +99,15 @@ class PersonSymptomSelector: UIView {
 		arms.accessibilityIdentifier = "arms"
 		arms.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(arms)
+	}
+	
+	func initNeck(width: CGFloat, height: CGFloat) {
+		neck = UIButton(frame: CGRect(x: self.frame.width/2-width/2, y: curPersonY, width: width, height: height))
+		curPersonY = curPersonY + height;
+		neck.backgroundColor = UIColor.clear
+		neck.accessibilityIdentifier = "neck"
+		neck.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
+		self.addSubview(neck)
 	}
 	
 	func initChest(width: CGFloat, height: CGFloat) {
@@ -140,6 +153,17 @@ class PersonSymptomSelector: UIView {
 		full.accessibilityIdentifier = "full"
 		full.addTarget(self, action: #selector(PersonSymptomSelector.bodyPartClicked(_:)), for: .touchUpInside)
 		self.addSubview(full)
+	}
+	
+	func displayBodyOutline() {
+		head.backgroundColor = .blue
+		neck.backgroundColor = .magenta
+		chest.backgroundColor = .red
+		stomach.backgroundColor = .green
+		arms.backgroundColor = .purple
+		leg1.backgroundColor = .yellow
+		leg2.backgroundColor = .yellow
+		personImage.alpha = 0.5
 	}
 	
 	// The thing that happens when a body part is clicked
@@ -222,6 +246,8 @@ private class PersonDimensions {
 	
 	var HEAD_WIDTH: CGFloat
 	var HEAD_HEIGHT: CGFloat
+	var NECK_WIDTH: CGFloat
+	var NECK_HEIGHT: CGFloat
 	var ARM_WIDTH: CGFloat
 	var ARM_HEIGHT: CGFloat
 	var CHEST_WIDTH: CGFloat
@@ -233,7 +259,9 @@ private class PersonDimensions {
 	// The height of the person as a whole
 	init(height: CGFloat) {
 		HEAD_WIDTH = height / 7
-		HEAD_HEIGHT = height / 6
+		HEAD_HEIGHT = height / 8
+		NECK_WIDTH = HEAD_WIDTH
+		NECK_HEIGHT = height / 12
 		ARM_WIDTH = height/2
 		ARM_HEIGHT = height/2
 		CHEST_WIDTH = height/5

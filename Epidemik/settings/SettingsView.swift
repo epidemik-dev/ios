@@ -184,7 +184,6 @@ public class SettingsView: UIView {
 			NetworkAPI.deleteUser(username: FileRW.readFile(fileName: "username.epi")!, callback: self.accountDeleted)
 		}))
 		alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-			print("cancling")
 		}))
 		self.window?.rootViewController?.present(alert, animated: true, completion: nil)
 	}

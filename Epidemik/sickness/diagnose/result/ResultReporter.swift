@@ -79,9 +79,9 @@ class ResultReporter: UIView {
 	}
 	
 	func addResult(diseaseName: String, probability: Double) {
-		let toAdd = ResultItem(frame: CGRect(x: self.frame.width/10, y: curY, width: self.frame.width-5, height: self.frame.height/12), diseaseName: diseaseName, percentage: probability)
+		let toAdd = ResultItem(frame: CGRect(x: self.frame.width/15, y: curY, width: self.frame.width-5, height: self.frame.height/12), diseaseName: diseaseName, percentage: probability)
 		resultItems.append(toAdd)
-		toAdd.addTarget(self, action: #selector(ResultReporter.showDetails(_:)), for: .touchUpInside)
+		toAdd.button.addTarget(self, action: #selector(ResultReporter.showDetails(_:)), for: .touchUpInside)
 		self.addSubview(toAdd)
 		curY = curY + CGFloat(toAdd.frame.height*2)
 	}
@@ -127,7 +127,7 @@ class ResultReporter: UIView {
 	@objc func showDetails(_ sender: UIButton?) {
 		var diseaseName = sender!.accessibilityIdentifier!
 		diseaseName = diseaseName.replacingOccurrences(of: " ", with: "-")
-		percentage = (sender as! ResultItem).percentage
+		percentage = (sender as! ResultItemButton).percentage
 		NetworkAPI.getDiseaseInfo(diseaseName: diseaseName, callback: displayDiseaseInformation)
 	}
 	
@@ -145,7 +145,28 @@ class ResultReporter: UIView {
 	
 }
 
-private class ResultItem: UIButton {
+private class ResultItem: UIView {
+	
+	var button: ResultItemButton!
+	var percentage: Double!
+	
+	init(frame: CGRect, diseaseName: String, percentage: Double) {
+		super.init(frame: frame)
+		self.initBlur(blurType: .extraLight)
+		self.percentage = percentage
+		self.layer.cornerRadius = 10
+		self.clipsToBounds = true
+		button = ResultItemButton(frame: CGRect(x: 10, y: 2, width: self.frame.width - 10, height: self.frame.height-4), diseaseName: diseaseName, percentage: percentage)
+		self.addSubview(button)
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+	}
+	
+}
+
+private class ResultItemButton: UIButton {
 	
 	var diseaseName: String!
 	var percentage: Double!
@@ -187,10 +208,11 @@ private class ResultItem: UIButton {
 	}
 	
 	func displayTitle(diseaseName: String) {
-		let nameTitle = UITextView(frame: CGRect(x: self.frame.height, y: 0, width: self.frame.width - self.frame.height - self.frame.width/3, height: self.frame.height/2))
+		let nameTitle = UITextView(frame: CGRect(x: self.frame.height, y: 0, width: self.frame.width - self.frame.height - self.frame.width/3, height: 7*self.frame.height/12))
 		nameTitle.text = diseaseName
 		nameTitle.backgroundColor = UIColor.clear
 		nameTitle.font = PRESETS.FONT_BIG
+		nameTitle.scrollRangeToVisible(NSRange(location: 0, length: 100))
 		nameTitle.isSelectable = false
 		nameTitle.isEditable = false
 		self.addSubview(nameTitle)

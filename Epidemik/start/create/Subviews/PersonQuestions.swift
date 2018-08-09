@@ -36,7 +36,6 @@ public class PersonQuestions: CreateItem {
 	}
 	
 	public override func getInfo() -> [String] {
-		print(questions[3].isSelected())
 		return [String(questions[0].isSelected()), String(questions[1].isSelected()), String(questions[2].isSelected()), String(questions[3].isSelected())]
 	}
 	
