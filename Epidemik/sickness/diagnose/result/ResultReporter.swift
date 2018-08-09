@@ -79,7 +79,7 @@ class ResultReporter: UIView {
 	}
 	
 	func addResult(diseaseName: String, probability: Double) {
-		let toAdd = ResultItem(frame: CGRect(x: self.frame.width/15, y: curY, width: self.frame.width-5, height: self.frame.height/12), diseaseName: diseaseName, percentage: probability)
+		let toAdd = ResultItem(frame: CGRect(x: self.frame.width/15, y: curY, width: self.frame.width-5, height: self.frame.height/10), diseaseName: diseaseName, percentage: probability)
 		resultItems.append(toAdd)
 		toAdd.button.addTarget(self, action: #selector(ResultReporter.showDetails(_:)), for: .touchUpInside)
 		self.addSubview(toAdd)
