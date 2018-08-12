@@ -114,6 +114,9 @@ class ResultReporter: UIView {
 	
 	@objc func done(_ sender: UIButton?) {
 		manager.done()
+		if(self.manager.superScreen?.title != nil) {
+			self.manager.superScreen!.title.text = "You Are Currently Sick"
+		}
 	}
 	
 	@objc func removeFromMap(_ sender: UIButton?) {
