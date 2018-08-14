@@ -1,2 +1,9 @@
 Epidemik.xcodeproj
 Epidemik.xcworkspace
+
+#Mac stuff
+.DS_STORE
+*/.DS_STORE
+
+Pods
+Podfile.lock
