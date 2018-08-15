@@ -73,7 +73,8 @@ public class DiseaseInfoScroll: UIScrollView {
 	}
 	
 	func initTitle(diseaseName: String) {
-		let titleView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: self.frame.height/15))
+		let height = self.estimatedHeightOfLabel(text: diseaseName, width: self.frame.width, font: PRESETS.FONT_VERY_VERY_BIG!)
+		let titleView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: height))
 		titleView.font = PRESETS.FONT_VERY_VERY_BIG
 		titleView.text = diseaseName
 		titleView.isEditable = false
@@ -108,25 +109,29 @@ public class DiseaseInfoScroll: UIScrollView {
 	}
 	
 	func initMedicalAttention(medicalAttention: Int) {
-		let warningView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: self.frame.height/20))
+		var warningText = "Medical Attention "
+		var warningColor = UIColor.orange
+		if(medicalAttention == 0) {
+			warningText += "Mildly Recommended"
+			warningColor = PRESETS.DARK_YELLOW
+		} else if(medicalAttention == 1) {
+			warningText += "Moderately Recommended"
+			warningColor = UIColor.orange
+		} else {
+			warningText += "Strongly Recommended"
+			warningColor = PRESETS.RED
+		}
+		let height = estimatedHeightOfLabel(text: warningText, width: self.frame.width, font: PRESETS.FONT_BIG!)
+		let warningView = UITextView(frame: CGRect(x: 0, y: curY, width: self.frame.width, height: height))
 		warningView.font = PRESETS.FONT_BIG
 		warningView.isEditable = false
 		warningView.isSelectable = false
 		warningView.isScrollEnabled = false
 		warningView.textAlignment = .center
 		warningView.backgroundColor = UIColor.clear
-		var warningText = "Medical Attention "
-		if(medicalAttention == 0) {
-			warningText += "Mildly Recommended"
-			warningView.textColor = UIColor.yellow
-		} else if(medicalAttention == 1) {
-			warningText += "Moderately Recommended"
-			warningView.textColor = UIColor.orange
-		} else {
-			warningText += "Strongly Recommended"
-			warningView.textColor = PRESETS.RED
-		}
 		warningView.text = warningText
+		warningView.textColor = warningColor
+		warningView.frame = CGRect(x: 0, y: curY, width: self.frame.width, height: height)
 		self.addSubview(warningView)
 		self.curY += warningView.frame.height
 	}
@@ -143,7 +148,8 @@ public class DiseaseInfoScroll: UIScrollView {
 		self.addSubview(descriptionTitleView)
 		self.curY += descriptionTitleView.frame.height
 		
-		let descriptionView = UITextView(frame: CGRect(x: 20, y: curY, width: self.frame.width-20, height: self.frame.height/10))
+		let height = estimatedHeightOfLabel(text: description, width: self.frame.width-20, font: PRESETS.FONT_BIG!)
+		let descriptionView = UITextView(frame: CGRect(x: 20, y: curY, width: self.frame.width-20, height: height))
 		descriptionView.font = PRESETS.FONT_BIG
 		descriptionView.text = "• " + description
 		descriptionView.isEditable = false

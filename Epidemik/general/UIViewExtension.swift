@@ -25,4 +25,17 @@ extension UIView {
 		self.initBlur(blurType: UIBlurEffectStyle.regular)
 	}
 	
+	func estimatedHeightOfLabel(text: String, width: CGFloat, font: UIFont) -> CGFloat {
+		
+		let size = CGSize(width: width, height: 1000)
+		
+		let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+		
+		let attributes = [kCTFontAttributeName: font]
+		
+		let rectangleHeight = String(text).boundingRect(with: size, options: options, attributes: attributes as [NSAttributedStringKey : Any], context: nil).height
+		
+		return rectangleHeight+20
+	}
+	
 }

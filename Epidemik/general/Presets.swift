@@ -15,6 +15,7 @@ public class PRESETS {
 	
 	public static var RED  = UIColor(displayP3Red: 169/255.0, green: 18/255.0, blue: 27/255.0, alpha: 1) // Dark Red
 	public static var DARK_RED  = UIColor(displayP3Red: 155/255.0, green: 10/255.0, blue: 20/255.0, alpha: 1) // Very Dark Red
+	public static var DARK_YELLOW = UIColor(displayP3Red: 204/255.0, green: 204/255.0, blue: 0/255.0, alpha: 1)
 	public static var GRAY  = UIColor.gray // Gray
 	public static var WHITE  = UIColor(displayP3Red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1) //White
 	public static var CLEAR = UIColor.clear

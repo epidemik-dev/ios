@@ -105,7 +105,7 @@ class ResultReporter: UIView {
 		doneButton = PressableButton(frame: CGRect(x: insetX, y: doneYCord, width: self.frame.width/2-2*insetX, height: buttonHeight))
 		doneButton.accessibilityIdentifier = "exit"
 		doneButton.cornerRadius = 40
-		doneButton.setTitle("Exit", for: UIControlState.normal)
+		doneButton.setTitle("Delete", for: UIControlState.normal)
 		doneButton.titleLabel?.font = PRESETS.FONT_BIG_BOLD
 		doneButton.colors = .init(button: PRESETS.GRAY, shadow: PRESETS.GRAY)
 		doneButton.addTarget(self, action: #selector(ResultReporter.removeFromMap(_:)), for: .touchUpInside)
@@ -113,7 +113,7 @@ class ResultReporter: UIView {
 	}
 	
 	@objc func done(_ sender: UIButton?) {
-		manager.done()
+		manager.amNowSick()
 		if(self.manager.superScreen?.title != nil) {
 			self.manager.superScreen!.title.text = "You Are Currently Sick"
 		}
@@ -121,7 +121,7 @@ class ResultReporter: UIView {
 	
 	@objc func removeFromMap(_ sender: UIButton?) {
 		NetworkAPI.deleteHealthy(username: FileRW.readFile(fileName: "username.epi")!, callback: self.processResult)
-		manager.done()
+		manager.back()
 	}
 	
 	func processResult(result: JSON?) {

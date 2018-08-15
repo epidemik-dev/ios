@@ -57,10 +57,13 @@ class DiagnosisManager: UIView {
 			self.frame.origin.x -= self.frame.width
 			self.superScreen.sicknessButton.frame.origin.x += self.frame.width
 			self.superScreen.diagnoseButton.frame.origin.x += self.frame.width
+		}, completion: {
+			(value: Bool) in
+			self.removeFromSuperview()
 		})
 	}
 	
-	func done() {
+	func amNowSick() {
 		superScreen.initHealthyButton()
 		UIView.animate(withDuration: 0.5, animations: {
 			self.frame.origin.x -= self.frame.width
