@@ -21,6 +21,11 @@ extension XCUIApplication {
 		self.buttons["exit"].tap()
 	}
 	
+	// Presses the add to map button
+	func pressAddToMap() {
+		self.buttons["add_to_map"].tap()
+	}
+	
 	// Presses the submit button
 	func pressSubmit() {
 		self.buttons["submit"].tap()
@@ -94,6 +99,11 @@ extension XCUIApplication {
 	// Says if the app could diagnose the user
 	func couldDiagnose() -> Bool {
 		return !self.textViews["noinfo"].exists
+	}
+	
+	// Returns the status indicator on the sick view
+	func getStatusIndicator() -> String {
+		return self.staticTexts["status_view"].label
 	}
 	
 }

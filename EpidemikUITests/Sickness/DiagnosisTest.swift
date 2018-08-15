@@ -32,10 +32,10 @@ class DiagnosisTest: XCTestCase {
 		// Put teardown code here. This method is called after the invocation of each test method in the class.
 	}
 	
-	func testDiagnosis() {
+	func testDiagnosisDontAddToMap() {
 		app.launch()
 		XCTAssertFalse(app.isDisplayLogin())
-		sleep(3)
+		sleep(5)
 		if(app.doesShowHealthyButton()) {
 			app.pressHealthy()
 			sleep(1)
@@ -51,11 +51,39 @@ class DiagnosisTest: XCTestCase {
 		XCTAssertTrue(app.couldDiagnose())
 		XCTAssertTrue(app.hasDiagnosedWith(diseaseName: "Common Cold"))
 		app.pressExit()
-		XCTAssertTrue(app.doesShowHealthyButton())
+		XCTAssertTrue(app.doesShowSickButton())
+		XCTAssertTrue(app.getStatusIndicator().contains("Healthy"))
 		app.launch()
-		sleep(3)
+		sleep(5)
+		XCTAssertTrue(app.doesShowSickButton())
+	}
+	
+	func testDiagnosisDoAddToMap() {
+		app.launch()
+		XCTAssertFalse(app.isDisplayLogin())
+		sleep(5)
+		if(app.doesShowHealthyButton()) {
+			app.pressHealthy()
+			sleep(1)
+		}
+		XCTAssertTrue(app.doesShowSickButton())
+		app.pressDiagnose()
+		app.pressAgree()
+		app.pressHead()
+		app.selectSymptom(symID: 1)
+		app.pressContinue()
+		app.pressSubmit()
+		sleep(1)
+		XCTAssertTrue(app.couldDiagnose())
+		XCTAssertTrue(app.hasDiagnosedWith(diseaseName: "Common Cold"))
+		app.pressAddToMap()
+		XCTAssertTrue(app.doesShowHealthyButton())
+		XCTAssertTrue(app.getStatusIndicator().contains("Sick"))
+		app.launch()
+		sleep(5)
 		XCTAssertTrue(app.doesShowHealthyButton())
 	}
+	
 	
 	func testCannotDiagnose() {
 		app.launch()

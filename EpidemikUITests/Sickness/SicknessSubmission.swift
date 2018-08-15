@@ -35,7 +35,7 @@ class SicknessSubmission: XCTestCase {
     func testSubmitSick() {
 		app.launch()
 		XCTAssertFalse(app.isDisplayLogin())
-		sleep(1)
+		sleep(5)
 		if(app.doesShowHealthyButton()) {
 			app.pressHealthy()
 			sleep(1)
@@ -50,7 +50,7 @@ class SicknessSubmission: XCTestCase {
 		app.launchArguments.remove(at: 1)
 
 		app.launch()
-		sleep(2)
+		sleep(5)
 		XCTAssertTrue(app.doesShowHealthyButton())
 		
 		submitHealthy()
@@ -64,7 +64,7 @@ class SicknessSubmission: XCTestCase {
 		
 		app.launch()
 		
-		sleep(1)
+		sleep(5)
 		
 		XCTAssertTrue(app.doesShowSickButton())
 	}

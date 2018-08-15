@@ -142,6 +142,7 @@ public class SicknessView: UIView {
 	//EFFECT: creates the title view on a blured background
 	func initTitle(isSick: Bool) {
 		self.title = UILabel(frame: CGRect(x: 10, y: 10, width: self.frame.width - 100, height: 50))
+		self.title.accessibilityIdentifier = "status_view"
 		if(isSick) {
 			self.title.text = "You Are Currently Sick"
 		} else {
